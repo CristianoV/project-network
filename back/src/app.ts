@@ -14,7 +14,7 @@ class App {
   private config(): void {
     this.app.use(cors());
     this.app.use(express.json());
-    this.app.get('/', (req, res) => res.send('Hello World!'));
+    this.app.get('/', (req, res) => res.json({ status: 'OK' }));
 
     this.app.use(
       (
