@@ -1,6 +1,7 @@
 import express = require('express');
 import cors = require('cors');
 import 'express-async-errors';
+import routes from './routes';
 
 class App {
   public app: express.Express;
@@ -15,6 +16,7 @@ class App {
     this.app.use(cors());
     this.app.use(express.json());
     this.app.get('/', (req, res) => res.json({ status: 'OK' }));
+    this.app.use(routes);
 
     this.app.use(
       (
