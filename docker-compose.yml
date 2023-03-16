@@ -1,0 +1,55 @@
+version: '3.9'
+services:
+  frontend:
+    container_name: app_frontend
+    build: ./front
+    ports:
+      - 3000:3000
+    platform: linux/x86_64
+    working_dir: /app-frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3333
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]
+      timeout: 10s
+      retries: 5
+  backend:
+    container_name: app_backend
+    build: ./back
+    ports:
+      - 3333:3333
+    platform: linux/x86_64
+    working_dir: /app-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - PORT=3333
+      - JWT_SECRET=jwt_secret
+      - PGUSER=postgres
+      - PGPASSWORD=1234
+      - PGHOST=db
+      - PGPORT=5432
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3333"]
+      timeout: 10s
+      retries: 5    
+  db:
+    image: postgres
+    container_name: db
+    platform: linux/x86_64
+    ports:
+     - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=1234
+    restart: 'always'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    cap_add:
+      - SYS_NICE
