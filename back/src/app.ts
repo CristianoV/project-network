@@ -1,5 +1,6 @@
 import express = require('express');
 import cors = require('cors');
+import 'express-async-errors';
 
 class App {
   public app: express.Express;
