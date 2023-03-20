@@ -97,6 +97,13 @@
             width: 75%;
           }
 
+          input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px white inset;
+          }
+          input:-webkit-autofill {
+            -webkit-text-fill-color: black !important;
+          }
+
           input[type='checkbox'] {
             width: 20px;
             height: 20px;
