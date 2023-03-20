@@ -1,0 +1,126 @@
+.header {
+  background-color: #f5f5f5;
+  border: 5px solid white;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+
+  span {
+    color: red;
+    margin-right: 5px;
+    font-weight: bold;
+    padding-left: 5px;
+  }
+}
+
+.footer {
+  background-color: #f5f5f5;
+  border: 5px solid white;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  height: 80vh;
+  margin: 20px;
+  gap: 20px;
+
+  .contentContainer {
+    width: 70%;
+    height: 100%;
+    max-height: 655px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    img {
+      width: 300px;
+      height: 150px;
+      object-fit: contain;
+    }
+    div {
+      text-align: center;
+      p {
+        span {
+          font-weight: bold;
+          color: #ed2590;
+        }
+      }
+    }
+  }
+  .userContainer {
+    width: 30%;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .loginBox {
+      border: 5px solid white;
+      background-color: #f5f5f5;
+      height: 100%;
+      max-height: 500px;
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+      justify-content: center;
+      p {
+        text-align: center;
+      }
+      padding: 20px;
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 20px;
+        #check {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+        label {
+          align-items: center;
+          justify-content: space-between;
+          display: flex;
+          width: 100%;
+          input {
+            margin-top: 5px;
+            padding: 5px;
+            width: 75%;
+          }
+
+          input[type='checkbox'] {
+            width: 20px;
+            height: 20px;
+            margin-left: 30px;
+            margin-right: 5px;
+          }
+        }
+        p {
+          margin-left: 55px;
+          padding: 0;
+          text-align: start;
+          color: gray;
+        }
+        button {
+          width: 50px;
+          margin-left: 55px;
+          padding: 5px;
+        }
+      }
+    }
+    .registerBox {
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      border: 5px solid white;
+    }
+  }
+}
