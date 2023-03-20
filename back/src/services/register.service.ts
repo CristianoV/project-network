@@ -6,19 +6,19 @@ export default class RegisterService {
   constructor(private model: typeof User) {}
 
   public async registerUser({
-    username,
+    email,
     password,
   }: {
-    username: string;
+    email: string;
     password: string;
   }) {
     const encrypt = Bcrypt.encrypt(password);
 
     const user = await this.model.create({
-      username,
+      email,
       password: encrypt,
     });
-    const token = JwtSecret.sign({ id: user.id, username: user.username });
+    const token = JwtSecret.sign({ id: user.id, email: user.email });
 
     return { token };
   }

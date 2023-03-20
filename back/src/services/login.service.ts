@@ -6,15 +6,15 @@ export default class LoginService {
   constructor(private model: typeof User) {}
 
   public async login({
-    username,
+    email,
     password,
   }: {
-    username: string;
+    email: string;
     password: string;
   }) {
     const user = await this.model.findOne({
       where: {
-        username,
+        email,
       },
       raw: true,
     });

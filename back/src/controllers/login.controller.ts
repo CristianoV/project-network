@@ -5,9 +5,9 @@ export default class LoginController {
   constructor(private registerService: LoginService) {}
 
   public async login(req: Request, res: Response) {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await this.registerService.login({ username, password });
+    const user = await this.registerService.login({ email, password });
 
     return res.status(202).json(user);
   }

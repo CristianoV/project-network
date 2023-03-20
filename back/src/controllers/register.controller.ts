@@ -5,9 +5,9 @@ export default class RegisterController {
   constructor(private registerService: UserService) {}
 
   public async register(req: Request, res: Response) {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await this.registerService.registerUser({ username, password });
+    const user = await this.registerService.registerUser({ email, password });
 
     return res.status(201).json(user);
   }
