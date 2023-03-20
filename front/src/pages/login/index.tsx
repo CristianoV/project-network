@@ -3,8 +3,43 @@ import styles from './styles.module.scss';
 import Image from 'next/image';
 import Head from 'next/head';
 import Link from 'next/link';
+import { fetchFromApi } from '../../utils/axios';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const { data } = await fetchFromApi.post('/login', {
+        email,
+        password,
+      });
+
+      if (data.token) {
+        await fetch('/api/login', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        router.push('/');
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setPassword('');
+      setEmail('');
+    }
+  };
   return (
     <>
       <Head>
@@ -38,14 +73,24 @@ export default function Login() {
               <p>
                 Acesse o <strong>Orkut.br</strong> com a sua conta
               </p>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <label htmlFor=''>
                   E-mail:
-                  <input type='text' required/>
+                  <input
+                    type='email'
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                  />
                 </label>
                 <label htmlFor=''>
                   Senha:
-                  <input type='text' required/>
+                  <input
+                    type='password'
+                    required
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                  />
                 </label>
                 <label htmlFor='save' id={styles.check}>
                   <input type='checkbox' name='' id='save' />
@@ -73,3 +118,22 @@ export default function Login() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const token = req.cookies.token || '';
+
+  if (token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      token,
+    },
+  };
+};
