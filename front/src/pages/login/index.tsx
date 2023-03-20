@@ -2,6 +2,7 @@ import logo from '../../../public/orkutLogo.png';
 import styles from './styles.module.scss';
 import Image from 'next/image';
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Login() {
   return (
@@ -59,7 +60,7 @@ export default function Login() {
             </div>
             <div className={styles.registerBox}>
               <p>Ainda não é membro?</p>
-              <a href='#'>Conecte-se agora</a>
+              <Link href='/register'>Entrar já</Link>
             </div>
           </div>
         </div>
