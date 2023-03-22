@@ -2,6 +2,9 @@
 
 .container {
   display: flex;
+  background-color: white;
+  border-radius: 2px;
+  padding-bottom: 100px;
   div {
     div {
       display: flex;
@@ -19,7 +22,6 @@
         margin: 20px;
       }
     }
-    background-color: white;
     border-radius: 2px;
     h1 {
       padding: 10px 20px;
