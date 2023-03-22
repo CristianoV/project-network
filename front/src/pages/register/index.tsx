@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 
 export default function Register() {
   const [firstName, setFirstName] = useState('');
@@ -160,3 +161,22 @@ export default function Register() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const token = req.cookies.token || '';
+
+  if (token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      token,
+    },
+  };
+};
