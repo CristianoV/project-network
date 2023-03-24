@@ -1,17 +1,23 @@
 import JwtSecret from '../utils/JwtService';
 import User from '../database/models/user';
 import Bcrypt from '../utils/BcryptService';
+import { ILoginService } from '../interface/IService/ILoginService';
+import { IUserData, userSchema } from '../interface/IData/IUserData';
+import { IToken } from '../interface/IToken';
+import { IError } from '../interface/IError';
 
-export default class LoginService {
+export default class LoginService implements ILoginService {
   constructor(private model: typeof User) {}
 
-  public async login({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }) {
+  public async login({ email, password }: IUserData): Promise<IToken | IError> {
+    const parsed = userSchema.safeParse({ email, password });
+
+    if (!parsed.success) {
+      const { message } = parsed.error;
+      const customMessage = JSON.parse(message);
+
+      throw new Error(customMessage[0].message);
+    }
     const user = await this.model.findOne({
       where: {
         email,
@@ -27,7 +33,7 @@ export default class LoginService {
 
     if (!verifyPassword) throw new Error('Incorrect email or password');
 
-    const token = JwtSecret.sign({ id: user.id, username: user.username });
+    const token = JwtSecret.sign({ id: user.id, email: user.email });
 
     return { token };
   }
