@@ -96,7 +96,7 @@ export default function Login() {
                   <input type='checkbox' name='' id='save' />
                   Salvar as minhas informações neste computador
                 </label>
-                <p>Não use em computadores públicos [?]</p>
+                <p id={styles.check}>Não use em computadores públicos [?]</p>
                 <button type='submit'>Entrar</button>
               </form>
               <p>
