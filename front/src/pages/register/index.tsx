@@ -22,11 +22,8 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      if (password !== passwordConfirmation) {
-        setError('As senhas não conferem');
-        return;
-      } else if (!checked) {
-        setError('você não aceitou os termos de uso');
+      if (password !== passwordConfirmation || !checked) {
+        setError('As senhas não conferem ou você não aceitou os termos de uso');
         return;
       }
       const { data } = await fetchFromApi.post('/register', {
@@ -142,7 +139,7 @@ export default function Register() {
               voluptate ipsum.
             </h2>
             <hr />
-            <label htmlFor='privacy'>
+            <label htmlFor='privacy' id={styles.privacy}>
               <input
                 type='checkbox'
                 id='privacy'
