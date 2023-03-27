@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ambiente": "cd ./back && npm i",
+    "preambiente": "cd ./front && npm i"
   },
   "keywords": [],
   "author": "",
