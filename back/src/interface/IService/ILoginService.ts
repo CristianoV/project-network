@@ -1,7 +1,7 @@
 import { IToken } from '../IToken';
 import { IError } from '../IError';
-import { ILoginData } from '../IData/IUserData';
+import { IUserData } from '../IData/IUserData';
 
 export interface ILoginService {
-  login({ email, password }: ILoginData): Promise<IToken | IError>;
+  login({ email, password }: IUserData): Promise<IToken | IError>;
 }
