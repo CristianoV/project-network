@@ -94,6 +94,7 @@ export default function Register() {
                 type='text'
                 placeholder='Email'
                 id='email'
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </label>
@@ -103,15 +104,17 @@ export default function Register() {
                 type='password'
                 placeholder='Senha'
                 id='password'
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
-            <label htmlFor='password'>
+            <label htmlFor='passwordConfirmation'>
               Digite a senha novamente:
               <input
                 type='password'
                 placeholder='Senha'
-                id='password'
+                id='passwordConfirmation'
+                value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
               />
             </label>
