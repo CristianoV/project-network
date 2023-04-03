@@ -1,0 +1,62 @@
+@import '../../styles/colors.scss';
+
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 60px;
+  background-color: $senary;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+
+  img {
+    width: 100px;
+    height: 50%;
+    background-color: white;
+    padding: 10px;
+  }
+
+  nav ul{
+      display: flex;
+      gap: 15px;
+      
+      a {
+        color: white;
+      }
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+      background-color: $septenary;
+      padding: 2px 15px;
+      border-radius: 10px;
+      gap: 5px;
+
+      input {
+        outline: none;
+        font-size: 16px;
+        padding: 5px;
+      }
+    }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 16px;
+  }
+}
