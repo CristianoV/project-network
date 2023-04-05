@@ -49,6 +49,10 @@ export default function Register() {
     } finally {
       setPassword('');
       setEmail('');
+      setFirstName('');
+      setLastName('');
+      setPasswordConfirmation('');
+      setChecked(false);
     }
   };
   return (
@@ -76,6 +80,7 @@ export default function Register() {
                 type='text'
                 placeholder='Nome'
                 id='firstName'
+                value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </label>
@@ -85,6 +90,7 @@ export default function Register() {
                 type='text'
                 placeholder='Sobrenome'
                 id='lastName'
+                value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
               />
             </label>
