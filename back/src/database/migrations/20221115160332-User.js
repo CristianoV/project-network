@@ -20,7 +20,23 @@ module.exports = {
         password: {
           type: Sequelize.STRING,
           allowNull: false,
-        }
+        },
+        firstName: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        lastName: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        bio: {
+          type: Sequelize.TEXT,
+          allowNull: true,
+        },
+        profile_picture: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
       },
       {
         timestamps: false,
