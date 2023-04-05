@@ -5,6 +5,9 @@ module.exports = {
         id: 999,
         email: 'cristianoviieira@gmail.com',
         password: '$2a$10$0ec80axjF54kPvZW5KRmSuQjCGK8P7vqJdoTY7KmUJ8NRzcX2v7pS',  // Abacaxi123
+        firstName: 'Cristiano',
+        lastName: 'Vieira',
+        bio: 'I am a software developer',
       },
     ], {});
   },
