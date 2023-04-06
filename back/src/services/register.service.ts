@@ -3,9 +3,13 @@ import { IToken } from '../interface/IToken';
 import User from '../database/models/user';
 import Bcrypt from '../utils/BcryptService';
 import JwtSecret from '../utils/JwtService';
-import { IRegisterrData, registerSchema } from '../interface/IData/IRegisterData';
+import {
+  IRegisterrData,
+  registerSchema,
+} from '../interface/IData/IRegisterData';
+import { IRegisterService } from '../interface/IService/IRegisterService';
 
-export default class RegisterService {
+export default class RegisterService implements IRegisterService {
   constructor(private model: typeof User) {}
 
   public async registerUser({
@@ -14,7 +18,12 @@ export default class RegisterService {
     firstName,
     lastName,
   }: IRegisterrData): Promise<IToken | IError> {
-    const parsed = registerSchema.safeParse({ email, password, firstName, lastName });
+    const parsed = registerSchema.safeParse({
+      email,
+      password,
+      firstName,
+      lastName,
+    });
 
     if (!parsed.success) {
       const { message } = parsed.error;
