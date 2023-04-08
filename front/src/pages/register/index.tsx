@@ -94,7 +94,6 @@ export default function Register() {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
-
               />
             </label>
             <label htmlFor='email'>
