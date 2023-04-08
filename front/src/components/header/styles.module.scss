@@ -1,10 +1,9 @@
 @import '../../styles/colors.scss';
 
-
 .headerContainer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 20px;
   height: 60px;
   background-color: $senary;
@@ -15,22 +14,32 @@
   right: 0;
   z-index: 100;
 
-  img {
-    width: 100px;
-    height: 50%;
-    background-color: white;
-    padding: 10px;
-  }
-
-  nav ul{
+  div {
+    display: flex;
+    max-width: 1400px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    img {
+      width: 100px;
+      height: 50%;
+      background-color: white;
+      padding: 10px;
+    }
+  
+    nav ul {
       display: flex;
       gap: 15px;
-      
+  
       a {
         color: white;
       }
-    }
 
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+  
     form {
       display: flex;
       align-items: center;
@@ -38,13 +47,14 @@
       padding: 2px 15px;
       border-radius: 10px;
       gap: 5px;
-
+  
       input {
         outline: none;
         font-size: 16px;
         padding: 5px;
       }
     }
+  }
 }
 
 .profile {
@@ -58,5 +68,9 @@
     outline: none;
     color: white;
     font-size: 16px;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
