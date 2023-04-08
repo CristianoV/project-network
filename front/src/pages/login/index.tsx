@@ -78,18 +78,18 @@ export default function Login() {
                   E-mail:
                   <input
                     type='email'
-                    required
-                    onChange={(e) => setEmail(e.target.value)}
                     value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </label>
                 <label htmlFor=''>
                   Senha:
                   <input
                     type='password'
-                    required
-                    onChange={(e) => setPassword(e.target.value)}
                     value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
                 </label>
                 <label htmlFor='save' id={styles.check}>

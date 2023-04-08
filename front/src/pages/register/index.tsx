@@ -49,6 +49,10 @@ export default function Register() {
     } finally {
       setPassword('');
       setEmail('');
+      setFirstName('');
+      setLastName('');
+      setPasswordConfirmation('');
+      setChecked(false);
     }
   };
   return (
@@ -76,7 +80,9 @@ export default function Register() {
                 type='text'
                 placeholder='Nome'
                 id='firstName'
+                value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
+                required
               />
             </label>
             <label htmlFor='lastName'>
@@ -85,7 +91,9 @@ export default function Register() {
                 type='text'
                 placeholder='Sobrenome'
                 id='lastName'
+                value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
+                required
               />
             </label>
             <label htmlFor='email'>
@@ -96,6 +104,7 @@ export default function Register() {
                 id='email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </label>
             <label htmlFor='password'>
@@ -106,6 +115,7 @@ export default function Register() {
                 id='password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </label>
             <label htmlFor='passwordConfirmation'>
@@ -116,6 +126,7 @@ export default function Register() {
                 id='passwordConfirmation'
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
+                required
               />
             </label>
             <hr />

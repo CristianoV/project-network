@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
 
-export interface ILoginController {
+export default interface ILoginController {
   login(req: Request, res: Response): Promise<Response>;
 }

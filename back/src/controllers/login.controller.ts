@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import LoginService from '../services/login.service';
+import ILoginController from '../interface/IController/ILoginController';
 
-export default class LoginController {
+export default class LoginController implements ILoginController {
   constructor(private registerService: LoginService) {}
 
   public async login(req: Request, res: Response) {

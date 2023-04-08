@@ -1,0 +1,16 @@
+@import '../../styles/colors.scss';
+
+.container {
+  background-color: white;
+  border-radius: 10px;
+  margin: 10px;
+  width: 400px;
+  height: 400px;
+
+  h2 {
+    padding: 15px 15px;
+    span {
+      color: $septenary;
+    }
+  }
+}

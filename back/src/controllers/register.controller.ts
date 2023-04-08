@@ -1,13 +1,19 @@
-import { Request, Response } from "express";
-import UserService from "../services/register.service";
+import { Request, Response } from 'express';
+import UserService from '../services/register.service';
+import IRegisterController from '../interface/IController/IRegisterController';
 
-export default class RegisterController {
+export default class RegisterController implements IRegisterController {
   constructor(private registerService: UserService) {}
 
   public async register(req: Request, res: Response) {
-    const { email, password } = req.body;
+    const { email, password, firstName, lastName } = req.body;
 
-    const user = await this.registerService.registerUser({ email, password });
+    const user = await this.registerService.registerUser({
+      email,
+      password,
+      firstName,
+      lastName,
+    });
 
     return res.status(201).json(user);
   }

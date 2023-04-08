@@ -1,0 +1,25 @@
+.container {
+  background-color: white;
+  border-radius: 10px;
+  border-top-right-radius: 50px;
+  margin: 10px;
+  padding: 20px;
+  width: 700px;
+
+  hr {
+    border: 1px solid #eaeaea;
+    margin: 10px 0;
+  }
+
+  p {
+    font-weight: bold;
+    span {
+      font-weight: normal;
+    }
+  }
+
+  .inputs {
+    display: flex;
+    gap: 20px;
+  }
+}
