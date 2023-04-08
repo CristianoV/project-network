@@ -1,16 +1,38 @@
+import styles from '../styles/Home.module.scss';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Header from '../components/header';
+import LeftSideBar from '../components/leftSideBar';
+import Welcome from '../components/welcome';
+import Friends from '../components/friends';
+import Community from '../components/community';
+import store from '../redux/store';
+import { fetchUserById } from '../redux/slices/user';
 
-export default function Home() {
+interface HomeProps {
+  token: string;
+}
+
+export default function Home({ token }: HomeProps) {
+  const { dispatch } = store;
+  dispatch(fetchUserById(token));
+
   return (
     <>
       <Head>
         <title>Rede Social</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main>
-        <Header />
+      <Header />
+      <main className={styles.container}>
+        <LeftSideBar />
+        <div>
+          <Welcome />
+        </div>
+        <div>
+          <Friends />
+          <Community />
+        </div>
       </main>
     </>
   );
