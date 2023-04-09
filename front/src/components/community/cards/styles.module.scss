@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  background-color: #F0F0F0;
+  width: 30%;
+  padding-bottom: 30px;
+
+  img {
+    width: 70%;
+    height: 85%;
+    object-fit: cover;
+  }
+
+  p {
+    margin-top: 10px;
+    text-decoration: none;
+  }
+}
