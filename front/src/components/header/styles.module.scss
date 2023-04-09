@@ -23,7 +23,8 @@
     img {
       width: 100px;
       height: 50%;
-      background-color: white;
+      background: rgb(252,252,252);
+      background: linear-gradient(180deg, rgba(252,252,252,1) 0%, rgba(193,193,204,1) 67%, rgba(252,252,252,1) 100%);
       padding: 10px;
     }
   

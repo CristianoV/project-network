@@ -20,6 +20,13 @@
     margin: 10px 0;
   }
 
+  .notFound {
+    margin: 5px;
+    background-color: $primary;
+    padding: 5px;
+    width: 90%;
+  }
+
   .cards {
     display: flex;
     flex-wrap: wrap;

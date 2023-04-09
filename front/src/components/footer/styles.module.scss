@@ -1,0 +1,23 @@
+.container {
+  background-color: white;
+  border-radius: 10px;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  img {
+    width: 100px;
+    height: 50%;
+    padding: 10px;
+  }
+
+  div {
+    display: flex;
+    gap: 20px;
+
+    hr {
+      border: 1px solid #eaeaea;
+    }
+  }
+}
