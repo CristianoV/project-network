@@ -31,7 +31,7 @@ export default function Header() {
               <Link href='/'>Ínicio</Link>
             </li>
             <li>
-              <Link href='/'>Perfil</Link>
+              <Link href='/profile'>Perfil</Link>
             </li>
             <li>
               <Link href='/'>Página de recados</Link>
