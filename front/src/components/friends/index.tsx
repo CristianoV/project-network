@@ -13,12 +13,15 @@ export default function Friends() {
         meus amigos <span>({friends.length})</span>
       </h2>
       <div className={styles.cards}>
-        {friends.length > 0 &&
+        {friends.length > 0 ? (
           friends.map(({ friend }: any, index: number) => {
             if (index < 6) {
               return <Card key={friend.id} friend={friend} />;
             }
-          })}
+          })
+        ) : (
+          <p className={styles.notFound}>Você ainda não adicionou nenhum amigo</p>
+        )}
       </div>
       <hr />
       <Link href='/friends' className={styles.link}>
