@@ -21,7 +21,9 @@ export default function LeftSideBar() {
       <Image src={avatar} alt='avatar' width={500} height={500} />
       <hr />
       <div>
-        <h2>{info?.firstName} {info?.lastName}</h2>
+        <h2>
+          {info?.firstName} {info?.lastName}
+        </h2>
         <p>Masculino</p>
         <p>Namorando</p>
         <p>Brasil</p>
@@ -34,7 +36,7 @@ export default function LeftSideBar() {
       </div>
       <hr />
       <div>
-      <Link href={`/${info.id}`}>
+        <Link href='/profile'>
           <CgProfile /> perfil
         </Link>
         <Link href='/'>
