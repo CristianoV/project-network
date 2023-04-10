@@ -24,13 +24,13 @@ export default function LeftSideBar() {
         <h2>
           {info?.firstName} {info?.lastName}
         </h2>
-        <p>Masculino</p>
-        <p>Namorando</p>
-        <p>Brasil</p>
+        <p>{info?.sex}</p>
+        <p>{info?.relationship}</p>
+        <p>{info?.country}</p>
       </div>
       <hr />
       <div>
-        <Link href='/'>
+        <Link href='/profile/edit'>
           <CgProfile /> editar perfil
         </Link>
       </div>
