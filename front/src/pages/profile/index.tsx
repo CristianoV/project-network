@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Header from '../../components/header';
 import LeftSideBar from '../../components/leftSideBar';
-import Welcome from '../../components/welcome';
+import Profile from '../../components/profile';
 import Friends from '../../components/friends';
 import Community from '../../components/community';
 import Footer from '../../components/footer';
@@ -29,14 +29,14 @@ export default function Home({ token }: HomeProps) {
   return (
     <>
       <Head>
-        <title>Rede Social</title>
+        <title>Perfil - Rede Social</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Header />
       <main className={styles.container}>
         <LeftSideBar />
         <div>
-          <Welcome />
+          <Profile token={token} />
         </div>
         <div>
           <Friends />
