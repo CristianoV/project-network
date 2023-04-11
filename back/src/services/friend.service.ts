@@ -39,22 +39,27 @@ export default class FriendshipService implements IFriendshipService {
     return result;
   }
 
-  public async addFriend(userId: number, friendId: number) {
+  public async addFriend(authorization: string, friendId: number) {
+    const { id } = await JwtSecret.verify(authorization);
+
     const friend = await this.model.create({
-      user_id: userId,
-      friend_id: friendId,
-      created_at: new Date(),
-      updated_at: new Date(),
+      user_id_1: id,
+      user_id_2: friendId,
     });
 
-    return friend;
+    return "Friend added";
   }
 
-  public async deleteFriend(userId: number, friendId: number) {
+  public async deleteFriend(authorization: string, friendId: number) {
+    const { id } = await JwtSecret.verify(authorization);
+
     const friend = await this.model.destroy({
-      where: { user_id: userId, friend_id: friendId },
+      where: {
+        user_id_1: id,
+        user_id_2: friendId,
+      },
     });
 
-    return friend;
+    return "Friend deleted";
   }
 }
