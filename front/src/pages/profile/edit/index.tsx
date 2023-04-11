@@ -29,7 +29,7 @@ export default function EditProfile({ token }: EditProfileProps) {
       <main className={styles.container}>
         <LeftSideBar />
         <div>
-          <Edit />
+          <Edit token={token} />
         </div>
       </main>
       <Footer />
