@@ -2,8 +2,9 @@ import JwtSecret from '../utils/JwtService';
 import Partners from '../database/models/partners';
 import User from '../database/models/user';
 import Group from '../database/models/groups';
+import IPartnerService from '../interface/IService/IPartnerService';
 
-export default class PartnerService {
+export default class PartnerService implements IPartnerService<Partners> {
   constructor(private model: typeof Partners) {}
 
   public async getPartners(authorization: string) {
