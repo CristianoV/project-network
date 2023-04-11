@@ -35,7 +35,6 @@ export default function Login() {
       }
     } catch (error) {
       console.error(error);
-    } finally {
       setPassword('');
       setEmail('');
     }
