@@ -13,16 +13,21 @@ export default class FriendshipController implements IFriendshipController {
   }
 
   public async addFriend(req: Request, res: Response) {
-    const { userId, friendId } = req.body;
-    const friendship = await this.friendshipService.addFriend(userId, friendId);
+    const { authorization } = req.headers as { authorization: string };
+    const { friendId } = req.body;
+    const friendship = await this.friendshipService.addFriend(
+      authorization,
+      friendId
+    );
 
     return res.status(201).json(friendship);
   }
 
   public async deleteFriend(req: Request, res: Response) {
-    const { userId, friendId } = req.body;
+    const { authorization } = req.headers as { authorization: string };
+    const { friendId } = req.body;
     const friendship = await this.friendshipService.deleteFriend(
-      userId,
+      authorization,
       friendId
     );
 
