@@ -29,8 +29,40 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
         },
+        phrase: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
         bio: {
           type: Sequelize.TEXT,
+          allowNull: true,
+        },
+        sex: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
+        relationship: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
+        birthday: {
+          type: Sequelize.DATEONLY,
+          allowNull: true,
+        },
+        state: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
+        cep: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
+        country: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
+        language: {
+          type: Sequelize.STRING,
           allowNull: true,
         },
         profile_picture: {

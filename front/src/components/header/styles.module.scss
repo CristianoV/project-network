@@ -23,14 +23,20 @@
     img {
       width: 100px;
       height: 50%;
-      background-color: white;
+      background: rgb(252, 252, 252);
+      background: linear-gradient(
+        180deg,
+        rgba(252, 252, 252, 1) 0%,
+        rgba(193, 193, 204, 1) 67%,
+        rgba(252, 252, 252, 1) 100%
+      );
       padding: 10px;
     }
-  
+
     nav ul {
       display: flex;
       gap: 15px;
-  
+
       a {
         color: white;
       }
@@ -39,7 +45,7 @@
         text-decoration: underline;
       }
     }
-  
+
     form {
       display: flex;
       align-items: center;
@@ -47,7 +53,7 @@
       padding: 2px 15px;
       border-radius: 10px;
       gap: 5px;
-  
+
       input {
         outline: none;
         font-size: 16px;
@@ -61,6 +67,12 @@
   display: flex;
   align-items: center;
   gap: 15px;
+
+  p {
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
 
   button {
     background-color: transparent;

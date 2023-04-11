@@ -1,4 +1,4 @@
-import { DATE, INTEGER, Model } from 'sequelize';
+import { INTEGER, Model } from 'sequelize';
 import user from './user';
 import db from '.';
 

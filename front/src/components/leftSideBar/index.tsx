@@ -21,20 +21,22 @@ export default function LeftSideBar() {
       <Image src={avatar} alt='avatar' width={500} height={500} />
       <hr />
       <div>
-        <h2>{info.firstName} {info.lastName}</h2>
-        <p>Masculino</p>
-        <p>Namorando</p>
-        <p>Brasil</p>
+        <h2>
+          {info?.firstName} {info?.lastName}
+        </h2>
+        <p>{info?.sex}</p>
+        <p>{info?.relationship}</p>
+        <p>{info?.country}</p>
       </div>
       <hr />
       <div>
-        <Link href='/'>
+        <Link href='/profile/edit'>
           <CgProfile /> editar perfil
         </Link>
       </div>
       <hr />
       <div>
-        <Link href='/'>
+        <Link href='/profile'>
           <CgProfile /> perfil
         </Link>
         <Link href='/'>

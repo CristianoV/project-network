@@ -15,7 +15,7 @@ export default function Welcome() {
 
   return (
     <div className={styles.container}>
-      <h1>Bem-vindo(a), {info.firstName}</h1>
+      <h1>Bem-vindo(a), {info?.firstName}</h1>
       <hr />
       <div className={styles.inputs}>
         <Inputs text='recados' icon={<BiMessageSquareEdit />} number={0} />

@@ -8,7 +8,7 @@ export default class RegisterController implements IRegisterController {
   public async register(req: Request, res: Response) {
     const { email, password, firstName, lastName } = req.body;
 
-    const user = await this.registerService.registerUser({
+    const user = await this.registerService.register({
       email,
       password,
       firstName,

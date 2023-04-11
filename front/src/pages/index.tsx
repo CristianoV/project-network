@@ -6,8 +6,12 @@ import LeftSideBar from '../components/leftSideBar';
 import Welcome from '../components/welcome';
 import Friends from '../components/friends';
 import Community from '../components/community';
+import Footer from '../components/footer';
 import store from '../redux/store';
 import { fetchUserById } from '../redux/slices/user';
+import { fetchFriendsById } from '../redux/slices/friends';
+import { fetchGroupsById } from '../redux/slices/groups';
+import { useEffect } from 'react';
 
 interface HomeProps {
   token: string;
@@ -15,7 +19,12 @@ interface HomeProps {
 
 export default function Home({ token }: HomeProps) {
   const { dispatch } = store;
-  dispatch(fetchUserById(token));
+
+  useEffect(() => {
+    dispatch(fetchUserById(token));
+    dispatch(fetchFriendsById(token));
+    dispatch(fetchGroupsById(token));
+  }, [dispatch, token]);
 
   return (
     <>
@@ -34,6 +43,7 @@ export default function Home({ token }: HomeProps) {
           <Community />
         </div>
       </main>
+      <Footer />
     </>
   );
 }

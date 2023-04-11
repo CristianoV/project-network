@@ -1,4 +1,4 @@
-import { INTEGER, STRING, TEXT, Model } from "sequelize";
+import { INTEGER, STRING, TEXT, Model, DATE } from 'sequelize';
 import db from '.';
 
 class User extends Model {
@@ -9,6 +9,14 @@ class User extends Model {
   public lastName: string;
   public bio: string;
   public profile_picture: string;
+  public birthday: Date;
+  public relationship: string;
+  public country: string;
+  public phrase: string;
+  public sex: string;
+  public cep: string;
+  public state: string;
+  public language: string;
 }
 
 User.init(
@@ -41,6 +49,38 @@ User.init(
       allowNull: true,
     },
     profile_picture: {
+      type: STRING,
+      allowNull: true,
+    },
+    birthday: {
+      type: DATE,
+      allowNull: true,
+    },
+    relationship: {
+      type: STRING,
+      allowNull: true,
+    },
+    country: {
+      type: STRING,
+      allowNull: true,
+    },
+    phrase: {
+      type: STRING,
+      allowNull: true,
+    },
+    sex: {
+      type: STRING,
+      allowNull: true,
+    },
+    cep: {
+      type: STRING,
+      allowNull: true,
+    },
+    state: {
+      type: STRING,
+      allowNull: true,
+    },
+    language: {
       type: STRING,
       allowNull: true,
     },

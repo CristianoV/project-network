@@ -14,10 +14,14 @@ module.exports = {
         user_id_1: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          references: { model: 'Users', key: 'id' },
+          allowNull: false,
           onDelete: 'cascade',
         },
         user_id_2: {
           type: Sequelize.INTEGER,
+          allowNull: false,
+          references: { model: 'Users', key: 'id' },
           allowNull: false,
           onDelete: 'cascade',
         },

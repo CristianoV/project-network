@@ -3,7 +3,7 @@ import { IError } from '../IError';
 import { IRegisterrData } from '../IData/IRegisterData';
 
 export interface IRegisterService {
-  registerUser({
+  register({
     email,
     password,
     firstName,

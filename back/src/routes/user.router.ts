@@ -11,4 +11,16 @@ LoginRoutes.get('/user', (request: Request, response: Response) =>
   loginController.getUser(request, response)
 );
 
+LoginRoutes.patch('/user/phrase', (request: Request, response: Response) =>
+  loginController.updatePhrase(request, response)
+);
+
+LoginRoutes.put('/user/profile', (request: Request, response: Response) =>
+  loginController.updateProfile(request, response)
+);
+
+LoginRoutes.get('/user/:name', (request: Request, response: Response) =>
+  loginController.getUsersByName(request, response)
+);
+
 export default LoginRoutes;

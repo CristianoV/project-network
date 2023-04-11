@@ -4,9 +4,13 @@ import logo from '../../../public/orkutLogo.png';
 import Image from 'next/image';
 import { FaSearch } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
   const router = useRouter();
+
+  const redux = useSelector((state: any) => state.user);
+  const user = redux.info;
 
   const logout = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +35,7 @@ export default function Header() {
               <Link href='/'>Ínicio</Link>
             </li>
             <li>
-              <Link href='/'>Perfil</Link>
+              <Link href='/profile'>Perfil</Link>
             </li>
             <li>
               <Link href='/'>Página de recados</Link>
@@ -45,6 +49,7 @@ export default function Header() {
           </ul>
         </nav>
         <article className={styles.profile}>
+          <p>{user.email}</p>
           <button onClick={(e) => logout(e)}>Sair</button>
           <form action=''>
             <input type='text' placeholder='Pesquisar no Orkut' />
