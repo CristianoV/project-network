@@ -12,7 +12,7 @@ import { IRegisterService } from '../interface/IService/IRegisterService';
 export default class RegisterService implements IRegisterService {
   constructor(private model: typeof User) {}
 
-  public async registerUser({
+  public async register({
     email,
     password,
     firstName,
