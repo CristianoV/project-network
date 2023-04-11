@@ -31,7 +31,7 @@ export default function Profile({ token }: WelcomeProps) {
 
   const handleEdit = async () => {
     if (phrase) {
-      await fetchFromApi.put(
+      await fetchFromApi.patch(
         '/user/phrase',
         { phrase },
         {
