@@ -1,0 +1,33 @@
+.container {
+  background-color: #F6F6F6;
+  width: 300px;
+
+  hr {
+    border: 1px solid #eaeaea;
+    margin: 10px 0;
+    width: 90%;
+    margin: 10px auto;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+
+    a {
+      img {
+        width: 20px;
+        height: 20px;
+      }
+
+
+      background-color: #FFFFFF;
+      padding: 10px 20px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+  }
+}

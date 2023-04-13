@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  
+  a {
+    display: flex;
+
+    img {
+      width: 20%;
+      height: 100%;
+      max-width: 200px;
+      object-fit: cover;
+      padding: 20px 20px 20px 40px;
+    }
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+
+      p {
+        color: black;
+        width: 200px;
+        font-size: 20px;
+      }
+      .tittle {
+        font-weight: bold;
+        font-size: 24px;
+      }
+    }
+  }
+}
