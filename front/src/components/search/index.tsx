@@ -26,9 +26,6 @@ export default function Search(): JSX.Element {
   const router = useRouter();
   const { q } = router.query;
 
-  console.log(router.pathname);
-  
-
   const [search, setSearch] = useState<string>((q as string) ?? '');
   const [users, setUsers] = useState<User[]>([]);
 
