@@ -5,8 +5,10 @@ import Image from 'next/image';
 import { FaSearch } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
+import { FormEvent, useState } from 'react';
 
 export default function Header() {
+  const [search, setSearch] = useState('');
   const router = useRouter();
 
   const redux = useSelector((state: any) => state.user);
@@ -23,6 +25,11 @@ export default function Header() {
       body: JSON.stringify({}),
     });
     router.push('/');
+  };
+
+  const handleSearch = async (e: FormEvent) => {
+    e.preventDefault();
+    router.push(`/search?search=${search}`);
   };
 
   return (
@@ -51,8 +58,13 @@ export default function Header() {
         <article className={styles.profile}>
           <p>{user.email}</p>
           <button onClick={(e) => logout(e)}>Sair</button>
-          <form action=''>
-            <input type='text' placeholder='Pesquisar no Orkut' />
+          <form onSubmit={handleSearch}>
+            <input
+              type='text'
+              placeholder='Pesquisar no Orkut'
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
             <button type='submit'>
               <FaSearch size={20} />
             </button>
