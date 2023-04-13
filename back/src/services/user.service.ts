@@ -54,18 +54,4 @@ export default class UserService implements IUserService<User> {
 
     return 'Profile updated';
   }
-
-  public async getUsersByName(name: string) {
-    const users = await this.model.findAll({
-      where: {
-        [Op.or]: [
-          { firstName: { [Op.iLike]: `%${name}%` } },
-          { lastName: { [Op.iLike]: `%${name}%` } },
-        ],
-      },
-      attributes: { exclude: ['password'] },
-    });
-
-    return users;
-  }
 }

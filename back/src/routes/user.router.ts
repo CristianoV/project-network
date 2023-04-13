@@ -19,8 +19,4 @@ LoginRoutes.put('/user/profile', (request: Request, response: Response) =>
   loginController.updateProfile(request, response)
 );
 
-LoginRoutes.get('/user/:name', (request: Request, response: Response) =>
-  loginController.getUsersByName(request, response)
-);
-
 export default LoginRoutes;
