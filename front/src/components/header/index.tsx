@@ -9,6 +9,7 @@ import { FormEvent, useState } from 'react';
 
 export default function Header() {
   const [search, setSearch] = useState('');
+  const searchPath = '/search';
   const router = useRouter();
 
   const redux = useSelector((state: any) => state.user);
@@ -29,7 +30,7 @@ export default function Header() {
 
   const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
-    router.push(`/search?search=${search}`);
+    router.push(`/search?q=${search}`);
   };
 
   return (
@@ -58,17 +59,19 @@ export default function Header() {
         <article className={styles.profile}>
           <p>{user.email}</p>
           <button onClick={(e) => logout(e)}>Sair</button>
-          <form onSubmit={handleSearch}>
-            <input
-              type='text'
-              placeholder='Pesquisar no Orkut'
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <button type='submit'>
-              <FaSearch size={20} />
-            </button>
-          </form>
+          {!router.pathname.startsWith(searchPath) && (
+            <form onSubmit={handleSearch}>
+              <input
+                type='text'
+                placeholder='Pesquisar no Orkut'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <button type='submit'>
+                <FaSearch size={20} />
+              </button>
+            </form>
+          )}
         </article>
       </div>
     </header>
