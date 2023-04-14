@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  p {
+    font-weight: normal;
+    gap: 5px;
+    display: flex;
+    align-items: center;
+    span {
+      font-weight: bold;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
