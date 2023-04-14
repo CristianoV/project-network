@@ -24,9 +24,9 @@ export default function LeftSideBar() {
         <h2>
           {info?.firstName} {info?.lastName}
         </h2>
-        <p>{info?.sex}</p>
-        <p>{info?.relationship}</p>
-        <p>{info?.country}</p>
+        {info?.birthday && <p>{info?.sex}</p>}
+        {info.relationship && <p>{info?.relationship}</p>}
+        {info?.country && <p>{info?.country}</p>}
       </div>
       <hr />
       <div>
