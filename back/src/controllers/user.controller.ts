@@ -29,4 +29,12 @@ export default class UserController implements IUserController {
 
     return res.status(200).json('Profile updated');
   }
+
+  public async getUserById(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const user = await this.userService.getUserById(Number(id));
+
+    return res.status(200).json(user);
+  }
 }

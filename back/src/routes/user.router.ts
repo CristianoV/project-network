@@ -19,4 +19,8 @@ LoginRoutes.put('/user/profile', (request: Request, response: Response) =>
   loginController.updateProfile(request, response)
 );
 
+LoginRoutes.get('/user/:id', (request: Request, response: Response) =>
+  loginController.getUserById(request, response)
+);
+
 export default LoginRoutes;

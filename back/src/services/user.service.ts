@@ -54,4 +54,12 @@ export default class UserService implements IUserService<User> {
 
     return 'Profile updated';
   }
+
+  public async getUserById(id: number) {
+    const user = await this.model.findByPk(id, {
+      attributes: { exclude: ['password'] },
+    });
+
+    return user;
+  }
 }
