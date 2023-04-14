@@ -7,7 +7,7 @@ export default function login(req: NextApiRequest, res: NextApiResponse) {
     cookie.serialize('token', req.body.token, {
       httpOnly: true,
       secure: process.env.NODE_ENV !== 'development',
-      maxAge: 60 * 60,
+      maxAge: 60 * 60 * 24, // 1 day
       sameSite: 'strict',
       path: '/',
     })
