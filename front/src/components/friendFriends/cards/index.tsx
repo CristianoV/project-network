@@ -11,7 +11,7 @@ export default function FriendCard({ friend }: FriendCardProps) {
   return (
     <div className={styles.container}>
       <Link href={`/profile/${friend.id}`}>
-        <Image src={avatar} alt='avatar' width={500} height={500} />
+      <Image src={friend?.profile_picture || avatar} alt='avatar' width={500} height={500} />
         <p>{friend.firstName}</p>
       </Link>
     </div>

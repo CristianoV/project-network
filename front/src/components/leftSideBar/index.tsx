@@ -18,7 +18,7 @@ export default function LeftSideBar() {
   const { info } = redux;
   return (
     <div className={styles.container}>
-      <Image src={avatar} alt='avatar' width={500} height={500} />
+      <Image src={info?.profile_picture || avatar} alt='avatar' width={500} height={500} />
       <hr />
       <div>
         <h2>
