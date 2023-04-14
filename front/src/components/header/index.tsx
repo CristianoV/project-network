@@ -65,6 +65,7 @@ export default function Header() {
                 type='text'
                 placeholder='Pesquisar no Orkut'
                 value={search}
+                required
                 onChange={(e) => setSearch(e.target.value)}
               />
               <button type='submit'>
