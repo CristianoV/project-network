@@ -5,16 +5,17 @@
   align-items: center;
   background-color: #F0F0F0;
   width: 30%;
+  height: 150px;
   padding-bottom: 30px;
 
   img {
-    width: 70%;
-    height: 100%;
+    max-width: 85px;
+    max-height: 120px;
     object-fit: cover;
   }
 
   p {
-    margin-top: 10px;
+    margin-top: 5px;
     text-decoration: none;
   }
 }
