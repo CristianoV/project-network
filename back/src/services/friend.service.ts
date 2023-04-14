@@ -39,6 +39,37 @@ export default class FriendshipService implements IFriendshipService {
     return result;
   }
 
+  public async getFriendsByUserId(id: number) {
+    const friends = await this.model.findAll({
+      where: {
+        [Op.or]: [{ user_id_1: id }, { user_id_2: id }],
+      },
+      include: [
+        {
+          model: User,
+          as: 'user_1',
+          attributes: { exclude: ['password'] },
+        },
+        {
+          model: User,
+          as: 'user_2',
+          attributes: { exclude: ['password'] },
+        },
+      ],
+    });
+
+    const result = friends.map((friend) => {
+      const friendUser =
+        friend.user_id_1 === id ? friend.user_2 : friend.user_1;
+      return {
+        id: friend.id,
+        friend: friendUser,
+      };
+    });
+
+    return result;
+  }
+
   public async addFriend(authorization: string, friendId: number) {
     const { id } = await JwtSecret.verify(authorization);
 
@@ -47,7 +78,7 @@ export default class FriendshipService implements IFriendshipService {
       user_id_2: friendId,
     });
 
-    return "Friend added";
+    return 'Friend added';
   }
 
   public async deleteFriend(authorization: string, friendId: number) {
@@ -60,6 +91,6 @@ export default class FriendshipService implements IFriendshipService {
       },
     });
 
-    return "Friend deleted";
+    return 'Friend deleted';
   }
 }

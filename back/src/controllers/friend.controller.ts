@@ -12,6 +12,15 @@ export default class FriendshipController implements IFriendshipController {
     return res.status(200).json(friends);
   }
 
+  public async getFriendRequests(req: Request, res: Response) {
+    const { id } = req.params;
+    const friendRequests = await this.friendshipService.getFriendsByUserId(
+      Number(id)
+    );
+
+    return res.status(200).json(friendRequests);
+  }
+
   public async addFriend(req: Request, res: Response) {
     const { authorization } = req.headers as { authorization: string };
     const { friendId } = req.body;
