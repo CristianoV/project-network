@@ -10,6 +10,7 @@ import store from '../../redux/store';
 import {fetchUserData } from '../../redux/slices/profile';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Footer from '../../components/footer';
 
 interface HomeProps {
   token: string;
@@ -42,6 +43,7 @@ export default function Home({ token }: HomeProps) {
           <FriendCommunity />
         </div>
       </main>
+      <Footer />
     </>
   );
 }
