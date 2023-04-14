@@ -2,20 +2,28 @@ import styles from '../../styles/Home.module.scss';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Header from '../../components/header';
-import LeftSideBar from '../../components/leftSideBar';
-import Welcome from '../../components/welcome';
-import Friends from '../../components/friends';
-import Community from '../../components/community';
+import FriendLeftSideBar from '../../components/friendLeftSideBar';
+import FriendProfile from '../../components/friendProfile';
+import FriendFriends from '../../components/friendFriends';
+import FriendCommunity from '../../components/friendCommunity';
 import store from '../../redux/store';
-import { fetchUserById } from '../../redux/slices/user';
-import {fetchFriendsById} from '../../redux/slices/friends';
+import {fetchUserData } from '../../redux/slices/profile';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 interface HomeProps {
   token: string;
 }
 
 export default function Home({ token }: HomeProps) {
+  const router = useRouter();
+  const { id } = router.query;
   const { dispatch } = store;
+  
+
+  useEffect(() => {
+    dispatch(fetchUserData(String(id)));
+  }, [dispatch, id]);
 
   return (
     <>
@@ -25,13 +33,13 @@ export default function Home({ token }: HomeProps) {
       </Head>
       <Header />
       <main className={styles.container}>
-        <LeftSideBar />
+        <FriendLeftSideBar />
         <div>
-          <Welcome />
+        <FriendProfile token={token} />
         </div>
         <div>
-          <Friends />
-          <Community />
+          <FriendFriends />
+          <FriendCommunity />
         </div>
       </main>
     </>
