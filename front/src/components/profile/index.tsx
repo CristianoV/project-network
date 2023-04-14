@@ -30,20 +30,16 @@ export default function Profile({ token }: WelcomeProps) {
   }, [redux.info?.phrase]);
 
   const handleEdit = async () => {
-    if (phrase) {
-      await fetchFromApi.patch(
-        '/user/phrase',
-        { phrase },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      setEdit(!edit);
-    } else {
-      setEdit(!edit);
-    }
+    await fetchFromApi.patch(
+      '/user/phrase',
+      { phrase },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    setEdit(!edit);
   };
 
   const { info } = redux;
