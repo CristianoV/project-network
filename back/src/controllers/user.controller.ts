@@ -37,4 +37,20 @@ export default class UserController implements IUserController {
 
     return res.status(200).json(user);
   }
+
+  public async updateImage(req: Request, res: Response) {
+    const { authorization } = req.headers as { authorization: string };
+    const file = req.file;
+
+    if (!file) {
+      return res.status(400).json({ error: 'Please, send a file' });
+    }
+
+    const car = await this.userService.updateImage({
+      profile_picture: process.env.DB_URL + file.filename,
+      authorization,
+    });
+
+    return res.status(201).json(car);
+  }
 }

@@ -62,4 +62,27 @@ export default class UserService implements IUserService<User> {
 
     return user;
   }
+
+  public async updateImage({
+    authorization,
+    profile_picture,
+  }: {
+    authorization: string;
+    profile_picture: string;
+  }) {
+    const { id } = JwtSecret.verify(authorization);
+
+    const user = await this.model.findOne({
+      where: { id },
+      attributes: { exclude: ['password'] },
+    });
+
+    if (!user) throw new Error('User not found');
+
+    user.profile_picture = profile_picture;
+
+    await user.save();
+
+    return 'Image updated';
+  }
 }
