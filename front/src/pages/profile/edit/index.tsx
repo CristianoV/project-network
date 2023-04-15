@@ -27,7 +27,7 @@ export default function EditProfile({ token }: EditProfileProps) {
       </Head>
       <Header />
       <main className={styles.container}>
-        <LeftSideBar />
+        <LeftSideBar token={token} />
         <div>
           <Edit token={token} />
         </div>
