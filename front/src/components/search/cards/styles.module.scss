@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  
+  a {
+    display: flex;
+
+    img {
+      max-width: 120px;
+      max-height: 120px;
+      object-fit: cover;
+      padding: 20px 20px 20px 40px;
+    }
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+
+      p {
+        color: black;
+        width: 200px;
+        font-size: 20px;
+      }
+      .tittle {
+        font-weight: bold;
+        font-size: 24px;
+      }
+    }
+  }
+}

@@ -11,6 +11,10 @@ FriendRoutes.get('/friends', (request: Request, response: Response) =>
   friendController.getFriends(request, response)
 );
 
+FriendRoutes.get('/friends/:id', (request: Request, response: Response) =>
+  friendController.getFriendRequests(request, response)
+);
+
 FriendRoutes.post('/friends', (request: Request, response: Response) =>
   friendController.addFriend(request, response)
 );

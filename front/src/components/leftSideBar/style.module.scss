@@ -10,7 +10,8 @@
 
   img {
     width: 100%;
-    height: 100%;
+    height: 250px;
+    object-fit: cover;
   }
 
   hr {
@@ -36,4 +37,10 @@
       }
     }
   }
+}
+
+.updateImage {
+  text-align: center;
+  margin: 10px 0;
+  font-weight: 500;
 }

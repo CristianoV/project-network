@@ -23,4 +23,20 @@ export default class PartnerService implements IPartnerService<Partners> {
 
     return partners;
   }
+
+  public async getPartnersByUserId(id: number) {
+    const partners = await this.model.findAll({
+      where: {
+        user_id: id,
+      },
+      include: [
+        {
+          model: Group,
+          as: 'group',
+        },
+      ],
+    });
+
+    return partners;
+  }
 }

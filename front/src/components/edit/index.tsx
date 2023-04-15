@@ -72,7 +72,7 @@ export default function Edit({ token }: EditProps) {
       );
       router.push('/profile');
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

@@ -4,5 +4,5 @@ export default interface IUserController {
   getUser(req: Request, res: Response): Promise<Response>;
   updatePhrase(req: Request, res: Response): Promise<Response>;
   updateProfile(req: Request, res: Response): Promise<Response>;
-  getUsersByName(req: Request, res: Response): Promise<Response>;
+  getUserById(req: Request, res: Response): Promise<Response>;
 }

@@ -11,4 +11,11 @@ export default class PartnerController implements IPartnerController {
 
     return res.status(200).json(partners);
   }
+
+  public async getPartnersByUserId(req: Request, res: Response) {
+    const { id } = req.params;
+    const partners = await this.partnerService.getPartnersByUserId(Number(id));
+
+    return res.status(200).json(partners);
+  }
 }

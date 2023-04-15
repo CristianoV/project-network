@@ -55,17 +55,34 @@ export default class UserService implements IUserService<User> {
     return 'Profile updated';
   }
 
-  public async getUsersByName(name: string) {
-    const users = await this.model.findAll({
-      where: {
-        [Op.or]: [
-          { firstName: { [Op.iLike]: `%${name}%` } },
-          { lastName: { [Op.iLike]: `%${name}%` } },
-        ],
-      },
+  public async getUserById(id: number) {
+    const user = await this.model.findByPk(id, {
       attributes: { exclude: ['password'] },
     });
 
-    return users;
+    return user;
+  }
+
+  public async updateImage({
+    authorization,
+    profile_picture,
+  }: {
+    authorization: string;
+    profile_picture: string;
+  }) {
+    const { id } = JwtSecret.verify(authorization);
+
+    const user = await this.model.findOne({
+      where: { id },
+      attributes: { exclude: ['password'] },
+    });
+
+    if (!user) throw new Error('User not found');
+
+    user.profile_picture = profile_picture;
+
+    await user.save();
+
+    return 'Image updated';
   }
 }

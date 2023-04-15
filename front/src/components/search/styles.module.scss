@@ -1,0 +1,62 @@
+@import '../../styles/colors.scss';
+
+.container {
+  border-radius: 10px;
+  margin: 10px;
+
+  .tittle {
+    background-color: $senary;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
+  }
+
+  .content {
+    min-height: 60vh;
+
+    display: flex;
+    background-color: white;
+    padding: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    .search {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      hr {
+        border: 1px solid #eaeaea;
+        margin: 10px 0;
+      }
+
+      div > p {
+        padding: 20px 20px 20px 30px;
+      }
+
+      form {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        input {
+          font-size: 16px;
+          padding: 5px;
+          border-radius: 3px;
+          border: 1px solid;
+          width: 400px;
+          margin-left: 30px;
+        }
+
+        button {
+          font-size: 16px;
+          padding: 5px;
+          border-radius: 3px;
+          border: 1px solid;
+        }
+      }
+    }
+  }
+}

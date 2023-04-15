@@ -30,20 +30,16 @@ export default function Profile({ token }: WelcomeProps) {
   }, [redux.info?.phrase]);
 
   const handleEdit = async () => {
-    if (phrase) {
-      await fetchFromApi.patch(
-        '/user/phrase',
-        { phrase },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      setEdit(!edit);
-    } else {
-      setEdit(!edit);
-    }
+    await fetchFromApi.patch(
+      '/user/phrase',
+      { phrase },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    setEdit(!edit);
   };
 
   const { info } = redux;
@@ -115,7 +111,8 @@ export default function Profile({ token }: WelcomeProps) {
           <div className={styles.text}>
             <p>aniversario:</p>
             <span>
-              {moment(info?.birthday).format('DD [de] MMMM [de] YYYY')}
+              {info?.birthday &&
+                moment(info?.birthday).format('DD [de] MMMM [de] YYYY')}
             </span>
           </div>
           <div className={styles.text}>
