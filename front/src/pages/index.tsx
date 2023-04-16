@@ -8,9 +8,7 @@ import Friends from '../components/friends';
 import Community from '../components/community';
 import Footer from '../components/footer';
 import store from '../redux/store';
-import { fetchUserById } from '../redux/slices/user';
-import { fetchFriendsById } from '../redux/slices/friends';
-import { fetchGroupsById } from '../redux/slices/groups';
+import {fetchUserData} from '../redux/slices/user';
 import { useEffect } from 'react';
 
 interface HomeProps {
@@ -21,9 +19,7 @@ export default function Home({ token }: HomeProps) {
   const { dispatch } = store;
 
   useEffect(() => {
-    dispatch(fetchUserById(token));
-    dispatch(fetchFriendsById(token));
-    dispatch(fetchGroupsById(token));
+    dispatch(fetchUserData(token));
   }, [dispatch, token]);
 
   return (
