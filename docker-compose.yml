@@ -33,6 +33,7 @@ services:
       - PGPASSWORD=1234
       - PGHOST=db
       - PGPORT=5432
+      - DB_URL=http://backend:3333/files/
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3333"]
       timeout: 10s
