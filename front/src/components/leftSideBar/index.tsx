@@ -16,7 +16,7 @@ import { useState } from 'react';
 import { fetchFromApi } from '../../utils/axios';
 
 interface LeftSideBarProps {
-  token: string;
+  token?: string;
 }
 
 export default function LeftSideBar({ token }: LeftSideBarProps) {
