@@ -4,8 +4,8 @@ import Card from './cards';
 import Link from 'next/link';
 
 export default function Friends() {
-  const redux = useSelector((state: any) => state.friends);
-  const friends = redux.info;
+  const redux = useSelector((state: any) => state.user);
+  const { friends } = redux;
 
   return (
     <div className={styles.container}>
@@ -20,7 +20,9 @@ export default function Friends() {
             }
           })
         ) : (
-          <p className={styles.notFound}>Você ainda não adicionou nenhum amigo</p>
+          <p className={styles.notFound}>
+            Você ainda não adicionou nenhum amigo
+          </p>
         )}
       </div>
       <hr />
