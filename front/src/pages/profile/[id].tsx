@@ -7,7 +7,8 @@ import FriendProfile from '../../components/friendProfile';
 import FriendFriends from '../../components/friendFriends';
 import FriendCommunity from '../../components/friendCommunity';
 import store from '../../redux/store';
-import {fetchUserData } from '../../redux/slices/profile';
+import { fetchProfileUserData } from '../../redux/slices/profile';
+import { fetchUserData } from '../../redux/slices/user';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Footer from '../../components/footer';
@@ -20,11 +21,11 @@ export default function Home({ token }: HomeProps) {
   const router = useRouter();
   const { id } = router.query;
   const { dispatch } = store;
-  
 
   useEffect(() => {
-    dispatch(fetchUserData(String(id)));
-  }, [dispatch, id]);
+    dispatch(fetchUserData(token));
+    dispatch(fetchProfileUserData(String(id)));
+  }, [dispatch, id, token]);
 
   return (
     <>
@@ -36,7 +37,7 @@ export default function Home({ token }: HomeProps) {
       <main className={styles.container}>
         <FriendLeftSideBar />
         <div>
-        <FriendProfile token={token} />
+          <FriendProfile token={token} />
         </div>
         <div>
           <FriendFriends />

@@ -6,7 +6,7 @@ import Header from '../../../components/header';
 import Footer from '../../../components/footer';
 import Edit from '../../../components/edit';
 import { useEffect } from 'react';
-import { fetchUserById } from '../../../redux/slices/user';
+import { fetchUserData } from '../../../redux/slices/user';
 import store from '../../../redux/store';
 
 interface EditProfileProps {
@@ -17,7 +17,7 @@ export default function EditProfile({ token }: EditProfileProps) {
   const { dispatch } = store;
 
   useEffect(() => {
-    dispatch(fetchUserById(token));
+    dispatch(fetchUserData(token));
   }, [dispatch, token]);
   return (
     <>
