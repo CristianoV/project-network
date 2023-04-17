@@ -22,18 +22,20 @@ export default function NewFriends({ token }: NewFriendsProps) {
         setRequests(result.data);
       };
       result();
+      
     } catch (error) {
       console.log(error);
     }
   }, [token]);
+  
 
   if (requests.length > 0) {
     return (
       <div className={styles.container}>
         <p>Novos pedidos de amizades ({requests.length})</p>
-        {requests.map(({ friend }, index) => {
+        {requests.map(({ friend, id }, index) => {
           if (index < 3) {
-            return <Card key={index} obj={friend} token={token} />;
+            return <Card key={index} obj={friend} token={token} requestId={id} />;
           }
         })}
         {requests.length > 3 && <Link href='/friends'>Ver todos</Link>}

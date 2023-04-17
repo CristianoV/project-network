@@ -44,7 +44,7 @@ export default function LeftSideBar({ token }: { token?: string }) {
           },
         });
 
-        if (response.data.status === 'not friends') {
+        if (response.data.status === 'not friends' || response.data.status === 'rejected') {
           setIsRequest(false);
           setIsFriend(false);
         } else if (response.data.status === 'pending') {

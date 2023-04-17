@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { fetchFromApi } from '../../../utils/axios';
 import { useRouter } from 'next/router';
 
-export default function Card({ obj, token }: any) {
+export default function Card({ obj, token, requestId }: any) {
   const { firstName, lastName, profile_picture, id } = obj;
   const router = useRouter();
 
@@ -15,6 +15,7 @@ export default function Card({ obj, token }: any) {
         {
           friendId: id,
           status: status === true ? 'accepted' : 'rejected',
+          requestId
         },
         {
           headers: {
