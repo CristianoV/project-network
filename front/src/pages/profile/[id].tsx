@@ -35,7 +35,7 @@ export default function Home({ token }: HomeProps) {
       </Head>
       <Header />
       <main className={styles.container}>
-        <FriendLeftSideBar />
+        <FriendLeftSideBar token={token} />
         <div>
           <FriendProfile token={token} />
         </div>

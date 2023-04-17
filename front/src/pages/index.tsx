@@ -6,6 +6,7 @@ import LeftSideBar from '../components/leftSideBar';
 import Welcome from '../components/welcome';
 import Friends from '../components/friends';
 import Community from '../components/community';
+import NewFriends from '../components/newFriends';
 import Footer from '../components/footer';
 import store from '../redux/store';
 import {fetchUserData} from '../redux/slices/user';
@@ -33,6 +34,7 @@ export default function Home({ token }: HomeProps) {
         <LeftSideBar />
         <div>
           <Welcome />
+          <NewFriends token={token} />
         </div>
         <div>
           <Friends />
