@@ -8,10 +8,11 @@ export default class FriendshipService implements IFriendshipService {
   constructor(private model: typeof Friend) {}
 
   public async getFriends(authorization: string) {
-    const { id: userId } = await JwtSecret.verify(authorization);
+    const { id } = await JwtSecret.verify(authorization);
     const friends = await this.model.findAll({
       where: {
-        [Op.or]: [{ user_id_1: userId }, { user_id_2: userId }],
+        [Op.or]: [{ user_id_1: id }, { user_id_2: id }],
+        status: 'accepted',
       },
       include: [
         {
@@ -29,7 +30,7 @@ export default class FriendshipService implements IFriendshipService {
 
     const result = friends.map((friend) => {
       const friendUser =
-        friend.user_id_1 === userId ? friend.user_2 : friend.user_1;
+        friend.user_id_1 === id ? friend.user_2 : friend.user_1;
       return {
         id: friend.id,
         friend: friendUser,
@@ -43,6 +44,7 @@ export default class FriendshipService implements IFriendshipService {
     const friends = await this.model.findAll({
       where: {
         [Op.or]: [{ user_id_1: id }, { user_id_2: id }],
+        status: 'accepted',
       },
       include: [
         {
@@ -73,9 +75,27 @@ export default class FriendshipService implements IFriendshipService {
   public async addFriend(authorization: string, friendId: number) {
     const { id } = await JwtSecret.verify(authorization);
 
-    const friend = await this.model.create({
+    if (id === friendId) {
+      throw new Error('You cannot add yourself as a friend');
+    }
+
+    const verifyFriend = await this.model.findOne({
+      where: {
+        [Op.or]: [
+          { user_id_1: id, user_id_2: friendId },
+          { user_id_1: friendId, user_id_2: id },
+        ],
+      },
+    });
+
+    if (verifyFriend) {
+      return 'Friend already added';
+    }
+
+    await this.model.create({
       user_id_1: id,
       user_id_2: friendId,
+      status: 'pending',
     });
 
     return 'Friend added';
@@ -86,11 +106,96 @@ export default class FriendshipService implements IFriendshipService {
 
     const friend = await this.model.destroy({
       where: {
-        user_id_1: id,
-        user_id_2: friendId,
+        [Op.or]: [
+          { user_id_1: id, user_id_2: friendId },
+          { user_id_1: friendId, user_id_2: id },
+        ],
       },
     });
 
     return 'Friend deleted';
+  }
+
+  public async getFriendRequestsByUserId(authorization: string) {
+    const { id } = await JwtSecret.verify(authorization);
+
+    const friends = await this.model.findAll({
+      where: {
+        user_id_2: id,
+        status: 'pending',
+      },
+      include: [
+        {
+          model: User,
+          as: 'user_1',
+          attributes: { exclude: ['password'] },
+        },
+        {
+          model: User,
+          as: 'user_2',
+          attributes: { exclude: ['password'] },
+        },
+      ],
+    });
+
+    const result = friends.map((friend) => {
+      const friendUser =
+        friend.user_id_1 === id ? friend.user_2 : friend.user_1;
+      return {
+        id: friend.id,
+        friend: friendUser,
+      };
+    });
+
+    return result;
+  }
+
+  public async respondToFriendRequest(
+    authorization: string,
+    friendId: number,
+    status: string
+  ) {
+    const { id } = await JwtSecret.verify(authorization);
+
+    await this.model.update(
+      { status },
+      {
+        where: {
+          [Op.or]: [
+            { user_id_1: id, user_id_2: friendId },
+            { user_id_1: friendId, user_id_2: id },
+          ],
+        },
+      }
+    );
+
+    return 'Friend request responded';
+  }
+
+  public async isFriend(authorization: string, friendId: number) {
+    const { id } = await JwtSecret.verify(authorization);
+
+    const friend = await this.model.findOne({
+      where: {
+        [Op.or]: [
+          { user_id_1: id, user_id_2: friendId },
+          { user_id_1: friendId, user_id_2: id },
+        ],
+      },
+    });
+
+    if (friend) {
+      return {
+        status: friend.status,
+      };
+    } else if (id === friendId) {
+      return {
+        status: 'self',
+      };
+    } else {
+      return {
+        status: 'not friends',
+      };
+    }
   }
 }
