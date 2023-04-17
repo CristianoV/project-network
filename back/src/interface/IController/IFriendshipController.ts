@@ -5,4 +5,7 @@ export default interface IFriendshipController {
   getFriendRequests(req: Request, res: Response): Promise<Response>;
   addFriend(req: Request, res: Response): Promise<Response>;
   deleteFriend(req: Request, res: Response): Promise<Response>;
+  getFriendRequestsByUserId(req: Request, res: Response): Promise<Response>;
+  respondToFriendRequest(req: Request, res: Response): Promise<Response>;
+  isFriend(req: Request, res: Response): Promise<Response>;
 }
