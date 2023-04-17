@@ -25,7 +25,7 @@ export default function Card({ obj, token, requestId }: any) {
       );
       router.reload();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

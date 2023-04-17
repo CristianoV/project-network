@@ -60,7 +60,7 @@ export default function LeftSideBar({ token }: { token?: string }) {
         result();
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, [info, token]);
 

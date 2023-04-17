@@ -24,7 +24,7 @@ export default function NewFriends({ token }: NewFriendsProps) {
       result();
       
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, [token]);
   

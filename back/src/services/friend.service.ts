@@ -189,8 +189,6 @@ export default class FriendshipService implements IFriendshipService {
       raw: true,
     });
 
-    console.log(friend);
-
     if (friend) {
       return {
         status: friend.status,
