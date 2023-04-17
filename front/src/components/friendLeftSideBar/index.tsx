@@ -77,7 +77,7 @@ export default function LeftSideBar({ token }: { token?: string }) {
         <h2>
           {info?.firstName} {info?.lastName}
         </h2>
-        {info?.birthday && <p>{info?.sex}</p>}
+        {info?.sex && <p>{info?.sex}</p>}
         {info?.relationship && <p>{info?.relationship}</p>}
         {info?.country && <p>{info?.country}</p>}
       </div>
