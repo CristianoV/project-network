@@ -7,7 +7,7 @@ module.exports = {
           id: 100,
           user_id_1: 100,
           user_id_2: 101,
-          status: 'accepted',
+          status: 'pending',
         },
         {
           id: 101,
@@ -31,25 +31,25 @@ module.exports = {
           id: 104,
           user_id_1: 105,
           user_id_2: 101,
-          status: 'pending',
+          status: 'accepted',
         },
         {
           id: 105,
           user_id_1: 101,
           user_id_2: 106,
-          status: 'pending',
+          status: 'accepted',
         },
         {
           id: 107,
           user_id_1: 101,
           user_id_2: 107,
-          status: 'pending',
+          status: 'accepted',
         },
         {
           id: 108,
           user_id_1: 101,
           user_id_2: 108,
-          status: 'pending',
+          status: 'accepted',
         },
       ],
       {}
