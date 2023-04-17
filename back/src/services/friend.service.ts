@@ -85,6 +85,7 @@ export default class FriendshipService implements IFriendshipService {
           { user_id_1: id, user_id_2: friendId },
           { user_id_1: friendId, user_id_2: id },
         ],
+        [Op.or]: [{ status: 'accepted' }, { status: 'pending' }],
       },
     });
 
@@ -153,7 +154,8 @@ export default class FriendshipService implements IFriendshipService {
   public async respondToFriendRequest(
     authorization: string,
     friendId: number,
-    status: string
+    status: string,
+    requestId: number
   ) {
     const { id } = await JwtSecret.verify(authorization);
 
@@ -161,6 +163,7 @@ export default class FriendshipService implements IFriendshipService {
       { status },
       {
         where: {
+          id: requestId,
           [Op.or]: [
             { user_id_1: id, user_id_2: friendId },
             { user_id_1: friendId, user_id_2: id },
@@ -182,7 +185,11 @@ export default class FriendshipService implements IFriendshipService {
           { user_id_1: friendId, user_id_2: id },
         ],
       },
+      order: [['id', 'DESC']],
+      raw: true,
     });
+
+    console.log(friend);
 
     if (friend) {
       return {
