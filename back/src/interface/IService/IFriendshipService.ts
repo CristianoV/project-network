@@ -14,7 +14,8 @@ export interface IFriendshipService {
   respondToFriendRequest(
     authorization: string,
     friendId: number,
-    status: string
+    status: string,
+    requestId: number
   ): Promise<string>;
   isFriend(
     authorization: string,
