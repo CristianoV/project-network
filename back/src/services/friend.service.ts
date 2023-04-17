@@ -81,12 +81,22 @@ export default class FriendshipService implements IFriendshipService {
 
     const verifyFriend = await this.model.findOne({
       where: {
-        [Op.or]: [
-          { user_id_1: id, user_id_2: friendId },
-          { user_id_1: friendId, user_id_2: id },
+        [Op.and]: [
+          {
+            [Op.or]: [
+              { user_id_1: id, user_id_2: friendId },
+              { user_id_1: friendId, user_id_2: id },
+            ],
+          },
+          {
+            status: {
+              [Op.in]: ['accepted', 'pending'],
+            },
+          },
         ],
-        [Op.or]: [{ status: 'accepted' }, { status: 'pending' }],
       },
+      order: [['id', 'DESC']],
+      raw: true,
     });
 
     if (verifyFriend) {
