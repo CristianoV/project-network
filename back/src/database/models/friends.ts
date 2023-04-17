@@ -1,4 +1,4 @@
-import { INTEGER, Model } from 'sequelize';
+import { INTEGER, Model, STRING } from 'sequelize';
 import user from './user';
 import db from '.';
 
@@ -6,8 +6,7 @@ class Friends extends Model {
   public id: number;
   public user_id_1: number;
   public user_id_2: number;
-  public created_at: Date;
-  public updated_at: Date;
+  public status: string;
   user_2: any;
   user_1: any;
 }
@@ -26,6 +25,10 @@ Friends.init(
     },
     user_id_2: {
       type: INTEGER,
+      allowNull: false,
+    },
+    status: {
+      type: STRING,
       allowNull: false,
     },
   },
