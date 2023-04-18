@@ -15,6 +15,7 @@ import Link from 'next/link';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import { fetchFromApi } from '../../utils/axios';
+import { useRouter } from 'next/router';
 
 interface WelcomeProps {
   token: string;
@@ -22,14 +23,21 @@ interface WelcomeProps {
 
 export default function Profile({ token }: WelcomeProps) {
   const redux = useSelector((state: any) => state.profile);
-  const { info } = redux;
+  const { info, loading } = redux;
+  const router = useRouter();
+
+  useEffect(() => {
+    if (loading === 'failed') {
+      router.push('/');
+    }
+  }, [loading, router]);
 
   return (
     <div className={styles.container}>
       <h1>
         {info?.firstName} {info?.lastName}
       </h1>
-      {info.phrase && (
+      {info?.phrase && (
         <div className={styles.bio}>
           <p>{info?.phrase}</p>
         </div>

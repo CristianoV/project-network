@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchFromApi } from '../../utils/axios';
 
-export const fetchUserData = createAsyncThunk(
+export const fetchProfileUserData = createAsyncThunk(
   'profile/fetchUserData',
-  async (token: string, thunkAPI) => {
+  async (id: string, thunkAPI) => {
     const [userResponse, groupsResponse, friendsResponse] = await Promise.all([
-      fetchFromApi.get(`/user/${token}`),
-      fetchFromApi.get(`/partner/${token}`),
-      fetchFromApi.get(`/friends/${token}`),
+      fetchFromApi.get(`/user/${id}`),
+      fetchFromApi.get(`/partner/${id}`),
+      fetchFromApi.get(`/friends/${id}`),
     ]);
     return {
       info: userResponse.data,
@@ -36,16 +36,16 @@ export const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchUserData.fulfilled, (state, action) => {
+    builder.addCase(fetchProfileUserData.fulfilled, (state, action) => {
       state.info = action.payload.info;
       state.groups = action.payload.groups;
       state.friends = action.payload.friends;
       state.loading = 'succeeded';
     }),
-      builder.addCase(fetchUserData.pending, (state, action) => {
+      builder.addCase(fetchProfileUserData.pending, (state, action) => {
         state.loading = 'pending';
       }),
-      builder.addCase(fetchUserData.rejected, (state, action) => {
+      builder.addCase(fetchProfileUserData.rejected, (state, action) => {
         state.loading = 'failed';
       });
   },

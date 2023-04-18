@@ -21,6 +21,9 @@ interface LeftSideBarProps {
 
 export default function LeftSideBar({ token }: LeftSideBarProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const router = useRouter();
+  const redux = useSelector((state: any) => state.user);
+  const { info } = redux;
 
   const handleFileInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -46,10 +49,7 @@ export default function LeftSideBar({ token }: LeftSideBarProps) {
       console.error(error);
     }
   };
-  const router = useRouter();
-  const redux = useSelector((state: any) => state.user);
 
-  const { info } = redux;
   return (
     <div className={styles.container}>
       <Image
@@ -76,8 +76,8 @@ export default function LeftSideBar({ token }: LeftSideBarProps) {
         <h2>
           {info?.firstName} {info?.lastName}
         </h2>
-        {info?.birthday && <p>{info?.sex}</p>}
-        {info.relationship && <p>{info?.relationship}</p>}
+        {info?.sex && <p>{info?.sex}</p>}
+        {info?.relationship && <p>{info?.relationship}</p>}
         {info?.country && <p>{info?.country}</p>}
       </div>
       <hr />

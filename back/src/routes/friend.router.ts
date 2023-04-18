@@ -23,4 +23,16 @@ FriendRoutes.delete('/friends', (request: Request, response: Response) =>
   friendController.deleteFriend(request, response)
 );
 
+FriendRoutes.get('/friend/requests', (request: Request, response: Response) =>
+  friendController.getFriendRequestsByUserId(request, response)
+);
+
+FriendRoutes.post('/friend/requests', (request: Request, response: Response) =>
+  friendController.respondToFriendRequest(request, response)
+);
+
+FriendRoutes.get('/friend/status/:id', (request: Request, response: Response) =>
+  friendController.isFriend(request, response)
+);
+
 export default FriendRoutes;

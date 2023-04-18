@@ -4,8 +4,8 @@ import Card from './cards';
 import Link from 'next/link';
 
 export default function Friends() {
-  const redux = useSelector((state: any) => state.groups);
-  const groups = redux.info;
+  const redux = useSelector((state: any) => state.user);
+  const { groups } = redux;
 
   return (
     <div className={styles.container}>

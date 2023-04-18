@@ -1,0 +1,22 @@
+.container {
+  background-color: white;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 20px;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  p {
+    font-weight: bold;
+    span {
+      font-weight: normal;
+    }
+  }
+
+  a {
+    text-align: center;
+    text-decoration: underline;
+  }
+}

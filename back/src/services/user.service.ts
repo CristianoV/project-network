@@ -1,7 +1,6 @@
 import User from '../database/models/user';
 import JwtSecret from '../utils/JwtService';
 import IUserService from '../interface/IService/IUserService';
-import { Op } from 'sequelize';
 
 export default class UserService implements IUserService<User> {
   constructor(private model: typeof User) {}
@@ -38,20 +37,26 @@ export default class UserService implements IUserService<User> {
 
   public async updateProfile(authorization: string, profile: any) {
     const { id } = JwtSecret.verify(authorization);
-
+  
+    Object.keys(profile).forEach(key => {
+      if (profile[key] === null || profile[key] === 'Data inválida') {
+        delete profile[key];
+      }
+    });
+  
     const user = await this.model.findOne({
       where: { id },
       attributes: { exclude: ['password'] },
     });
-
+  
     if (!user) {
       throw new Error('User not found');
     }
-
+  
     Object.assign(user, profile);
-
+  
     await user.save();
-
+  
     return 'Profile updated';
   }
 
