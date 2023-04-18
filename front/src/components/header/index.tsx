@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { FaSearch } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 
 export default function Header() {
   const [search, setSearch] = useState('');
@@ -13,11 +13,9 @@ export default function Header() {
   const router = useRouter();
 
   const redux = useSelector((state: any) => state.user);
-  const user = redux.info;
+  const { info, loading } = redux;
 
-  const logout = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const logout = useCallback(async () => {
     await fetch('/api/logout', {
       method: 'post',
       headers: {
@@ -26,12 +24,18 @@ export default function Header() {
       body: JSON.stringify({}),
     });
     router.push('/');
-  };
+  }, [router]);
 
   const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
     router.push(`/search?q=${search}`);
   };
+
+  useEffect(() => {
+    if (loading === 'failed') {
+      logout();
+    }
+  }, [loading, logout]);
 
   return (
     <header className={styles.headerContainer}>
@@ -57,8 +61,8 @@ export default function Header() {
           </ul>
         </nav>
         <article className={styles.profile}>
-          <p>{user.email}</p>
-          <button onClick={(e) => logout(e)}>Sair</button>
+          <p>{info.email}</p>
+          <button onClick={() => logout()}>Sair</button>
           {!router.pathname.startsWith(searchPath) && (
             <form onSubmit={handleSearch}>
               <input
