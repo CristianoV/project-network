@@ -7,17 +7,23 @@ import FriendProfile from '../../components/friendProfile';
 import FriendFriends from '../../components/friendFriends';
 import FriendCommunity from '../../components/friendCommunity';
 import store from '../../redux/store';
-import { fetchProfileUserData } from '../../redux/slices/profile';
+import {
+  fetchProfileUserData,
+  cleanUserData,
+} from '../../redux/slices/profile';
 import { fetchUserData } from '../../redux/slices/user';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Footer from '../../components/footer';
+import { useSelector } from 'react-redux';
 
 interface HomeProps {
   token: string;
 }
 
 export default function Home({ token }: HomeProps) {
+  const redux = useSelector((state: any) => state.profile);
+  const { info, loading } = redux;
   const router = useRouter();
   const { id } = router.query;
   const { dispatch } = store;
@@ -25,12 +31,20 @@ export default function Home({ token }: HomeProps) {
   useEffect(() => {
     dispatch(fetchUserData(token));
     dispatch(fetchProfileUserData(String(id)));
+
+    return () => {
+      dispatch(cleanUserData());
+    };
   }, [dispatch, id, token]);
 
   return (
     <>
       <Head>
-        <title>Rede Social</title>
+        <title>
+          {loading === 'succeeded'
+            ? `${info?.firstName} ${info?.lastName} - Rede Social`
+            : 'Rede Social'}
+        </title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Header />
