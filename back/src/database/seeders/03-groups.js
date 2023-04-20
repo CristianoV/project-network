@@ -4,16 +4,22 @@ module.exports = {
       'Groups',
       [
         {
-          id: 1,
           name: 'Odeio acordar cedo',
           description: 'Grupo para pessoas que odeiam acordar cedo',
-          owner_id: 101,
+          languages: 'Português',
+          category: 'Esportes',
+          country: 'Brasil',
+          type: 'Público',
+          owner_id: 2,
         },
         {
-          id: 2,
           name: 'Nescau ou Toddy',
           description: 'Grupo para pessoas que gostam de Nescau ou Toddy',
-          owner_id: 100,
+          languages: 'Português',
+          category: 'Esportes',
+          country: 'Brasil',
+          type: 'Público',
+          owner_id: 2,
         },
       ],
       {}
