@@ -1,4 +1,5 @@
 import { INTEGER, STRING, TEXT, Model } from "sequelize";
+import user from './user';
 import db from '.';
 
 class Groups extends Model {
@@ -41,5 +42,7 @@ Groups.init(
     timestamps: false,
   }
 );
+
+Groups.belongsTo(user, { as: 'user', foreignKey: 'owner_id' });
 
 export default Groups;
