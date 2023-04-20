@@ -19,4 +19,12 @@ FriendRoutes.get('/partner/group/:id', (request: Request, response: Response) =>
   friendController.getPartnerByGroupId(request, response)
 );
 
+FriendRoutes.post('/partner', (request: Request, response: Response) =>
+  friendController.createPartner(request, response)
+);
+
+FriendRoutes.get('/partner/is/:groupId', (request: Request, response: Response) =>
+  friendController.isPartner(request, response)
+);
+
 export default FriendRoutes;

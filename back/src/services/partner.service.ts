@@ -8,10 +8,10 @@ export default class PartnerService implements IPartnerService<Partners> {
   constructor(private model: typeof Partners) {}
 
   public async getPartners(authorization: string) {
-    const { id: userId } = await JwtSecret.verify(authorization);
+    const { id } = await JwtSecret.verify(authorization);
     const partners = await this.model.findAll({
       where: {
-        user_id: userId,
+        user_id: id,
       },
       include: [
         {
@@ -54,5 +54,43 @@ export default class PartnerService implements IPartnerService<Partners> {
     });
 
     return partners;
+  }
+
+  public async createPartner({
+    authorization,
+    groupId,
+  }: {
+    authorization: string;
+    groupId: number;
+  }) {
+    const { id } = await JwtSecret.verify(authorization);
+    const partner = await this.model.create({
+      user_id: id,
+      group_id: groupId,
+    });
+
+    return partner;
+  }
+
+  public async isPartner({
+    authorization,
+    groupId,
+  }: {
+    authorization: string;
+    groupId: number;
+  }) {
+    const { id } = await JwtSecret.verify(authorization);
+    const partner = await this.model.findOne({
+      where: {
+        user_id: id,
+        group_id: groupId,
+      },
+    });
+
+    if (partner) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
