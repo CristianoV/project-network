@@ -34,7 +34,14 @@ const initialState = {
 export const userSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {},
+  reducers: {
+    cleanUserData: (state) => {
+      state.info = [];
+      state.groups = [];
+      state.friends = [];
+      state.loading = 'idle';
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchProfileUserData.fulfilled, (state, action) => {
       state.info = action.payload.info;
@@ -51,5 +58,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const {} = userSlice.actions;
+export const { cleanUserData } = userSlice.actions;
 export default userSlice.reducer;
