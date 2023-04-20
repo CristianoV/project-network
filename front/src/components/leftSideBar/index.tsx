@@ -65,7 +65,7 @@ export default function LeftSideBar({ token }: LeftSideBarProps) {
       {router.pathname === '/profile/edit' && (
         <div className={styles.updateImage}>
           <p>Alterar foto de perfil</p>
-          <input type='file' onChange={handleFileInputChange} />
+          <input type='file' onChange={handleFileInputChange} accept='image/*' />
           <button onClick={handleUploadClick} disabled={!selectedFile}>
             Enviar
           </button>
