@@ -14,14 +14,20 @@ export default class GroupsController implements IGroupsController {
   }
 
   public async createGroup(req: Request, res: Response) {
-    const { name, description } = req.body;
-    const { authorization } = req.headers;
+    const { name, description, language, category, type, country } = req.body;
+    const { authorization } = req.headers as { authorization: string };
+    const file = req.file;
 
-    const group = await this.service.createGroup(
+    const group = await this.service.createGroup({
       name,
       description,
-      authorization as string
-    );
+      language,
+      category,
+      type,
+      country,
+      profile_picture: file ? process.env.DB_URL + file.filename : null,
+      authorization,
+    });
 
     return res.status(201).json(group);
   }
