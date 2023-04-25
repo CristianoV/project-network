@@ -6,7 +6,7 @@ module.exports = {
         {
           name: 'Odeio acordar cedo',
           description: 'Grupo para pessoas que odeiam acordar cedo',
-          languages: 'Português',
+          language: 'Português',
           category: 'Esportes',
           country: 'Brasil',
           type: 'Público',
@@ -15,7 +15,7 @@ module.exports = {
         {
           name: 'Nescau ou Toddy',
           description: 'Grupo para pessoas que gostam de Nescau ou Toddy',
-          languages: 'Português',
+          language: 'Português',
           category: 'Esportes',
           country: 'Brasil',
           type: 'Público',

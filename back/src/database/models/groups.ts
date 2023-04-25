@@ -4,11 +4,11 @@ import db from '.';
 
 class Groups extends Model {
   public id: number;
-  public profile_picture: string;
+  public profile_picture: string | null;
   public name: string;
   public description: string;
   public owner_id: number;
-  public languages: string;
+  public language: string;
   public category: string;
   public type: string;
   public country: string;
@@ -24,7 +24,7 @@ Groups.init(
     },
     profile_picture: {
       type: STRING,
-      allowNull: false,
+      allowNull: true,
     },
     name: {
       type: STRING,
@@ -35,7 +35,7 @@ Groups.init(
       type: TEXT,
       allowNull: false,
     },
-    languages: {
+    language: {
       type: STRING,
       allowNull: false,
     },
