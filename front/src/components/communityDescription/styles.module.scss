@@ -8,6 +8,13 @@
   padding: 20px;
   width: 700px;
 
+  nav {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
   hr {
     border: 1px solid #eaeaea;
     margin: 10px 0;
