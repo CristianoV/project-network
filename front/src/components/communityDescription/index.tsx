@@ -10,6 +10,13 @@ export default function Profile() {
   return (
     <div className={styles.container}>
       <h1>{info?.name}</h1>
+      <nav>
+        <Link href='/'>Inicio</Link>
+        {'>'}
+        <Link href='/community'>comunidades</Link>
+        {'>'}
+        <p>{info?.name}</p>
+      </nav>
       <div className={styles.social}>
         <main>
           <div className={styles.text}>
@@ -18,7 +25,7 @@ export default function Profile() {
           </div>
           <div className={styles.text}>
             <p>idioma:</p>
-            <span>{info?.languages}</span>
+            <span>{info?.language}</span>
           </div>
           <div className={styles.text}>
             <p>categoria:</p>
