@@ -56,7 +56,7 @@ export default function Header() {
               <Link href='/'>Amigos</Link>
             </li>
             <li>
-              <Link href='/'>Comunidades</Link>
+              <Link href='/community'>Comunidades</Link>
             </li>
           </ul>
         </nav>
