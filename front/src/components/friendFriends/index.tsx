@@ -21,7 +21,7 @@ export default function Friends() {
           })
         ) : (
           <p className={styles.notFound}>
-            Você ainda não adicionou nenhum amigo
+            Esta pessoa ainda não tem amigos :(
           </p>
         )}
       </div>
