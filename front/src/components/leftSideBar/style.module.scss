@@ -56,3 +56,16 @@
     }
   }
 }
+
+.loading-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #ddd;
+  margin-top: 10px;
+}
+
+.bar {
+  height: 100%;
+  background-color: #007bff;
+  transition: width 1s ease-in-out;
+}
