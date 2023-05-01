@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import styles from './styles.module.scss';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function SearchCommunity() {
   const [search, setSearch] = useState('');
@@ -27,6 +28,9 @@ export default function SearchCommunity() {
         </form>
       </div>
       <div>Procurar por categorias:</div>
+      <div>
+        <Link href='/community/create'>Criar</Link>
+      </div>
     </div>
   );
 }
