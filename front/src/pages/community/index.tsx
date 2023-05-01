@@ -2,6 +2,8 @@ import Header from '../../components/header';
 import styles from '../../styles/Home.module.scss';
 import LeftSideBar from '../../components/leftSideBar';
 import Footer from '../../components/footer';
+import DescriptionCommunity from '../../components/descriptionCommunity';
+import SearchCommunity from '../../components/searchCommunity';
 import store from '../../redux/store';
 import { fetchUserData } from '../../redux/slices/user';
 import { useEffect } from 'react';
@@ -24,8 +26,12 @@ export default function Community({ token }: any) {
       <Header />
       <main className={styles.container}>
         <LeftSideBar />
-        <div></div>
-        <div></div>
+        <div>
+          <DescriptionCommunity />
+        </div>
+        <div>
+          <SearchCommunity />
+        </div>
       </main>
       <Footer />
     </>
