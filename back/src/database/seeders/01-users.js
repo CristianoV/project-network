@@ -4,7 +4,6 @@ module.exports = {
       'Users',
       [
         {
-          id: 100,
           email: 'cintia.sc.samara22@gmail.com',
           password:
             '$2a$10$jZEYJgXWOlpZHYj0Ek2dlOewoSbm.pz6coG4qjvRoojSh0FEKzcnK',
@@ -21,7 +20,6 @@ module.exports = {
           language: 'Português',
         },
         {
-          id: 101,
           email: 'cristianoviieira@gmail.com',
           password:
             '$2a$10$0ec80axjF54kPvZW5KRmSuQjCGK8P7vqJdoTY7KmUJ8NRzcX2v7pS', // Abacaxi123
@@ -37,7 +35,6 @@ module.exports = {
           language: 'Português',
         },
         {
-          id: 102,
           email: 'carolinasilva@gmail.com',
           password:
             '$2a$10$6ywuB6UqMa6HyIH.bSX.TORgsJZcRzKP67QXibjC4am4v4MwR0b7O',
@@ -54,7 +51,6 @@ module.exports = {
           language: 'Português',
         },
         {
-          id: 103,
           email: 'johndoe@gmail.com',
           password:
             '$2a$10$4GpmYsQ2fMwRrgyV.iYGgeaMN89knT7q3MKxASZV7vTk8BpWLEriS',
@@ -71,7 +67,6 @@ module.exports = {
           language: 'Inglês',
         },
         {
-          id: 104,
           email: 'maria.silva@hotmail.com',
           password:
             '$2a$10$KWnc2hAiSYue5Wc1HeG5veEUPC7Fh/vLf8nC/ZQLXmtgMXZa6N25i',
@@ -88,7 +83,6 @@ module.exports = {
           language: 'Português',
         },
         {
-          id: 105,
           email: 'alexandre.costa@gmail.com',
           password:
             '$2a$10$zR/wvccj2dJ/Pn9hYnOOI.Bq3fM5JwH5pw5pWt8bs7VJLhD5/mC9K',
@@ -104,7 +98,6 @@ module.exports = {
           language: 'Português',
         },
         {
-          id: 106,
           email: 'davidthomas@yahoo.com',
           password:
             '$2a$10$OF5K9I4e4p4Bo/c4OOl1ruGgdSl8M3I6bl/Lj6eNY7HbtJ9R9F7ye',
@@ -113,7 +106,6 @@ module.exports = {
           bio: 'I am a UX designer',
         },
         {
-          id: 107,
           email: 'sarahlee@hotmail.com',
           password:
             '$2a$10$evJXZ2h0Z.19zOL0nxm/ieoghrRfM84eDJQ2Cr1gG/aaxDrZ9j3Hq',
@@ -122,7 +114,6 @@ module.exports = {
           bio: 'I am a software developer',
         },
         {
-          id: 108,
           email: 'michaelsmith@gmail.com',
           password:
             '$2a$10$v.wow9X4o4P/4RW.IaF7j.qB0m3w7kUOjjiUg7xdWl9P89v7VJKbu',

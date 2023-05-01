@@ -21,6 +21,8 @@ interface LeftSideBarProps {
 
 export default function LeftSideBar({ token }: LeftSideBarProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
   const router = useRouter();
   const redux = useSelector((state: any) => state.user);
   const { info } = redux;
@@ -35,11 +37,21 @@ export default function LeftSideBar({ token }: LeftSideBarProps) {
   };
 
   const handleUploadClick = async () => {
+    setLoading(true);
+
     try {
       const headers = {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: token,
+        },
+
+        onUploadProgress: (progressEvent: any) => {
+          const { loaded, total } = progressEvent;
+          let percent = Math.floor((loaded * 100) / total);
+          console.log(`${loaded}kb of ${total}kb | ${percent}%`);
+
+          setProgress(percent);
         },
       };
       await fetchFromApi.patch(`/user/image`, { foto: selectedFile }, headers);
@@ -47,6 +59,9 @@ export default function LeftSideBar({ token }: LeftSideBarProps) {
       router.push('/profile');
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
+      setProgress(0);
     }
   };
 
@@ -65,10 +80,22 @@ export default function LeftSideBar({ token }: LeftSideBarProps) {
       {router.pathname === '/profile/edit' && (
         <div className={styles.updateImage}>
           <p>Alterar foto de perfil</p>
-          <input type='file' onChange={handleFileInputChange} />
+          <input
+            type='file'
+            onChange={handleFileInputChange}
+            accept='image/*'
+          />
           <button onClick={handleUploadClick} disabled={!selectedFile}>
             Enviar
           </button>
+          {loading && (
+            <div className={styles['loading-bar']}>
+              <div
+                className={styles.bar}
+                style={{ width: `${progress}%` }}
+              ></div>
+            </div>
+          )}
         </div>
       )}
       <hr />

@@ -1,0 +1,49 @@
+@import '../../styles/colors.scss';
+
+.container {
+  background-color: white;
+  border-radius: 10px;
+  border-top-right-radius: 50px;
+  margin: 10px;
+  padding: 20px;
+  width: 700px;
+
+  nav {
+    display: flex;
+    gap: 10px;
+    margin: 5px 0;
+  }
+
+  hr {
+    border: 1px solid #eaeaea;
+    margin: 10px 0;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-weight: normal;
+  }
+
+  a {
+    color: $senary;
+    font-weight: bold;
+  }
+
+  input {
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 5px 10px;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 0;
+  }
+}

@@ -2,32 +2,29 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchFromApi } from '../../utils/axios';
 
 export const fetchProfileUserData = createAsyncThunk(
-  'profile/fetchUserData',
+  'community/fetchUserData',
   async (id: string, thunkAPI) => {
-    const [userResponse, groupsResponse, friendsResponse] = await Promise.all([
-      fetchFromApi.get(`/user/${id}`),
-      fetchFromApi.get(`/partner/${id}`),
-      fetchFromApi.get(`/friends/${id}`),
+    const [userResponse, groupsResponse] = await Promise.all([
+      fetchFromApi.get(`/groups/${id}`),
+      fetchFromApi.get(`/partner/group/${id}`),
     ]);
+
     return {
       info: userResponse.data,
-      groups: groupsResponse.data,
-      friends: friendsResponse.data,
+      members: groupsResponse.data,
     };
   }
 );
 
 interface UsersState {
   info: [];
-  friends: [];
-  groups: [];
+  members: [];
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 const initialState = {
   info: [],
-  friends: [],
-  groups: [],
+  members: [],
   loading: 'idle',
 } as UsersState;
 
@@ -37,16 +34,14 @@ export const userSlice = createSlice({
   reducers: {
     cleanUserData: (state) => {
       state.info = [];
-      state.groups = [];
-      state.friends = [];
+      state.members = [];
       state.loading = 'idle';
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProfileUserData.fulfilled, (state, action) => {
       state.info = action.payload.info;
-      state.groups = action.payload.groups;
-      state.friends = action.payload.friends;
+      state.members = action.payload.members;
       state.loading = 'succeeded';
     }),
       builder.addCase(fetchProfileUserData.pending, (state, action) => {

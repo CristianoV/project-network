@@ -22,6 +22,22 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true,
       },
+      language: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      category: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      type: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      country: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       owner_id: {
         type: Sequelize.INTEGER,
         allowNull: false,

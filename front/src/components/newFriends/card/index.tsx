@@ -3,6 +3,7 @@ import avatar from '../../../../public/avatar.jpg';
 import Image from 'next/image';
 import { fetchFromApi } from '../../../utils/axios';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function Card({ obj, token, requestId }: any) {
   const { firstName, lastName, profile_picture, id } = obj;
@@ -15,7 +16,7 @@ export default function Card({ obj, token, requestId }: any) {
         {
           friendId: id,
           status: status === true ? 'accepted' : 'rejected',
-          requestId
+          requestId,
         },
         {
           headers: {
@@ -32,12 +33,14 @@ export default function Card({ obj, token, requestId }: any) {
   return (
     <div className={styles.container}>
       <div className={styles.card__img}>
-        <Image
-          src={profile_picture || avatar}
-          alt='Avatar'
-          width={500}
-          height={500}
-        />
+        <Link href={`/profile/${id}`}>
+          <Image
+            src={profile_picture || avatar}
+            alt='Avatar'
+            width={500}
+            height={500}
+          />
+        </Link>
       </div>
       <div className={styles.card__content}>
         <div className={styles.card__text}>

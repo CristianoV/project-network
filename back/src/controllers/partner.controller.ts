@@ -18,4 +18,36 @@ export default class PartnerController implements IPartnerController {
 
     return res.status(200).json(partners);
   }
+
+  public async getPartnerByGroupId(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const partners = await this.partnerService.getPartnerByGroupId(Number(id));
+
+    return res.status(200).json(partners);
+  }
+
+  public async createPartner(req: Request, res: Response) {
+    const { authorization } = req.headers as { authorization: string };
+    const { groupId } = req.body;
+
+    const partner = await this.partnerService.createPartner({
+      authorization,
+      groupId,
+    });
+
+    return res.status(200).json(partner);
+  }
+
+  public async isPartner(req: Request, res: Response) {
+    const { authorization } = req.headers as { authorization: string };
+    const { groupId } = req.params;
+
+    const partner = await this.partnerService.isPartner({
+      authorization,
+      groupId: Number(groupId),
+    });
+
+    return res.status(200).json(partner);
+  }
 }

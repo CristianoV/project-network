@@ -21,7 +21,7 @@ interface User {
 export default function FriendCard({ user }: FriendCardProps) {
   return (
     <div className={styles.container}>
-      <Link href={`/profile/${user.id}`}>
+      <Link href={user.name ? `/community/${user.id}` : `/profile/${user.id}`}>
         <Image
           src={user.profile_picture || avatar}
           alt='avatar'

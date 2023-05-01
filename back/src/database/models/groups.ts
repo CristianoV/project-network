@@ -1,12 +1,17 @@
-import { INTEGER, STRING, TEXT, Model } from "sequelize";
+import { INTEGER, STRING, TEXT, Model } from 'sequelize';
+import user from './user';
 import db from '.';
 
 class Groups extends Model {
   public id: number;
-  public profile_picture: string;
+  public profile_picture: string | null;
   public name: string;
   public description: string;
   public owner_id: number;
+  public language: string;
+  public category: string;
+  public type: string;
+  public country: string;
 }
 
 Groups.init(
@@ -19,7 +24,7 @@ Groups.init(
     },
     profile_picture: {
       type: STRING,
-      allowNull: false,
+      allowNull: true,
     },
     name: {
       type: STRING,
@@ -28,6 +33,22 @@ Groups.init(
     },
     description: {
       type: TEXT,
+      allowNull: false,
+    },
+    language: {
+      type: STRING,
+      allowNull: false,
+    },
+    category: {
+      type: STRING,
+      allowNull: false,
+    },
+    type: {
+      type: STRING,
+      allowNull: false,
+    },
+    country: {
+      type: STRING,
       allowNull: false,
     },
     owner_id: {
@@ -41,5 +62,7 @@ Groups.init(
     timestamps: false,
   }
 );
+
+Groups.belongsTo(user, { as: 'user', foreignKey: 'owner_id' });
 
 export default Groups;

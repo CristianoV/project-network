@@ -4,18 +4,15 @@ module.exports = {
       'Partners',
       [
         {
-          id: 100,
-          user_id: 100,
+          user_id: 1,
           group_id: 1,
         },
         {
-          id: 101,
-          user_id: 101,
+          user_id: 2,
           group_id: 1,
         },
         {
-          id: 102,
-          user_id: 101,
+          user_id: 2,
           group_id: 2,
         },
       ],
