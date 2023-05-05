@@ -46,4 +46,36 @@
     gap: 10px;
     margin: 10px 0;
   }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+    border: 1px solid #eaeaea;
+    padding: 10px;
+  }
+
+  .groups {
+    nav {
+      display: flex;
+    }
+
+    .selected {
+      background-color: $septenary;
+      color: white;
+    }
+
+    h2 {
+      padding: 5px 10px;
+      width: fit-content;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+      border: 1px solid #eaeaea;
+      cursor: pointer;
+    }
+    hr {
+      margin: 0 0 20px 0;
+    }
+  }
 }
