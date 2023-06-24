@@ -44,6 +44,15 @@ export default class GroupsService implements IGroupsService<Groups> {
     profile_picture: string | null;
   }) {
     const { id } = await JwtSecret.verify(authorization);
+
+    if (!id) {
+      throw new Error('Invalid token');
+    }
+
+    if (!name || !description || !language || !category || !type || !country) {
+      throw new Error('Invalid data');
+    }
+
     const group = await this.model.create({
       name,
       description,
