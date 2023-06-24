@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import UserService from '../services/user.service';
 import IUserController from '../interface/IController/IUserController';
+import dotenv = require('dotenv');
+dotenv.config();
 
 export default class UserController implements IUserController {
   constructor(private userService: UserService) {}
