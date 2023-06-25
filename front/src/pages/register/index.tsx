@@ -162,6 +162,7 @@ export default function Register() {
                 id='privacy'
                 onChange={() => setChecked(!checked)}
                 value={checked ? 'true' : 'false'}
+                required
               />
               <p>
                 Eu li e concordo com os termos de uso e a política de
