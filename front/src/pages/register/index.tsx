@@ -7,6 +7,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
+import ValidatePassword from '../../components/validatePassword';
 
 export default function Register() {
   const [firstName, setFirstName] = useState('');
@@ -118,6 +119,7 @@ export default function Register() {
                 required
               />
             </label>
+            <ValidatePassword password={password} />
             <label htmlFor='passwordConfirmation'>
               Digite a senha novamente:
               <input
@@ -129,6 +131,7 @@ export default function Register() {
                 required
               />
             </label>
+            <ValidatePassword password={passwordConfirmation} />
             <hr />
             <h3>Termos de uso e política de privacidade do site Orkut</h3>
             <h2>
