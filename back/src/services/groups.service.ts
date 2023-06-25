@@ -49,7 +49,7 @@ export default class GroupsService implements IGroupsService<Groups> {
       throw new Error('Invalid token');
     }
 
-    if (!name || !description || !language || !category || !type || !country) {
+    if (!name || !description || !type) {
       throw new Error('Invalid data');
     }
 

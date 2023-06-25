@@ -13,7 +13,7 @@ export default function CreateCommunity({ token }: CreateCommunityProps) {
   const [description, setDescription] = useState('');
   const [language, setLanguage] = useState('');
   const [category, setCategory] = useState('');
-  const [type, setType] = useState('');
+  const [type, setType] = useState('Público');
   const [country, setCountry] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -76,6 +76,7 @@ export default function CreateCommunity({ token }: CreateCommunityProps) {
               type='text'
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
             />
           </div>
           <div className={styles.text}>
@@ -416,6 +417,7 @@ export default function CreateCommunity({ token }: CreateCommunityProps) {
                 id=''
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                required
               ></textarea>
             </label>
           </div>

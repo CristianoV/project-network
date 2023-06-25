@@ -48,11 +48,10 @@ export default function Register() {
     } catch (error) {
       console.error(error);
     } finally {
-      setPassword('');
-      setEmail('');
-      setFirstName('');
-      setLastName('');
-      setPasswordConfirmation('');
+      if (password !== passwordConfirmation || !checked) {
+        setPassword('');
+        setPasswordConfirmation('');
+      }
       setChecked(false);
     }
   };
@@ -161,7 +160,7 @@ export default function Register() {
                 type='checkbox'
                 id='privacy'
                 onChange={() => setChecked(!checked)}
-                value={checked ? 'true' : 'false'}
+                checked={checked}
                 required
               />
               <p>
