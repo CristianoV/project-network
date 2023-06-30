@@ -3,5 +3,6 @@
 - [x] Comunidades
 - [x] Pesquisas
 - [x] Amizades
+- [ ] Mobile
 - [ ] Publicações
 - [ ] Jogos
