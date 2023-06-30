@@ -1,0 +1,7 @@
+- [x] Login
+- [x] Perfil
+- [x] Comunidades
+- [x] Pesquisas
+- [x] Amizades
+- [ ] Publicações
+- [ ] Jogos
