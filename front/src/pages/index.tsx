@@ -11,6 +11,8 @@ import Footer from '../components/footer';
 import store from '../redux/store';
 import {fetchUserData} from '../redux/slices/user';
 import { useEffect } from 'react';
+import CreatePost from '../components/createPost';
+import FeedPosts from '../components/feedPosts';
 
 interface HomeProps {
   token: string;
@@ -35,6 +37,8 @@ export default function Home({ token }: HomeProps) {
         <div>
           <Welcome />
           <NewFriends token={token} />
+          <CreatePost />
+          <FeedPosts />
         </div>
         <div>
           <Friends />
