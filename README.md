@@ -22,3 +22,4 @@ Meu objetivo com esse projeto é proporcionar uma experiência única aos usuár
 - [ ] Publicações
 - [ ] Jogos
 </details>
+
