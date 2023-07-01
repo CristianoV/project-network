@@ -53,7 +53,7 @@ export default function Header() {
               <Link href='/'>Página de recados</Link>
             </li>
             <li>
-              <Link href='/'>Amigos</Link>
+              <Link href='/friends'>Amigos</Link>
             </li>
             <li>
               <Link href='/community'>Comunidades</Link>
