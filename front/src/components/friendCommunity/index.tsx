@@ -21,9 +21,6 @@ export default function Friends() {
           })}
       </div>
       <hr />
-      <Link href='/communities' className={styles.link}>
-        ver todos
-      </Link>
     </div>
   );
 }
