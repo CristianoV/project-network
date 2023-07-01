@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  background-color: #F0F0F0;
+  width: 120px;
+  height: 150px;
+  padding-bottom: 30px;
+
+  img {
+    max-width: 85px;
+    max-height: 120px;
+    object-fit: cover;
+  }
+
+  p {
+    margin-top: 5px;
+    text-decoration: none;
+  }
+}

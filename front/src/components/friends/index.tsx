@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 import { useSelector } from 'react-redux';
-import Card from './cards';
+import Card from '../friendCard';
 import Link from 'next/link';
 
 export default function Friends() {
