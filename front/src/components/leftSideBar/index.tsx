@@ -36,6 +36,11 @@ export default function LeftSideBar({ token }: LeftSideBarProps) {
     }
   };
 
+  const chooseFile = () => {
+    const uploadBtn = document.getElementById('uploadBtn');
+    uploadBtn?.click();
+  };
+
   const handleUploadClick = async () => {
     setLoading(true);
 
@@ -83,11 +88,18 @@ export default function LeftSideBar({ token }: LeftSideBarProps) {
           <input
             type='file'
             onChange={handleFileInputChange}
-            accept='image/*'
+            style={{ display: 'none' }}
+            id='uploadBtn'
+            accept='image/png, image/jpg, image/jpeg'
+            capture='user'
+            maxLength={1048576}
           />
-          <button onClick={handleUploadClick} disabled={!selectedFile}>
-            Enviar
-          </button>
+          <div className={styles.buttons}>
+            <button onClick={chooseFile}>Adicionar foto</button>
+            <button onClick={handleUploadClick} disabled={!selectedFile}>
+              Enviar
+            </button>
+          </div>
           {loading && (
             <div className={styles['loading-bar']}>
               <div

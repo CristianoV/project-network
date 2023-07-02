@@ -58,7 +58,9 @@ export default function CreatePost() {
           type='file'
           style={{ display: 'none' }}
           id='uploadBtn'
-          accept='image/*'
+          accept='image/png, image/jpg, image/jpeg'
+          capture='user'
+          maxLength={1048576}
         />
         <button className={styles.addPhoto} onClick={chooseFile}>
           Adicionar foto
@@ -66,7 +68,7 @@ export default function CreatePost() {
         <button
           className={styles.submit}
           onClick={handleSubmit}
-          disabled={!text}
+          disabled={!text && !image}
         >
           Publicar
         </button>
