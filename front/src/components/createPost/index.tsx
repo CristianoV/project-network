@@ -1,11 +1,41 @@
 import styles from './styles.module.scss';
 import Image from 'next/image';
 import { useState } from 'react';
-import {GrClose} from 'react-icons/gr';
+import { GrClose } from 'react-icons/gr';
+import { fetchFromApi } from '../../utils/axios';
+import { useRouter } from 'next/router';
 
-export default function CreatePost() {
+export default function CreatePost({ token }: { token: string }) {
   const [text, setText] = useState('');
   const [image, setImage] = useState<File | null>(null);
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      await fetchFromApi.post(
+        '/post',
+        {
+          text,
+          foto: image,
+        },
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: token,
+          },
+        }
+      );
+
+      setText('');
+      setImage(null);
+
+      router.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   function chooseFile() {
     const uploadBtn = document.getElementById('uploadBtn');
@@ -21,10 +51,6 @@ export default function CreatePost() {
       false
     );
   }
-
-  const handleSubmit = () => {
-    console.log(text);
-  };
 
   const handleCancel = () => {
     setText('');
@@ -44,7 +70,9 @@ export default function CreatePost() {
 
       {image && (
         <div className={styles.imageContainer}>
-          <div className={styles.exclude} onClick={() => setImage(null)}><GrClose /></div>
+          <div className={styles.exclude} onClick={() => setImage(null)}>
+            <GrClose />
+          </div>
           <Image
             src={URL.createObjectURL(image)}
             alt='Imagem selecionada'

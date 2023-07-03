@@ -37,7 +37,7 @@ export default function Home({ token }: HomeProps) {
         <div>
           <Welcome />
           <NewFriends token={token} />
-          <CreatePost />
+          <CreatePost token={token} />
           <FeedPosts />
         </div>
         <div>
