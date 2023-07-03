@@ -96,13 +96,19 @@ export default function FeedPosts({ token }: { token: string }) {
               }}
             >
               <div className={styles.userInfo}>
-                <Image
-                  src={post.user.profile_picture || avatar}
-                  alt='user image'
-                  width={50}
-                  height={50}
-                  className={styles.userImage}
-                />
+                <Link
+                  className={styles.postAuthor}
+                  href={`/profile/${post.user.id}`}
+                  passHref
+                >
+                  <Image
+                    src={post.user.profile_picture || avatar}
+                    alt='user image'
+                    width={50}
+                    height={50}
+                    className={styles.userImage}
+                  />
+                </Link>
                 <Link
                   className={styles.postAuthor}
                   href={`/profile/${post.user.id}`}
@@ -157,9 +163,9 @@ export default function FeedPosts({ token }: { token: string }) {
         )
       )}
       <div className={styles.loading} id='sentinelScroll'>
-          <div className={styles.spinner}></div>
-          <p className={styles.loadingText}>Carregando...</p>
-        </div>
+        <div className={styles.spinner}></div>
+        <p className={styles.loadingText}>Carregando...</p>
+      </div>
     </div>
   );
 }
