@@ -9,7 +9,11 @@
     "prestart": "npm run build",
     "build": "tsc --build",
     "dev": "tsx watch src/server.ts",
-    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+    "db:reset": "npm run db:drop && npm run db:create && npm run db:migrate && npm run db:seed",
+    "db:drop": "npx sequelize-cli db:drop",
+    "db:create": "npx sequelize-cli db:create",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "db:seed": "npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
