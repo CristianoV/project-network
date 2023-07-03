@@ -77,8 +77,8 @@ export default function FeedPosts({ token }: { token: string }) {
           id: number;
           text: string;
           image: string;
-          createdAt: string;
-          updatedAt: string;
+          created_at: string;
+          updated_at: string;
           user: {
             id: number;
             firstName: string;
@@ -118,14 +118,14 @@ export default function FeedPosts({ token }: { token: string }) {
                 </Link>
               </div>
               <p>
-                {moment(post.createdAt).format('DD/MM/YYYY')} às{' '}
-                {moment(post.createdAt).format('HH:mm')}
-                {post.createdAt !== post.updatedAt && (
+                {moment(post.created_at).format('DD/MM/YYYY')} às{' '}
+                {moment(post.created_at).format('HH:mm')}
+                {post.created_at !== post.updated_at && (
                   <span>
                     {' '}
-                    (editado em {moment(post.updatedAt).format(
+                    (editado em {moment(post.updated_at).format(
                       'DD/MM/YYYY'
-                    )} às {moment(post.updatedAt).format('HH:mm')})
+                    )} às {moment(post.updated_at).format('HH:mm')})
                   </span>
                 )}
               </p>
