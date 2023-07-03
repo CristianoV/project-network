@@ -1,5 +1,6 @@
 import { INTEGER, STRING, TEXT, Model, DATE } from 'sequelize';
 import user from './user';
+import friends from './friends';
 import db from '.';
 
 class Post extends Model {

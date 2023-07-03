@@ -22,7 +22,13 @@ export default class PostController {
   }
 
   public async getPosts(req: Request, res: Response) {
-    const posts = await this.postService.getPosts();
+    const { authorization } = req.headers as { authorization: string };
+    const { page, pageSize } = req.query;
+    const posts = await this.postService.getPosts({
+      authorization,
+      page: page ? Number(page) : 1,
+      pageSize: pageSize ? Number(pageSize) : 5,
+    });
 
     return res.status(200).json(posts);
   }

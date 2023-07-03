@@ -1,5 +1,7 @@
 import JwtSecret from '../utils/JwtService';
 import Post from '../database/models/posts';
+import Friends from '../database/models/friends';
+import { Op } from 'sequelize';
 
 export default class PostsService {
   constructor(private model: typeof Post) {}
@@ -24,39 +26,51 @@ export default class PostsService {
     return post;
   }
 
-  //  public async getPosts() {
-  //    const posts = await this.model.findAll({
-  //      include: [
-  //        {
-  //          association: 'user',
-  //          attributes: ['name', 'username', 'id'],
-  //        },
-  //        {
-  //         association: 'comments',
-  //          attributes: ['text', 'id'],
-  //          include: [
-  //            {
-  //              association: 'user',
-  //              attributes: ['name', 'username', 'id'],
-  //            },
-  //          ],
-  //        },
-  //      ],
-  //    });
-  //
-  //    return posts;
-  //  }
-
-  public async getPosts() {
+  public async getPosts({
+    authorization,
+    page,
+    pageSize,
+  }: {
+    authorization: string;
+    page: number;
+    pageSize: number;
+  }) {
+    const { id } = JwtSecret.verify(authorization);
+  
+    const friends = await Friends.findAll({
+      where: {
+        [Op.or]: [{ user_id_1: id }, { user_id_2: id }],
+        status: 'accepted',
+      },
+    });
+  
+    const friendIds = friends.flatMap((item) => {
+      if (item.user_id_1 === id) {
+        return item.user_id_2;
+      } else {
+        return item.user_id_1;
+      }
+    }) as number[];
+  
+    friendIds.push(Number(id));
+  
     const posts = await this.model.findAll({
       order: [['createdAt', 'DESC']],
+      where: {
+        user_id: friendIds,
+      },
       include: [
         {
-          association: 'user',
+          all: true,
         },
       ],
     });
-
-    return posts;
+  
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+    const result = posts.slice(startIndex, endIndex);
+  
+    return result;
   }
+  
 }

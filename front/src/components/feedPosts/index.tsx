@@ -21,7 +21,7 @@ export default function FeedPosts({ token }: { token: string }) {
     try {
       const getPosts = async () => {
         const response = await fetchFromApi.get(
-          `/friends/posts?page=${page}&pageSize=3`,
+          `/post?page=${page}&pageSize=3`,
           {
             headers: {
               Authorization: token,
