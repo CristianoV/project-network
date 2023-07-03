@@ -31,11 +31,11 @@ Post.init(
       type: INTEGER,
       allowNull: false,
     },
-    createdAt: {
+    created_at: {
       type: DATE,
       allowNull: false,
     },
-    updatedAt: {
+    updated_at: {
       type: DATE,
       allowNull: false,
     },
@@ -44,6 +44,8 @@ Post.init(
     sequelize: db,
     modelName: 'Post',
     timestamps: true,
+    updatedAt: 'updated_at',
+    createdAt: 'created_at',
   }
 );
 

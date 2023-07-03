@@ -55,7 +55,7 @@ export default class PostsService {
     friendIds.push(Number(id));
   
     const posts = await this.model.findAll({
-      order: [['createdAt', 'DESC']],
+      order: [['created_at', 'DESC']],
       where: {
         user_id: friendIds,
       },
