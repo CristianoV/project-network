@@ -125,7 +125,8 @@ export default function FeedPosts({ token }: { token: string }) {
                     {' '}
                     (editado em {moment(post.updated_at).format(
                       'DD/MM/YYYY'
-                    )} às {moment(post.updated_at).format('HH:mm')})
+                    )}{' '}
+                    às {moment(post.updated_at).format('HH:mm')})
                   </span>
                 )}
               </p>
@@ -162,10 +163,12 @@ export default function FeedPosts({ token }: { token: string }) {
           </div>
         )
       )}
-      <div className={styles.loading} id='sentinelScroll'>
-        <div className={styles.spinner}></div>
-        <p className={styles.loadingText}>Carregando...</p>
-      </div>
+      <li id='sentinelScroll' />
     </div>
   );
 }
+
+//<div className={styles.loading} id='sentinelScroll'>
+//<div className={styles.spinner}></div>
+//<p className={styles.loadingText}>Carregando...</p>
+//</div>
