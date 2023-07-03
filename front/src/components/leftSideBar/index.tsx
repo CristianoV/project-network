@@ -54,7 +54,6 @@ export default function LeftSideBar({ token }: LeftSideBarProps) {
         onUploadProgress: (progressEvent: any) => {
           const { loaded, total } = progressEvent;
           let percent = Math.floor((loaded * 100) / total);
-          console.log(`${loaded}kb of ${total}kb | ${percent}%`);
 
           setProgress(percent);
         },
