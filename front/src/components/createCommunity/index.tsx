@@ -406,7 +406,9 @@ export default function CreateCommunity({ token }: CreateCommunityProps) {
             <input
               type='file'
               onChange={handleFileInputChange}
-              accept='image/*'
+              accept='image/png, image/jpg, image/jpeg'
+              capture='user'
+              maxLength={1048576}
             />
           </div>
           <div className={styles.text}>
