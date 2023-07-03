@@ -8,19 +8,61 @@ import moment from 'moment';
 import { BiCommentDetail } from 'react-icons/bi';
 import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
 
-export default function FeedPosts() {
-  const [posts, setPosts] = useState([]);
+interface PostComment {
+  [key: number]: boolean;
+}
+
+export default function FeedPosts({ token }: { token: string }) {
+  const [posts, setPosts] = useState<any[]>([]);
+  const [commentStates, setCommentStates] = useState<PostComment>({});
+  const [page, setPage] = useState(0);
+
   useEffect(() => {
     try {
       const getPosts = async () => {
-        const response = await fetchFromApi.get('/post');
-        setPosts(response.data);
+        const response = await fetchFromApi.get(
+          `/friends/posts?page=${page}&pageSize=3`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+        if (response.data.length === 0) {
+          return;
+        }
+        setPosts((prevState) => [...prevState, ...response.data]);
       };
       getPosts();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
+  }, [page, token]);
+
+  useEffect(() => {
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        setPage((prevState) => prevState + 1);
+      }
+    });
+
+    const sentinelScroll = document.getElementById(
+      'sentinelScroll'
+    ) as HTMLLIElement;
+
+    intersectionObserver.observe(sentinelScroll);
+
+    return () => {
+      intersectionObserver.disconnect();
+    };
   }, []);
+
+  const toggleComment = (postId: number) => {
+    setCommentStates((prevState) => ({
+      ...prevState,
+      [postId]: !prevState[postId],
+    }));
+  };
 
   return (
     <div className={styles.container}>
@@ -32,13 +74,13 @@ export default function FeedPosts() {
       )}
       {posts.map(
         (post: {
-          id: string;
+          id: number;
           text: string;
           image: string;
           createdAt: string;
           updatedAt: string;
           user: {
-            id: string;
+            id: number;
             firstName: string;
             lastName: string;
             profile_picture: string;
@@ -99,12 +141,25 @@ export default function FeedPosts() {
                 <AiOutlineLike className={styles.icon} />
                 <AiOutlineDislike className={styles.icon} />
               </div>
-              <BiCommentDetail className={styles.icon} />
+              <BiCommentDetail
+                className={styles.icon}
+                onClick={() => toggleComment(post.id)}
+              />
             </div>
+            {commentStates[post.id] && (
+              <div className={styles.newComment}>
+                <input type='text' placeholder='Escreva um comentário...' />
+                <button>Publicar</button>
+              </div>
+            )}
             <hr />
           </div>
         )
       )}
+      <div className={styles.loading} id='sentinelScroll'>
+          <div className={styles.spinner}></div>
+          <p className={styles.loadingText}>Carregando...</p>
+        </div>
     </div>
   );
 }

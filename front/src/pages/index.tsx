@@ -9,7 +9,7 @@ import Community from '../components/community';
 import NewFriends from '../components/newFriends';
 import Footer from '../components/footer';
 import store from '../redux/store';
-import {fetchUserData} from '../redux/slices/user';
+import { fetchUserData } from '../redux/slices/user';
 import { useEffect } from 'react';
 import CreatePost from '../components/createPost';
 import FeedPosts from '../components/feedPosts';
@@ -38,7 +38,7 @@ export default function Home({ token }: HomeProps) {
           <Welcome />
           <NewFriends token={token} />
           <CreatePost token={token} />
-          <FeedPosts />
+          <FeedPosts token={token} />
         </div>
         <div>
           <Friends />
