@@ -9,7 +9,6 @@ export default class PostController {
     const { text } = req.body as {
       text: string;
     };
-    console.log('req.file', req.file);
 
     const image = req.file ? process.env.DB_URL + req.file.filename : null;
 
