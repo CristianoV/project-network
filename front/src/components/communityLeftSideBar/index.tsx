@@ -18,6 +18,7 @@ export default function LeftSideBar({ token }: { token?: string }) {
 
   const handleParticipate = async () => {
     try {
+      setIsParticipating(true);
       await fetchFromApi.post(
         '/partner',
         {
@@ -32,6 +33,7 @@ export default function LeftSideBar({ token }: { token?: string }) {
 
       router.reload();
     } catch (error) {
+      setIsParticipating(false);
       console.error(error);
     }
   };
@@ -73,7 +75,7 @@ export default function LeftSideBar({ token }: { token?: string }) {
       </div>
       <hr />
       {!isParticipating && (
-        <button onClick={handleParticipate}>
+        <button onClick={handleParticipate} disabled={isParticipating}>
           <CgProfile /> participar
         </button>
       )}
