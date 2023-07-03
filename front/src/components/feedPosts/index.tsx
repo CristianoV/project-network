@@ -5,6 +5,8 @@ import styles from './styles.module.scss';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import moment from 'moment';
+import { BiCommentDetail } from 'react-icons/bi';
+import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
 
 export default function FeedPosts() {
   const [posts, setPosts] = useState([]);
@@ -59,7 +61,11 @@ export default function FeedPosts() {
                   height={50}
                   className={styles.userImage}
                 />
-                <Link className={styles.postAuthor} href={`/profile/${post.user.id}`} passHref>
+                <Link
+                  className={styles.postAuthor}
+                  href={`/profile/${post.user.id}`}
+                  passHref
+                >
                   {post.user.firstName} {post.user.lastName}
                 </Link>
               </div>
@@ -88,6 +94,13 @@ export default function FeedPosts() {
                 className={styles.postImage}
               />
             )}
+            <div className={styles.icons}>
+              <div className={styles.likeDislike}>
+                <AiOutlineLike className={styles.icon} />
+                <AiOutlineDislike className={styles.icon} />
+              </div>
+              <BiCommentDetail className={styles.icon} />
+            </div>
             <hr />
           </div>
         )
