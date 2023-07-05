@@ -107,6 +107,9 @@ export default function FeedPosts({ token }: { token: string }) {
                     width={50}
                     height={50}
                     className={styles.userImage}
+                    quality={70}
+                    placeholder='blur'
+                    blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN0vQgAAWEBGHsgcxcAAAAASUVORK5CYII='
                   />
                 </Link>
                 <Link
@@ -141,6 +144,9 @@ export default function FeedPosts({ token }: { token: string }) {
                 width={500}
                 height={500}
                 className={styles.postImage}
+                quality={70}
+                placeholder='blur'
+                blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN0vQgAAWEBGHsgcxcAAAAASUVORK5CYII='
               />
             )}
             <div className={styles.icons}>

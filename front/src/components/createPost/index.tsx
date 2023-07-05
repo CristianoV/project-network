@@ -78,6 +78,9 @@ export default function CreatePost({ token }: { token: string }) {
             alt='Imagem selecionada'
             width={200}
             height={200}
+            quality={70}
+            placeholder='blur'
+            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN0vQgAAWEBGHsgcxcAAAAASUVORK5CYII='
           />
         </div>
       )}
