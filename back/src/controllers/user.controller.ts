@@ -42,7 +42,10 @@ export default class UserController implements IUserController {
 
   public async updateImage(req: Request, res: Response) {
     const { authorization } = req.headers as { authorization: string };
-    const file = req.file;
+    const file = req.file as unknown as {
+      location: string;
+      filename: string;
+    };
 
     if (!file) {
       return res.status(400).json({ error: 'Please, send a file' });
