@@ -10,6 +10,7 @@ import { IoIosList } from 'react-icons/io';
 import { BsEnvelope } from 'react-icons/bs';
 import { CiSettings } from 'react-icons/ci';
 import { GiSunglasses } from 'react-icons/gi';
+import { IoGameControllerOutline } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -149,6 +150,9 @@ export default function LeftSideBar({ token }: LeftSideBarProps) {
         </Link>
         <Link href='/'>
           <IoIosList /> listas
+        </Link>
+        <Link href='/game'>
+          <IoGameControllerOutline /> jogos
         </Link>
         <Link href='/'>
           <BsEnvelope /> mensagens
