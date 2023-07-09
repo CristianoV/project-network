@@ -2,6 +2,7 @@ import { Request, Response, Router } from 'express';
 import PostModel from '../database/models/posts';
 import PostService from '../services/post.service';
 import PostController from '../controllers/post.controller';
+const multer = require('multer');
 import upload from '../utils/picture';
 
 const PostRoutes: Router = Router();
@@ -10,7 +11,7 @@ const loginController = new PostController(postService);
 
 PostRoutes.post(
   '/post',
-  upload.single('foto'),
+  multer(upload).single('foto'),
   (request: Request, response: Response) =>
     loginController.createPost(request, response)
 );

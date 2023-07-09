@@ -1,0 +1,228 @@
+@function pipe-animation-duration($duration) {
+  $animation-duration: $duration * 2; // Dobrar a duração original
+
+  @return $animation-duration;
+}
+
+.container {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  width: 100%;
+
+  .instructions {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    span {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+      text-shadow: 2px 2px 2px #fff;
+    }
+
+    animation: instructions-animation 2s ease-in-out infinite;
+  }
+
+  @keyframes instructions-animation {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .cloud {
+    position: absolute;
+    width: 550px;
+    height: 200px;
+    animation: cloud-animation 20s linear infinite;
+  }
+
+  @keyframes cloud-animation {
+    0% {
+      right: -550px;
+    }
+    100% {
+      right: 100%;
+    }
+  }
+
+  .gameContainer {
+    width: 80%;
+    height: 500px;
+    border: 1px solid #333;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(#87ceeb, #e0f6ff);
+  }
+
+  .gameOver {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    animation: gameOver-animation 1s ease-in-out;
+
+    .gameOver_text {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #333;
+      text-shadow: 2px 2px 2px #fff;
+      z-index: 1;
+    }
+
+    .score_gameOver {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      span {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        text-shadow: 2px 2px 2px #fff;
+        z-index: 1;
+      }
+    }
+
+    .restart {
+      display: flex;
+      flex-direction: column;
+      button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border: 1px solid #333;
+        border-radius: 5px;
+        background: #fff;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          background: #333;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  @keyframes gameOver-animation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .score {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    z-index: 1;
+  }
+
+  .timer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    z-index: 1;
+  }
+
+  .pipe {
+    position: absolute;
+    width: 80px;
+    height: 20%;
+    bottom: 0;
+    right: 100%;
+    animation: pipe-animation pipe-animation-duration(1s) linear infinite;
+  }
+
+  @keyframes pipe-animation {
+    0% {
+      right: 0%;
+    }
+    100% {
+      right: 100%;
+    }
+  }
+
+  .mario {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    bottom: 0;
+  }
+
+  .dead {
+    position: absolute;
+    width: 80px;
+    height: 21%;
+    margin-left: 50px;
+  }
+
+  .jump {
+    animation: jump-animation 500ms ease-out;
+  }
+
+  .left {
+    animation: left-animation 500ms ease-out;
+  }
+
+  .right {
+    animation: right-animation 500ms ease-out;
+  }
+
+  @keyframes left-animation {
+    0% {
+      left: 0;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  @keyframes right-animation {
+    0% {
+      right: 0;
+    }
+    100% {
+      right: 100%;
+    }
+  }
+
+  @keyframes jump-animation {
+    0% {
+      bottom: 0;
+    }
+    40% {
+      bottom: 45%;
+    }
+    50% {
+      bottom: 50%;
+    }
+    60% {
+      bottom: 55%;
+    }
+    100% {
+      bottom: 0;
+    }
+  }
+}

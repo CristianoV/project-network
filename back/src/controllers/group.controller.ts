@@ -25,7 +25,7 @@ export default class GroupsController implements IGroupsController {
       category,
       type,
       country,
-      profile_picture: file ? process.env.DB_URL + file.filename : null,
+      profile_picture: process.env.STORAGE_TYPE === 'aws' ? (file ? file.location : null) : (file ? process.env.DB_URL + file.filename : null),
       authorization,
     });
 
