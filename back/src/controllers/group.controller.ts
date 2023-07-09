@@ -28,7 +28,14 @@ export default class GroupsController implements IGroupsController {
       category,
       type,
       country,
-      profile_picture: process.env.STORAGE_TYPE === 'aws' ? (file ? file.location : null) : (file ? process.env.DB_URL + file.filename : null),
+      profile_picture:
+        process.env.STORAGE_TYPE === 'aws'
+          ? file
+            ? file.location
+            : null
+          : file
+          ? process.env.DB_URL + file.filename
+          : null,
       authorization,
     });
 
@@ -41,5 +48,22 @@ export default class GroupsController implements IGroupsController {
     await this.service.deleteGroup(Number(id));
 
     return res.status(200).json({ message: 'Group deleted' });
+  }
+
+  public async updateImage(req: Request, res: Response) {
+    const { id } = req.params;
+    const file = req.file as unknown as {
+      location: string;
+      filename: string;
+    };
+    const { authorization } = req.headers as { authorization: string };
+
+    const group = await this.service.updateImage({
+      id: Number(id),
+      profile_picture: process.env.STORAGE_TYPE === 'aws' ? (file ? file.location : null) : (file ? process.env.DB_URL + file.filename : null),
+      authorization,
+    });
+    
+    return res.status(200).json(group);
   }
 }

@@ -80,4 +80,34 @@ export default class GroupsService implements IGroupsService<Groups> {
     });
     return group;
   }
+
+  public async updateImage({
+    id,
+    authorization,
+    profile_picture,
+  }: {
+    id: number;
+    authorization: string;
+    profile_picture: string | null;
+  }) {
+    const { id: userId } = await JwtSecret.verify(authorization);
+
+    if (!userId) {
+      throw new Error('Invalid token');
+    }
+
+    const group = await this.model.update(
+      {
+        profile_picture: profile_picture || null,
+      },
+      {
+        where: {
+          id,
+          owner_id: userId,
+        },
+      }
+    );
+
+    return group;
+  }
 }
