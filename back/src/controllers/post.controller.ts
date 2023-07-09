@@ -6,14 +6,13 @@ export default class PostController {
 
   public async createPost(req: Request, res: Response) {
     const { authorization } = req.headers as { authorization: string };
+    const file = req.file as Express.Multer.File;
     const { text } = req.body as {
       text: string;
     };
 
-    const image = req.file ? process.env.DB_URL + req.file.filename : null;
-
     const post = await this.postService.createPost({
-      image,
+      image: process.env.STORAGE_TYPE === 'aws' ? (file ? file.location : null) : (file ? process.env.DB_URL + file.filename : null),
       text,
       authorization,
     });

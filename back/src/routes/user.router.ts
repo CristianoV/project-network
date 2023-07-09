@@ -4,6 +4,7 @@ import LoginService from '../services/user.service';
 import LoginController from '../controllers/user.controller';
 import FileMiddleware from '../middleware/File.middleware';
 import upload from '../utils/picture';
+const multer = require('multer');
 
 const LoginRoutes: Router = Router();
 const loginService = new LoginService(UserModel);
@@ -27,8 +28,7 @@ LoginRoutes.get('/user/:id', (request: Request, response: Response) =>
 
 LoginRoutes.patch(
   '/user/image',
-  upload.single('foto'),
-  FileMiddleware.deleteUpdateFile,
+  multer(upload).single('foto'),
   (request: Request, response: Response) =>
     loginController.updateImage(request, response)
 );

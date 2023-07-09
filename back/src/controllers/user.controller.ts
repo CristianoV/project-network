@@ -49,7 +49,10 @@ export default class UserController implements IUserController {
     }
 
     const car = await this.userService.updateImage({
-      profile_picture: process.env.DB_URL + file.filename,
+      profile_picture:
+        process.env.STORAGE_TYPE === 'aws'
+          ? file.location
+          : process.env.DB_URL + file.filename,
       authorization,
     });
 

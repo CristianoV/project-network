@@ -5,6 +5,7 @@ import GroupsService from '../services/groups.service';
 import GroupsController from '../controllers/group.controller';
 import FileMiddleware from '../middleware/File.middleware';
 import upload from '../utils/picture';
+const multer = require('multer');
 
 const GroupRoutes: Router = Router();
 const groupsService = new GroupsService(GroupModel, PartnersModel);
@@ -16,7 +17,7 @@ GroupRoutes.get('/groups/:id', (request: Request, response: Response) =>
 
 GroupRoutes.post(
   '/groups',
-  upload.single('foto'),
+  multer(upload).single('foto'),
   FileMiddleware.deleteUpdateFile,
   (request: Request, response: Response) =>
     groupsController.createGroup(request, response)
