@@ -3,6 +3,8 @@ import Header from '../../../components/header';
 import styles from './styles.module.scss';
 import store from '../../../redux/store';
 import Head from 'next/head';
+import Link from 'next/link';
+import { IoChevronBackCircleOutline } from 'react-icons/io5';
 import { fetchUserData } from '../../../redux/slices/user';
 import { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
@@ -28,6 +30,9 @@ export default function Trivia({ token }: TriviaProps) {
       </Head>
       <div className={styles.container}>
         <Header />
+        <Link href='/game' className={styles.backButton}>
+          <IoChevronBackCircleOutline size={40} /> Voltar
+        </Link>
         <div className={styles.gameContainer}>
           <iframe src='https://game-trivia-gules.vercel.app/' />
         </div>

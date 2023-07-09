@@ -27,4 +27,11 @@ GroupRoutes.delete('/groups/:id', (request: Request, response: Response) =>
   groupsController.deleteGroup(request, response)
 );
 
+GroupRoutes.patch(
+  '/group/image/:id',
+  multer(upload).single('foto'),
+  (request: Request, response: Response) =>
+    groupsController.updateImage(request, response)
+);
+
 export default GroupRoutes;

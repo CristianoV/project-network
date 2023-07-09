@@ -4,8 +4,10 @@ import Header from '../../../components/header';
 import styles from './styles.module.scss';
 import store from '../../../redux/store';
 import { fetchUserData } from '../../../redux/slices/user';
+import { IoChevronBackCircleOutline } from 'react-icons/io5';
 import { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
+import Link from 'next/link';
 import Head from 'next/head';
 
 interface MarioProps {
@@ -27,6 +29,9 @@ export default function Mario({ token }: MarioProps) {
       </Head>
       <div className={styles.container}>
         <Header />
+        <Link href='/game' className={styles.backButton}>
+          <IoChevronBackCircleOutline size={40} /> Voltar
+        </Link>
         <div className={styles.gameContainer}>
           <MarioGame />
         </div>
