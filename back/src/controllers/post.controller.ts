@@ -6,7 +6,10 @@ export default class PostController {
 
   public async createPost(req: Request, res: Response) {
     const { authorization } = req.headers as { authorization: string };
-    const file = req.file as Express.Multer.File;
+    const file = req.file as unknown as {
+      location: string;
+      filename: string;
+    };
     const { text } = req.body as {
       text: string;
     };

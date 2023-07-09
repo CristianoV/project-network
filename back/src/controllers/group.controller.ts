@@ -16,7 +16,10 @@ export default class GroupsController implements IGroupsController {
   public async createGroup(req: Request, res: Response) {
     const { name, description, language, category, type, country } = req.body;
     const { authorization } = req.headers as { authorization: string };
-    const file = req.file;
+    const file = req.file as unknown as {
+      location: string;
+      filename: string;
+    };
 
     const group = await this.service.createGroup({
       name,
