@@ -93,4 +93,22 @@ export default class PartnerService implements IPartnerService<Partners> {
       return false;
     }
   }
+
+  public async deletePartner({
+    authorization,
+    groupId,
+  }: {
+    authorization: string;
+    groupId: number;
+  }) {
+    const { id } = await JwtSecret.verify(authorization);
+    const partner = await this.model.destroy({
+      where: {
+        user_id: id,
+        group_id: groupId,
+      },
+    });
+
+    return partner;
+  }
 }

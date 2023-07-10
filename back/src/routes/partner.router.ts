@@ -31,4 +31,10 @@ PartnersRoutes.get(
     partnerController.isPartner(request, response)
 );
 
+PartnersRoutes.delete(
+  '/partner/:groupId',
+  (request: Request, response: Response) =>
+    partnerController.deletePartner(request, response)
+);
+
 export default PartnersRoutes;

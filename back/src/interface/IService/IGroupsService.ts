@@ -19,5 +19,5 @@ export interface IGroupsService<T> {
     country: string;
     profile_picture: string | null;
   }): Promise<T>;
-  deleteGroup(id: number): Promise<number>;
+  deleteGroup(id: number, authorization: string): Promise<number>;
 }

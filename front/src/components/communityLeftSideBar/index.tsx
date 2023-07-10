@@ -4,6 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { CgProfile } from 'react-icons/cg';
 import { AiOutlineCamera, AiOutlineVideoCamera } from 'react-icons/ai';
+import {
+  AiOutlineUsergroupAdd,
+  AiOutlineUsergroupDelete,
+} from 'react-icons/ai';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { BiMessageSquareEdit } from 'react-icons/bi';
 import { fetchFromApi } from '../../utils/axios';
 import { useSelector } from 'react-redux';
@@ -43,6 +48,38 @@ export default function LeftSideBar({ token }: { token?: string }) {
     }
   };
 
+  const handleDeleteParticipate = async () => {
+    try {
+      setIsParticipating(true);
+      await fetchFromApi.delete(`/partner/${info.id}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      router.reload();
+    } catch (error) {
+      setIsParticipating(false);
+      console.error(error);
+    }
+  };
+
+  const handleDeleteGroup = async () => {
+    try {
+      setIsParticipating(true);
+      await fetchFromApi.delete(`/groups/${info.id}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      router.push('/');
+    } catch (error) {
+      setIsParticipating(false);
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     try {
       const result = async () => {
@@ -60,6 +97,7 @@ export default function LeftSideBar({ token }: { token?: string }) {
       }
     } catch (error) {
       console.error(error);
+      router.push('/');
     }
   }, [info, token]);
 
@@ -165,14 +203,28 @@ export default function LeftSideBar({ token }: { token?: string }) {
         <p>
           (<span>{members.length}</span>) membros
         </p>
+        {isParticipating && (
+          <p>
+            <span>Participando</span>
+          </p>
+        )}
       </div>
       <hr />
       {!isParticipating && (
         <button onClick={handleParticipate} disabled={isParticipating}>
-          <CgProfile /> participar
+          <AiOutlineUsergroupAdd /> participar
         </button>
       )}
-      {isParticipating && <button>participando</button>}
+      {isParticipating &&
+        (userInfo?.id === info?.owner_id ? (
+          <button onClick={handleDeleteGroup}>
+            <AiOutlineDelete /> excluir
+          </button>
+        ) : (
+          <button onClick={handleDeleteParticipate}>
+            <AiOutlineUsergroupDelete /> sair
+          </button>
+        ))}
       <hr />
       <div>
         <Link href='/profile'>

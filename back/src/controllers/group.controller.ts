@@ -44,8 +44,9 @@ export default class GroupsController implements IGroupsController {
 
   public async deleteGroup(req: Request, res: Response) {
     const { id } = req.params;
+    const { authorization } = req.headers as { authorization: string };
 
-    await this.service.deleteGroup(Number(id));
+    await this.service.deleteGroup(Number(id), authorization);
 
     return res.status(200).json({ message: 'Group deleted' });
   }
