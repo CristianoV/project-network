@@ -66,6 +66,9 @@ export default function CreatePost({ token }: { token: string }) {
         placeholder='O que você está pensando?'
         value={text}
         onChange={(e) => setText(e.target.value)}
+        style={{
+          height: text ? '90px' : '30px',
+        }}
       ></textarea>
 
       {image && (
