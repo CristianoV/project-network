@@ -31,5 +31,6 @@ Meu objetivo com esse projeto é proporcionar uma experiência única aos usuár
 - [ ] Adicionar fotos
 - [ ] Adicionar Vídeos
 - [ ] Sistema de opinar (confiável / legal / sexy)
+- [ ] Chat
 </details>
 
