@@ -9,11 +9,14 @@ import { fetchFromApi } from '../../utils/axios';
 import { GiSunglasses } from 'react-icons/gi';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function LeftSideBar({ token }: { token?: string }) {
   const redux = useSelector((state: any) => state.profile);
   const [isFriend, setIsFriend] = useState(false);
   const [isRequest, setIsRequest] = useState(false);
+  const [showDeleteFriendModal, setShowDeleteFriendModal] = useState(false);
+  const router = useRouter();
   const { info } = redux;
 
   const handleAddFriend = async () => {
@@ -35,6 +38,23 @@ export default function LeftSideBar({ token }: { token?: string }) {
     }
   };
 
+  const handleDeleteFriend = async () => {
+    try {
+      await fetchFromApi.delete('/friends', {
+        data: {
+          friendId: info.id,
+        },
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      router.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     try {
       const result = async () => {
@@ -44,7 +64,10 @@ export default function LeftSideBar({ token }: { token?: string }) {
           },
         });
 
-        if (response.data.status === 'not friends' || response.data.status === 'rejected') {
+        if (
+          response.data.status === 'not friends' ||
+          response.data.status === 'rejected'
+        ) {
           setIsRequest(false);
           setIsFriend(false);
         } else if (response.data.status === 'pending') {
@@ -84,6 +107,8 @@ export default function LeftSideBar({ token }: { token?: string }) {
         {info?.relationship && <p>{info?.relationship}</p>}
         {info?.country && <p>{info?.country}</p>}
       </div>
+      {isFriend && <p>Amigo</p>}
+
       <hr />
       {!isFriend && !isRequest && (
         <button onClick={handleAddFriend}>
@@ -91,7 +116,21 @@ export default function LeftSideBar({ token }: { token?: string }) {
         </button>
       )}
       {isRequest && <button>Solicitação enviada</button>}
-      {isFriend && <button>Amigo</button>}
+      {isFriend && (
+        <button
+          onClick={() => setShowDeleteFriendModal(!showDeleteFriendModal)}
+        >
+          Deletar
+        </button>
+      )}
+      {showDeleteFriendModal && (
+        <div className={styles.confirm}>
+          <hr />
+          <p>Você tem certeza que deseja deletar esta amizade?</p>
+          <button onClick={handleDeleteFriend}>Sim</button>
+          <button onClick={() => setShowDeleteFriendModal(false)}>Não</button>
+        </div>
+      )}
       <hr />
       <div>
         <Link href='/profile'>
