@@ -23,6 +23,27 @@ export default class PostController {
     return res.status(201).json(post);
   }
 
+  public async updatePost(req: Request, res: Response) {
+    const { authorization } = req.headers as { authorization: string };
+    const file = req.file as unknown as {
+      location: string;
+      filename: string;
+    };
+    const { text } = req.body as {
+      text: string;
+    };
+    const { id } = req.params as { id: string };
+
+    const post = await this.postService.updatePost({
+      id: Number(id),
+      image: process.env.STORAGE_TYPE === 'aws' ? (file ? file.location : null) : (file ? process.env.DB_URL + file.filename : null),
+      text,
+      authorization,
+    });
+
+    return res.status(200).json(post);
+  }
+
   public async getPosts(req: Request, res: Response) {
     const { authorization } = req.headers as { authorization: string };
     const { page, pageSize } = req.query;
@@ -33,5 +54,17 @@ export default class PostController {
     });
 
     return res.status(200).json(posts);
+  }
+
+  public async deletePost(req: Request, res: Response) {
+    const { authorization } = req.headers as { authorization: string };
+    const { id } = req.params as { id: string };
+
+    await this.postService.deletePost({
+      authorization,
+      id: Number(id),
+    });
+
+    return res.status(204).json();
   }
 }

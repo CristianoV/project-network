@@ -34,10 +34,6 @@
 
   textarea:focus {
     outline: 1px solid $primary;
-    height: 90px;
-    &::placeholder {
-      color: transparent;
-    }
   }
 
   .imageContainer {
@@ -88,9 +84,16 @@
     }
   }
 
+  .submitContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
   .buttons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
   }

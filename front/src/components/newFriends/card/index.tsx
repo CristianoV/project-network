@@ -36,7 +36,7 @@ export default function Card({ obj, token, requestId }: any) {
         <Link href={`/profile/${id}`}>
           <Image
             src={profile_picture || avatar}
-            alt='Avatar'
+            alt='avatar de usuário'
             width={500}
             height={500}
             quality={70}

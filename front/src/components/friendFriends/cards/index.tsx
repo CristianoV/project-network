@@ -13,7 +13,7 @@ export default function FriendCard({ friend }: FriendCardProps) {
       <Link href={`/profile/${friend.id}`}>
         <Image
           src={friend?.profile_picture || avatar}
-          alt='avatar'
+          alt='avatar de usuário'
           width={500}
           height={500}
           quality={70}

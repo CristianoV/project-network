@@ -66,6 +66,9 @@ export default function CreatePost({ token }: { token: string }) {
         placeholder='O que você está pensando?'
         value={text}
         onChange={(e) => setText(e.target.value)}
+        style={{
+          height: text ? '90px' : '30px',
+        }}
       ></textarea>
 
       {image && (
@@ -93,16 +96,6 @@ export default function CreatePost({ token }: { token: string }) {
           capture='user'
           maxLength={1048576}
         />
-        <button className={styles.addPhoto} onClick={chooseFile}>
-          Adicionar foto
-        </button>
-        <button
-          className={styles.submit}
-          onClick={handleSubmit}
-          disabled={!text && !image}
-        >
-          Publicar
-        </button>
         <button
           className={styles.cancel}
           onClick={handleCancel}
@@ -110,6 +103,18 @@ export default function CreatePost({ token }: { token: string }) {
         >
           Cancelar
         </button>
+        <div className={styles.submitContainer}>
+          <button className={styles.addPhoto} onClick={chooseFile}>
+            Adicionar foto
+          </button>
+          <button
+            className={styles.submit}
+            onClick={handleSubmit}
+            disabled={!text && !image}
+          >
+            Publicar
+          </button>
+        </div>
       </div>
     </div>
   );

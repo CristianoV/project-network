@@ -111,11 +111,11 @@ export function MarioGame() {
             </div>
           </div>
         )}
-        <Image src={cloud} alt='cloud' className={styles.cloud} />
-        <Image src={pipe} alt='pipe' className={styles.pipe} id='pipe' />
+        <Image src={cloud} alt='imagem de nuvem' className={styles.cloud} />
+        <Image src={pipe} alt='imagem de um cano' className={styles.pipe} id='pipe' />
         <Image
           src={dead ? over : mario}
-          alt='mario'
+          alt='imagem do Mario'
           className={styles.mario}
           id='mario'
           priority

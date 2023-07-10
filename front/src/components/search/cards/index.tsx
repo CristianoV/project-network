@@ -24,7 +24,7 @@ export default function FriendCard({ user }: FriendCardProps) {
       <Link href={user.name ? `/community/${user.id}` : `/profile/${user.id}`}>
         <Image
           src={user.profile_picture || avatar}
-          alt='avatar'
+          alt='avatar de usuário'
           width={500}
           height={500}
           quality={70}

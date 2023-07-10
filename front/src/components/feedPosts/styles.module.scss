@@ -20,12 +20,92 @@
     font-weight: bold;
   }
 
+  .postEditText {
+    background-color: $warning;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 97%;
+  }
+
   .userImage {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin-right: 10px;
     object-fit: cover;
+  }
+
+  .editButtons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    .cancelButton {
+      background-color: transparent;
+      text-decoration: none;
+      color: #000;
+      font-size: 1.2rem;
+      font-weight: 500;
+      transition: 0.2s;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+
+      &:hover {
+        color: $septenary;
+      }
+    }
+
+    .saveButton {
+      background-color: transparent;
+      text-decoration: none;
+      color: #000;
+      font-size: 1.2rem;
+      font-weight: 500;
+      transition: 0.2s;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+
+      &:hover {
+        color: $septenary;
+      }
+    }
+
+  }
+
+  textarea {
+    width: 97%;
+    height: 30px;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 18px;
+    transition: 0.3s;
+  }
+
+  textarea:focus {
+    outline: 1px solid $primary;
+  }
+
+  .svg {
+    margin-left: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: 0.2s;
+
+    &:hover {
+      color: $septenary;
+    }
   }
 
   .userInfo {

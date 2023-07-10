@@ -16,8 +16,19 @@ PostRoutes.post(
     loginController.createPost(request, response)
 );
 
+PostRoutes.put(
+  '/post/:id',
+  multer(upload).single('foto'),
+  (request: Request, response: Response) =>
+    loginController.updatePost(request, response)
+);
+
 PostRoutes.get('/post', (request: Request, response: Response) =>
   loginController.getPosts(request, response)
+);
+
+PostRoutes.delete('/post/:id', (request: Request, response: Response) =>
+  loginController.deletePost(request, response)
 );
 
 export default PostRoutes;

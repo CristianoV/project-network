@@ -39,7 +39,7 @@ export default function Game({ token }: GameProps) {
         <div className={styles.gamesContainer}>
           <div className={styles.gameImage}>
             <Link href='/game/mario'>
-              <Image src={mario} alt='Mario' />
+              <Image src={mario} alt='imagem do jogo do Mario' />
               <h1>
                 <strong>Mario</strong>
               </h1>
@@ -50,7 +50,7 @@ export default function Game({ token }: GameProps) {
           </div>
           <div className={styles.gameImage}>
             <Link href='/game/trivia'>
-              <Image src={trivia} alt='Mario' />
+              <Image src={trivia} alt='imagem de um jogo de Trivia' />
               <h1>
                 <strong>Trivia</strong>
               </h1>

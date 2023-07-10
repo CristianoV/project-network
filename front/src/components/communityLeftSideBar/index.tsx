@@ -156,7 +156,7 @@ export default function LeftSideBar({ token }: { token?: string }) {
             ? URL.createObjectURL(selectedFile)
             : info?.profile_picture) || avatar
         }
-        alt='avatar'
+        alt='avatar da comunidade'
         width={500}
         height={500}
         quality={70}

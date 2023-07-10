@@ -7,15 +7,65 @@ import Link from 'next/link';
 import moment from 'moment';
 import { BiCommentDetail } from 'react-icons/bi';
 import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
+import { FiEdit } from 'react-icons/fi';
+import { GrClose } from 'react-icons/gr';
+import { useSelector } from 'react-redux';
 
 interface PostComment {
   [key: number]: boolean;
 }
 
 export default function FeedPosts({ token }: { token: string }) {
+  const user = useSelector((state: any) => state.user.info);
   const [posts, setPosts] = useState<any[]>([]);
   const [commentStates, setCommentStates] = useState<PostComment>({});
+  const [editStates, setEditStates] = useState<PostComment>({});
   const [page, setPage] = useState(0);
+  const [text, setText] = useState('');
+
+  const handleDeletePost = async (postId: number) => {
+    try {
+      await fetchFromApi.delete(`/post/${postId}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      setPosts((prevState) => prevState.filter((post) => post.id !== postId));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleEditPost = async (postId: number) => {
+    try {
+      await fetchFromApi.put(
+        `/post/${postId}`,
+        {
+          text,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setPosts((prevState) =>
+        prevState.map((post) => {
+          if (post.id === postId) {
+            return {
+              ...post,
+              text,
+              updated_at: new Date().toISOString(),
+            };
+          }
+          return post;
+        })
+      );
+      setText('');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     try {
@@ -64,6 +114,13 @@ export default function FeedPosts({ token }: { token: string }) {
     }));
   };
 
+  const toggleEdit = (postId: number) => {
+    setEditStates((prevState) => ({
+      ...prevState,
+      [postId]: !prevState[postId],
+    }));
+  };
+
   return (
     <div className={styles.container}>
       {posts.length === 0 && (
@@ -103,7 +160,7 @@ export default function FeedPosts({ token }: { token: string }) {
                 >
                   <Image
                     src={post.user.profile_picture || avatar}
-                    alt='user image'
+                    alt='avatar de usuário'
                     width={50}
                     height={50}
                     className={styles.userImage}
@@ -132,15 +189,60 @@ export default function FeedPosts({ token }: { token: string }) {
                     às {moment(post.updated_at).format('HH:mm')})
                   </span>
                 )}
+                {post.user.id === user.id && (
+                  <>
+                    <FiEdit
+                      className={styles.svg}
+                      onClick={() => toggleEdit(post.id)}
+                    />
+                    <GrClose
+                      className={styles.svg}
+                      onClick={() => handleDeletePost(post.id)}
+                    />
+                  </>
+                )}
               </p>
             </div>
-            <p>
-              <span className={styles.postText}>{post.text}</span>
-            </p>
+            {editStates[post.id] && post.user.id === user.id ? (
+              <>
+                <p>
+                  <textarea
+                    name=''
+                    id=''
+                    cols={30}
+                    rows={10}
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                  ></textarea>
+                </p>
+                <div className={styles.editButtons}>
+                  <button
+                    className={styles.cancelButton}
+                    onClick={() => toggleEdit(post.id)}
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    className={styles.saveButton}
+                    onClick={() => {
+                      handleEditPost(post.id);
+                      toggleEdit(post.id);
+                    }}
+                  >
+                    Salvar
+                  </button>
+                </div>
+                <span className={styles.postEditText}>{post.text}</span>
+              </>
+            ) : (
+              <p>
+                <span className={styles.postText}>{post.text}</span>
+              </p>
+            )}
             {post.image && (
               <Image
                 src={post.image}
-                alt='post image'
+                alt='imagem do post'
                 width={500}
                 height={500}
                 className={styles.postImage}
