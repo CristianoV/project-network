@@ -23,16 +23,21 @@
   }
 
   textarea {
-    height: 90px;
+    height: 30px;
     resize: none;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
     font-size: 18px;
+    transition: 0.3s;
   }
 
   textarea:focus {
     outline: 1px solid $primary;
+    height: 90px;
+    &::placeholder {
+      color: transparent;
+    }
   }
 
   .imageContainer {
