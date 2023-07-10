@@ -78,7 +78,7 @@ export default function LeftSideBar({ token }: LeftSideBarProps) {
             ? URL.createObjectURL(selectedFile)
             : info?.profile_picture) || avatar
         }
-        alt='avatar'
+        alt='avatar do usuário'
         width={500}
         height={500}
         quality={70}

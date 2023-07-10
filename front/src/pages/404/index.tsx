@@ -19,7 +19,7 @@ export default function Custom404() {
         <title>404 - Página não encontrada</title>
       </Head>
       <div className={styles.container}>
-        <Image src={gif} alt='404' />
+        <Image src={gif} alt='imagem de um foguete com o numero 404' />
         <h1>Página não encontrada</h1>
         <p>
           A página que você está procurando pode ter sido removida ou o nome

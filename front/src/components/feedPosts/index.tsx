@@ -103,7 +103,7 @@ export default function FeedPosts({ token }: { token: string }) {
                 >
                   <Image
                     src={post.user.profile_picture || avatar}
-                    alt='user image'
+                    alt='avatar de usuário'
                     width={50}
                     height={50}
                     className={styles.userImage}
@@ -140,7 +140,7 @@ export default function FeedPosts({ token }: { token: string }) {
             {post.image && (
               <Image
                 src={post.image}
-                alt='post image'
+                alt='imagem do post'
                 width={500}
                 height={500}
                 className={styles.postImage}

@@ -91,7 +91,7 @@ export default function LeftSideBar({ token }: { token?: string }) {
     <div className={styles.container}>
       <Image
         src={info?.profile_picture || avatar}
-        alt='avatar'
+        alt='avatar de usuário'
         width={500}
         height={500}
         quality={70}

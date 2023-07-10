@@ -13,7 +13,7 @@ export default function GroupCard({ group }: GroupCardProps) {
       <Link href={`/community/${group.id}`}>
         <Image
           src={group?.profile_picture || avatar}
-          alt='avatar'
+          alt='avatar da comunidade'
           width={500}
           height={500}
           quality={70}
