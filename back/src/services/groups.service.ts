@@ -72,10 +72,12 @@ export default class GroupsService implements IGroupsService<Groups> {
     return group;
   }
 
-  public async deleteGroup(id: number) {
+  public async deleteGroup(id: number, authorization: string) {
+    const { id: userId } = await JwtSecret.verify(authorization);
     const group = await this.model.destroy({
       where: {
         id,
+        owner_id: userId,
       },
     });
     return group;

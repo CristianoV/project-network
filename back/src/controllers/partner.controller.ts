@@ -50,4 +50,16 @@ export default class PartnerController implements IPartnerController {
 
     return res.status(200).json(partner);
   }
+
+  public async deletePartner(req: Request, res: Response) {
+    const { authorization } = req.headers as { authorization: string };
+    const { groupId } = req.params;
+
+    const partner = await this.partnerService.deletePartner({
+      authorization,
+      groupId: Number(groupId),
+    });
+
+    return res.status(200).json(partner);
+  }
 }

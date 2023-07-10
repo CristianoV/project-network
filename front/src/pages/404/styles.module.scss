@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    width: 50%;
+    max-width: 100vw;
+    height: 50%;
+    max-height: 100vh;
+    object-fit: contain;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+  }
+}
