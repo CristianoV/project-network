@@ -17,6 +17,8 @@ import { useRouter } from 'next/router';
 
 export default function LeftSideBar({ token }: { token?: string }) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [showLeaveGroupModal, setShowLeaveGroupModal] = useState(false);
+  const [showDeleteGroupModal, setShowDeleteGroupModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const redux = useSelector((state: any) => state.community);
@@ -217,14 +219,32 @@ export default function LeftSideBar({ token }: { token?: string }) {
       )}
       {isParticipating &&
         (userInfo?.id === info?.owner_id ? (
-          <button onClick={handleDeleteGroup}>
+          <button
+            onClick={() => setShowDeleteGroupModal(!showDeleteGroupModal)}
+          >
             <AiOutlineDelete /> excluir
           </button>
         ) : (
-          <button onClick={handleDeleteParticipate}>
+          <button onClick={() => setShowLeaveGroupModal(!showLeaveGroupModal)}>
             <AiOutlineUsergroupDelete /> sair
           </button>
         ))}
+      {showLeaveGroupModal && (
+        <div className={styles.confirm}>
+          <hr />
+          <p>Você tem certeza que deseja sair da comunidade?</p>
+          <button onClick={handleDeleteParticipate}>Sim</button>
+          <button onClick={() => setShowLeaveGroupModal(false)}>Não</button>
+        </div>
+      )}
+      {showDeleteGroupModal && (
+        <div className={styles.confirm}>
+          <hr />
+          <p>Você tem certeza que deseja excluir a comunidade?</p>
+          <button onClick={handleDeleteGroup}>Sim</button>
+          <button onClick={() => setShowDeleteGroupModal(false)}>Não</button>
+        </div>
+      )}
       <hr />
       <div>
         <Link href='/profile'>
