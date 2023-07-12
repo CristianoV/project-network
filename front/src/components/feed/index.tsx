@@ -8,7 +8,7 @@ import moment from 'moment';
 import { BiCommentDetail } from 'react-icons/bi';
 import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
 import { FiEdit } from 'react-icons/fi';
-import { GrClose } from 'react-icons/gr';
+import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 
 interface PostProps {
@@ -158,8 +158,9 @@ export default function Feed({ post, token }: FeedProps) {
                     setEditStates(!editStates)
                   }}
                 />
-                <GrClose
+                <AiOutlineClose
                   className={styles.svg}
+                  style={{ fontSize: 1.3 + 'rem' }}
                   onClick={() => handleDeletePost(post.id)}
                 />
               </>
