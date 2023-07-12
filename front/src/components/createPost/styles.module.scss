@@ -23,7 +23,7 @@
   }
 
   textarea {
-    height: 30px;
+    height: 90px;
     resize: none;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -32,8 +32,13 @@
     transition: 0.3s;
   }
 
+  textarea:empty {
+    height: 30px;
+  }
+
   textarea:focus {
     outline: 1px solid $primary;
+    height: 90px;
   }
 
   .imageContainer {
@@ -71,6 +76,7 @@
       height: 50%;
       max-height: 300px;
       border-radius: 5px;
+      object-fit: cover;
     }
 
     .addPhoto {
