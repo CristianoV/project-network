@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Footer from '../../components/footer';
 import { useSelector } from 'react-redux';
+import FeedProfile from '../../components/feedProfile';
 
 interface HomeProps {
   token: string;
@@ -52,6 +53,7 @@ export default function Home({ token }: HomeProps) {
         <FriendLeftSideBar token={token} />
         <div>
           <FriendProfile token={token} />
+          <FeedProfile token={token} />
         </div>
         <div>
           <FriendFriends />

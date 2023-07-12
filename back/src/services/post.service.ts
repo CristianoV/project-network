@@ -105,6 +105,38 @@ export default class PostsService {
     return result;
   }
 
+  public async getPostsProfile({
+    authorization,
+    page,
+    pageSize,
+    id,
+  }: {
+    authorization: string;
+    page: number;
+    pageSize: number;
+    id: number;
+  }) {
+    const { id: userId } = JwtSecret.verify(authorization);
+
+    const posts = await this.model.findAll({
+      order: [['created_at', 'DESC']],
+      where: {
+        user_id: id,
+      },
+      include: [
+        {
+          all: true,
+        },
+      ],
+    });
+
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+    const result = posts.slice(startIndex, endIndex);
+
+    return result;
+  }
+
   public async deletePost({
     authorization,
     id,

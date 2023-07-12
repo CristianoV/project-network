@@ -1,0 +1,17 @@
+@import '../../styles/colors.scss';
+
+.container {
+  background-color: white;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 20px;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .noPosts {
+    text-align: center;
+    padding-block: 50px;
+  }
+}

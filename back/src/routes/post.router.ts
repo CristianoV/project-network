@@ -27,6 +27,10 @@ PostRoutes.get('/post', (request: Request, response: Response) =>
   loginController.getPosts(request, response)
 );
 
+PostRoutes.get('/post/profile/:id', (request: Request, response: Response) =>
+  loginController.getPostsProfile(request, response)
+);
+
 PostRoutes.delete('/post/:id', (request: Request, response: Response) =>
   loginController.deletePost(request, response)
 );
