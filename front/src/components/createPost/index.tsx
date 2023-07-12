@@ -66,9 +66,6 @@ export default function CreatePost({ token }: { token: string }) {
         placeholder='O que você está pensando?'
         value={text}
         onChange={(e) => setText(e.target.value)}
-        style={{
-          height: text ? '90px' : '30px',
-        }}
       ></textarea>
 
       {image && (
@@ -100,6 +97,10 @@ export default function CreatePost({ token }: { token: string }) {
           className={styles.cancel}
           onClick={handleCancel}
           disabled={!text && !image}
+          style={!text && !image ? { 
+            opacity: 0, 
+            cursor: 'default',
+          } : undefined}
         >
           Cancelar
         </button>
