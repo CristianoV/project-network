@@ -56,6 +56,20 @@ export default class PostController {
     return res.status(200).json(posts);
   }
 
+  public async getPostsProfile(req: Request, res: Response) {
+    const { authorization } = req.headers as { authorization: string };
+    const { page, pageSize } = req.query;
+    const { id } = req.params as { id: string };
+    const posts = await this.postService.getPostsProfile({
+      authorization,
+      id: Number(id),
+      page: page ? Number(page) : 1,
+      pageSize: pageSize ? Number(pageSize) : 5,
+    });
+
+    return res.status(200).json(posts);
+  }
+
   public async deletePost(req: Request, res: Response) {
     const { authorization } = req.headers as { authorization: string };
     const { id } = req.params as { id: string };
