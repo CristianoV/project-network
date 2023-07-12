@@ -12,7 +12,7 @@ import store from '../redux/store';
 import { fetchUserData } from '../redux/slices/user';
 import { useEffect } from 'react';
 import CreatePost from '../components/createPost';
-import FeedPosts from '../components/feedPosts';
+import FeedPosts from '../components/feedHome';
 
 interface HomeProps {
   token: string;
