@@ -4,9 +4,20 @@ export const registerSchema = z.object({
   email: z.string().email(),
   password: z
     .string()
-    .min(8, { message: 'Password must be at least 8 characters' })
-    .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z$*&@#]{8,}$/, {
-      message: 'model must be alphanumeric',
+    .nonempty({
+      message: 'A senha é obrigatória',
+    })
+    .min(8, {
+      message: 'A senha deve ter no mínimo 8 caracteres',
+    })
+    .regex(/[A-Z]/, {
+      message: 'A senha deve ter no mínimo 1 letra maiúscula',
+    })
+    .regex(/[a-z]/, {
+      message: 'A senha deve ter no mínimo 1 letra minúscula',
+    })
+    .regex(/[0-9]/, {
+      message: 'A senha deve ter no mínimo 1 número',
     }),
   firstName: z
     .string()

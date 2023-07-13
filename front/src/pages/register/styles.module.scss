@@ -79,6 +79,11 @@
   }
 }
 
+.error {
+  color: $danger;
+  font-weight: bold;
+}
+
 #privacy {
   align-items: center;
   justify-content: start;

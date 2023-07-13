@@ -7,16 +7,55 @@ import { fetchFromApi } from '../../utils/axios';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
+import { set, useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+const loginUserSchema = z.object({
+  email: z
+    .string()
+    .nonempty({
+      message: 'O e-mail é obrigatório',
+    })
+    .email({
+      message: 'Formato de e-mail inválido',
+    }),
+  password: z
+    .string()
+    .nonempty({
+      message: 'A senha é obrigatória',
+    })
+    .min(8, {
+      message: 'A senha deve ter no mínimo 8 caracteres',
+    })
+    .regex(/[A-Z]/, {
+      message: 'A senha deve ter no mínimo 1 letra maiúscula',
+    })
+    .regex(/[a-z]/, {
+      message: 'A senha deve ter no mínimo 1 letra minúscula',
+    })
+    .regex(/[0-9]/, {
+      message: 'A senha deve ter no mínimo 1 número',
+    }),
+});
+
+type LoginUserData = z.infer<typeof loginUserSchema>;
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [errorLogin, setErrorLogin] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<LoginUserData>({
+    resolver: zodResolver(loginUserSchema),
+  });
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  async function createUser({ email, password }: LoginUserData) {
     try {
+      setErrorLogin(false);
       const { data } = await fetchFromApi.post('/login', {
         email,
         password,
@@ -35,10 +74,11 @@ export default function Login() {
       }
     } catch (error) {
       console.error(error);
-      setPassword('');
-      setEmail('');
+      reset();
+      setErrorLogin(true);
     }
-  };
+  }
+
   return (
     <>
       <Head>
@@ -72,25 +112,32 @@ export default function Login() {
               <p>
                 Acesse o <strong>Orkut.br</strong> com a sua conta
               </p>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit(createUser)}>
                 <label htmlFor=''>
                   E-mail:
-                  <input
-                    type='email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
+                  <input type='email' id='email' {...register('email')} />
                 </label>
+                {errors.email && (
+                  <span className={styles.error}>{errors.email.message}</span>
+                )}
                 <label htmlFor=''>
                   Senha:
                   <input
                     type='password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
+                    id='password'
+                    {...register('password')}
                   />
                 </label>
+                {errors.password && (
+                  <span className={styles.error}>
+                    {errors.password.message}
+                  </span>
+                )}
+                {errorLogin && (
+                  <span className={styles.error}>
+                    email ou senha inválidos. Tente novamente.
+                  </span>
+                )}
                 <label htmlFor='save' id={styles.check}>
                   <input type='checkbox' name='' id='save' />
                   Salvar as minhas informações neste computador

@@ -15,6 +15,12 @@
   }
 }
 
+.error {
+  color: $danger;
+  text-align: center;
+  font-weight: bold;
+}
+
 .footer {
   background-color: $quaternary;
   margin: 20px;
