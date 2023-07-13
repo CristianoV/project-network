@@ -1,33 +1,34 @@
 import { INTEGER, STRING, TEXT, Model, DATE } from 'sequelize';
 import user from './user';
-import Comment from './comment';
+import Post from './posts';
 import db from '.';
 
-class Post extends Model {
+class Comment extends Model {
   public id: number;
-  public text: string;
-  public image: string;
+  public content: string;
   public user_id: number;
+  public post_id: number;
   public created_at: Date;
   public updated_at: Date;
 }
 
-Post.init(
+Comment.init(
   {
     id: {
       type: INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      allowNull: false,
     },
-    text: {
+    content: {
       type: TEXT,
       allowNull: false,
     },
-    image: {
-      type: STRING,
-      allowNull: true,
-    },
     user_id: {
+      type: INTEGER,
+      allowNull: false,
+    },
+    post_id: {
       type: INTEGER,
       allowNull: false,
     },
@@ -42,14 +43,13 @@ Post.init(
   },
   {
     sequelize: db,
-    modelName: 'Post',
-    timestamps: true,
+    modelName: 'Comment',
     updatedAt: 'updated_at',
     createdAt: 'created_at',
   }
 );
 
-Post.belongsTo(user, { foreignKey: 'user_id', as: 'user' });
-Post.hasMany(Comment, { foreignKey: 'post_id', as: 'comments' });
+Comment.belongsTo(user, { foreignKey: 'user_id', as: 'user' });
 
-export default Post;
+
+export default Comment;

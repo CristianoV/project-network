@@ -9,6 +9,26 @@
     width: 97%;
   }
 
+.showComments {
+  display: flex;
+  justify-content: space-between;
+  .showMore {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+    color: #000;
+
+    .icon {
+      margin-right: 5px;
+    }
+
+    &:hover {
+      color: $septenary;
+    }
+  }
+}
+
   .userImage {
     width: 50px;
     height: 50px;
@@ -55,7 +75,6 @@
         color: $septenary;
       }
     }
-
   }
 
   textarea {
@@ -131,6 +150,63 @@
       to {
         width: 100%;
       }
+    }
+  }
+}
+
+.commentHeader { 
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+}
+
+.notComments {
+  text-align: center;
+  p {
+    font-size: 16px;
+  }
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+
+  background-color: $primary;
+  border-radius: 5px;
+  padding: 5px;
+  animation: roll 0.1s ease-in-out;
+
+  @keyframes roll {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  .commentContact {
+    display: flex;
+    img {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      margin-right: 10px;
+      object-fit: cover;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+  .commentContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 35px;
+    margin-bottom: 10px;
+    .commentText {
+      font-size: 16px;
+      word-wrap: break-word;
     }
   }
 }

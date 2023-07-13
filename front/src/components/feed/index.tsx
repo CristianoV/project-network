@@ -7,9 +7,27 @@ import Link from 'next/link';
 import moment from 'moment';
 import { BiCommentDetail } from 'react-icons/bi';
 import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
+import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
+
+interface CometProps {
+  id: number;
+  content: string;
+  user_id: number;
+  post_id: number;
+  created_at: string;
+  updated_at: string;
+  user: UserProps;
+}
+
+interface UserProps {
+  id: number;
+  firstName: string;
+  lastName: string;
+  profile_picture: string;
+}
 
 interface PostProps {
   id: number;
@@ -17,12 +35,8 @@ interface PostProps {
   image: string;
   created_at: string;
   updated_at: string;
-  user: {
-    id: number;
-    firstName: string;
-    lastName: string;
-    profile_picture: string;
-  };
+  user: UserProps;
+  comments: CometProps[];
 }
 
 interface FeedProps {
@@ -40,7 +54,9 @@ export default function Feed({ post, token }: FeedProps) {
   const [editStates, setEditStates] = useState(false);
   const [page, setPage] = useState(0);
   const [text, setText] = useState('');
+  const [comment, setComment] = useState('');
   const [deleted, setDeleted] = useState(false);
+  const [numberComments, setNumberComments] = useState(3);
 
   const handleDeletePost = async (postId: number) => {
     try {
@@ -79,6 +95,42 @@ export default function Feed({ post, token }: FeedProps) {
     }
   };
 
+  const handleNewComment = async (postId: number) => {
+    try {
+      await fetchFromApi.post(
+        '/comment',
+        {
+          content: comment,
+          post_id: postId,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      post.comments.push({
+        id: 0,
+        content: comment,
+        user_id: user.id,
+        post_id: postId,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        user: {
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          profile_picture: user.profile_picture,
+        },
+      });
+
+      setComment('');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     const intersectionObserver = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) {
@@ -96,7 +148,6 @@ export default function Feed({ post, token }: FeedProps) {
       intersectionObserver.disconnect();
     };
   }, []);
-
 
   if (deleted) {
     return null;
@@ -155,7 +206,7 @@ export default function Feed({ post, token }: FeedProps) {
                   className={styles.svg}
                   onClick={() => {
                     setText(post.text);
-                    setEditStates(!editStates)
+                    setEditStates(!editStates);
                   }}
                 />
                 <AiOutlineClose
@@ -217,7 +268,7 @@ export default function Feed({ post, token }: FeedProps) {
         )}
         <div className={styles.icons}>
           <div className={styles.likeDislike}>
-            <AiOutlineLike className={styles.icon} />
+            <AiOutlineLike className={styles.icon} /> 0
             <AiOutlineDislike className={styles.icon} />
           </div>
           <BiCommentDetail
@@ -227,10 +278,88 @@ export default function Feed({ post, token }: FeedProps) {
         </div>
         {commentStates && (
           <div className={styles.newComment}>
-            <input type='text' placeholder='Escreva um comentário...' />
-            <button>Publicar</button>
+            <input
+              type='text'
+              onChange={(e) => setComment(e.target.value)}
+              value={comment}
+              placeholder='Escreva um comentário...'
+            />
+            <button
+              onClick={() => {
+                handleNewComment(post.id);
+              }}
+            >
+              Publicar
+            </button>
           </div>
         )}
+        {post.comments.length > 0
+          ? post.comments
+              .slice()
+              .sort(
+                (a: CometProps, b: CometProps) =>
+                  new Date(b.created_at).getTime() -
+                  new Date(a.created_at).getTime()
+              )
+              .map((comment: CometProps, index) => {
+                if (index < numberComments) {
+                  return (
+                    <div className={styles.comments} key={comment.id}>
+                      <div className={styles.commentHeader}>
+                        <Link href={`/profile/${comment.user.id}`} passHref>
+                          <div className={styles.commentContact}>
+                            <Image
+                              src={comment.user.profile_picture || avatar}
+                              alt='imagem do post'
+                              width={500}
+                              height={500}
+                              quality={70}
+                              placeholder='blur'
+                              blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN0vQgAAWEBGHsgcxcAAAAASUVORK5CYII='
+                            />
+                            <p>
+                              {comment.user.firstName} {comment.user.lastName}
+                            </p>
+                          </div>
+                        </Link>
+                        <p>
+                          {moment(comment.created_at).format('DD/MM/YYYY')} às{' '}
+                          {moment(comment.created_at).format('HH:mm')}
+                        </p>
+                      </div>
+                      <div className={styles.commentContent}>
+                        <p className={styles.commentText}>{comment.content}</p>
+                      </div>
+                    </div>
+                  );
+                }
+              })
+          : commentStates && (
+              <div className={styles.notComments}>
+                <p>Nenhum comentário</p>
+              </div>
+            )}
+        <div className={styles.showComments}>
+          {post.comments.length > 3 &&
+            numberComments < post.comments.length && (
+              <button
+                onClick={() => setNumberComments(numberComments + 3)}
+                className={styles.showMore}
+              >
+                <AiOutlineArrowDown className={styles.icon} />
+                Carregar mais comentários
+              </button>
+            )}
+          {numberComments > 3 && (
+            <button
+              onClick={() => setNumberComments(3)}
+              className={styles.showMore}
+            >
+              <AiOutlineArrowUp className={styles.icon} />
+              Carregar menos comentários
+            </button>
+          )}
+        </div>
         <hr />
       </div>
     </div>

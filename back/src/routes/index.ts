@@ -6,6 +6,7 @@ import PartnerRoutes from './partner.router';
 import SearchRoutes from './search.router';
 import GroupRoutes from './group.router';
 import PostRoutes from './post.router';
+import CommentRoutes from './comment.router';
 
 export default [
   RegisterRoutes,
@@ -16,4 +17,5 @@ export default [
   SearchRoutes,
   GroupRoutes,
   PostRoutes,
+  CommentRoutes,
 ];
