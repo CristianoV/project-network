@@ -1,6 +1,7 @@
 import JwtSecret from '../utils/JwtService';
 import Post from '../database/models/posts';
 import Friends from '../database/models/friends';
+import Comment from '../database/models/comment';
 import { Op } from 'sequelize';
 
 export default class PostsService {
@@ -94,7 +95,8 @@ export default class PostsService {
       include: [
         {
           all: true,
-        },
+          nested: true,
+        }
       ],
     });
 
