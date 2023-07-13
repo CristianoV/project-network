@@ -128,6 +128,7 @@ export default class PostsService {
       include: [
         {
           all: true,
+          nested: true,
         },
       ],
     });
