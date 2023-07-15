@@ -1,3 +1,5 @@
+@import '../../styles/colors.scss';
+
 .container {
   background-color: white;
   border-radius: 10px;
@@ -18,5 +20,20 @@
   a {
     text-align: center;
     text-decoration: underline;
+  }
+
+  .button {
+    border: none;
+    background-color: transparent;
+    color: $septenary;
+    width: 150px;
+    height: 30px;
+    font-size: 1.1rem;
+    margin: 0 auto;
+
+    &:hover {
+      cursor: pointer;
+      color: $senary;
+    }
   }
 }
