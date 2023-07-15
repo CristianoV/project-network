@@ -1,7 +1,7 @@
 import { fetchFromApi } from '../../utils/axios';
 import styles from './styles.module.scss';
 import { useEffect, useState } from 'react';
-import Feed from '../feed';
+import Post from '../post';
 
 export default function FeedPosts({ token }: { token: string }) {
   const [posts, setPosts] = useState<any[]>([]);
@@ -56,7 +56,7 @@ export default function FeedPosts({ token }: { token: string }) {
         </p>
       )}
       {posts.map((post) => (
-        <Feed key={post.id} post={post} token={token} />
+        <Post key={post.id} post={post} token={token} />
       ))}
       <li id='sentinelScroll' />
     </div>

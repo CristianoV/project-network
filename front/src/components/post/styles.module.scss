@@ -93,7 +93,6 @@
   }
 
   .svg {
-    margin-left: 10px;
     cursor: pointer;
     border: none;
     background-color: transparent;
@@ -174,14 +173,14 @@
   background-color: $primary;
   border-radius: 5px;
   padding: 5px;
-  animation: roll 0.1s ease-in-out;
+  animation: colorChange 0.5s;
 
-  @keyframes roll {
+  @keyframes colorChange {
     from {
-      width: 0;
+      background-color: transparent;
     }
     to {
-      width: 100%;
+      background-color: $primary;
     }
   }
 
@@ -291,6 +290,12 @@
   border-top: 5px solid #3498db;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+}
+
+.alignCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes spin {

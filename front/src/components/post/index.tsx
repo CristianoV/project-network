@@ -5,6 +5,7 @@ import styles from './styles.module.scss';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import moment from 'moment';
+import Comment from '../comment';
 import { BiCommentDetail } from 'react-icons/bi';
 import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
@@ -42,10 +43,6 @@ interface PostProps {
 interface FeedProps {
   post: PostProps;
   token: string;
-}
-
-interface PostComment {
-  [key: number]: boolean;
 }
 
 export default function Feed({ post, token }: FeedProps) {
@@ -189,7 +186,7 @@ export default function Feed({ post, token }: FeedProps) {
               {post.user.firstName} {post.user.lastName}
             </Link>
           </div>
-          <p>
+          <p className={styles.alignCenter}>
             {moment(post.created_at).format('DD/MM/YYYY')} às{' '}
             {moment(post.created_at).format('HH:mm')}
             {post.created_at !== post.updated_at && (
@@ -204,6 +201,7 @@ export default function Feed({ post, token }: FeedProps) {
               <>
                 <FiEdit
                   className={styles.svg}
+                  style={{ marginLeft: 0.5 + 'rem' }}
                   onClick={() => {
                     setText(post.text);
                     setEditStates(!editStates);
@@ -293,73 +291,15 @@ export default function Feed({ post, token }: FeedProps) {
             </button>
           </div>
         )}
-        {post.comments.length > 0
-          ? post.comments
-              .slice()
-              .sort(
-                (a: CometProps, b: CometProps) =>
-                  new Date(b.created_at).getTime() -
-                  new Date(a.created_at).getTime()
-              )
-              .map((comment: CometProps, index) => {
-                if (index < numberComments) {
-                  return (
-                    <div className={styles.comments} key={comment.id}>
-                      <div className={styles.commentHeader}>
-                        <Link href={`/profile/${comment.user.id}`} passHref>
-                          <div className={styles.commentContact}>
-                            <Image
-                              src={comment.user.profile_picture || avatar}
-                              alt='imagem do post'
-                              width={500}
-                              height={500}
-                              quality={70}
-                              placeholder='blur'
-                              blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN0vQgAAWEBGHsgcxcAAAAASUVORK5CYII='
-                            />
-                            <p>
-                              {comment.user.firstName} {comment.user.lastName}
-                            </p>
-                          </div>
-                        </Link>
-                        <p>
-                          {moment(comment.created_at).format('DD/MM/YYYY')} às{' '}
-                          {moment(comment.created_at).format('HH:mm')}
-                        </p>
-                      </div>
-                      <div className={styles.commentContent}>
-                        <p className={styles.commentText}>{comment.content}</p>
-                      </div>
-                    </div>
-                  );
-                }
-              })
-          : commentStates && (
-              <div className={styles.notComments}>
-                <p>Nenhum comentário</p>
-              </div>
-            )}
-        <div className={styles.showComments}>
-          {post.comments.length > 3 &&
-            numberComments < post.comments.length && (
-              <button
-                onClick={() => setNumberComments(numberComments + 3)}
-                className={styles.showMore}
-              >
-                <AiOutlineArrowDown className={styles.icon} />
-                Carregar mais comentários
-              </button>
-            )}
-          {numberComments > 3 && (
-            <button
-              onClick={() => setNumberComments(3)}
-              className={styles.showMore}
-            >
-              <AiOutlineArrowUp className={styles.icon} />
-              Carregar menos comentários
-            </button>
-          )}
-        </div>
+        {post.comments.length > 0 ? (
+          <Comment post={post} token={token} />
+        ) : (
+          commentStates && (
+            <div className={styles.notComments}>
+              <p>Nenhum comentário</p>
+            </div>
+          )
+        )}
         <hr />
       </div>
     </div>
