@@ -19,4 +19,30 @@ export default class CommentController {
 
     return res.status(201).json(comment);
   }
+
+  public async updateComment(req: Request, res: Response) {
+    const { authorization } = req.headers as { authorization: string };
+    const { content } = req.body as { content: string };
+    const { id } = req.params;
+
+    const comment = await this.commentService.updateComment({
+      content,
+      authorization,
+      id: Number(id),
+    });
+
+    return res.status(200).json(comment);
+  }
+
+  public async deleteComment(req: Request, res: Response) {
+    const { authorization } = req.headers as { authorization: string };
+    const { id } = req.params;
+
+    const comment = await this.commentService.deleteComment({
+      authorization,
+      id: Number(id),
+    });
+
+    return res.status(200).json(comment);
+  }
 }

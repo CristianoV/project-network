@@ -11,4 +11,12 @@ CommentRoutes.post('/comment', (request: Request, response: Response) =>
   commentController.createComment(request, response)
 );
 
+CommentRoutes.put('/comment/:id', (request: Request, response: Response) =>
+  commentController.updateComment(request, response)
+);
+
+CommentRoutes.delete('/comment/:id', (request: Request, response: Response) =>
+  commentController.deleteComment(request, response)
+);
+
 export default CommentRoutes;
