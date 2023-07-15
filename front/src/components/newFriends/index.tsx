@@ -10,6 +10,7 @@ interface NewFriendsProps {
 
 export default function NewFriends({ token }: NewFriendsProps) {
   const [requests, setRequests] = useState([]);
+  const [quantity, setQuantity] = useState(3);
 
   useEffect(() => {
     try {
@@ -22,23 +23,34 @@ export default function NewFriends({ token }: NewFriendsProps) {
         setRequests(result.data);
       };
       result();
-      
     } catch (error) {
       console.error(error);
     }
   }, [token]);
-  
 
   if (requests.length > 0) {
     return (
       <div className={styles.container}>
         <p>Novos pedidos de amizades ({requests.length})</p>
         {requests.map(({ friend, id }, index) => {
-          if (index < 3) {
-            return <Card key={index} obj={friend} token={token} requestId={id} />;
+          if (index < quantity) {
+            return (
+              <Card key={index} obj={friend} token={token} requestId={id} />
+            );
           }
         })}
-        {requests.length > 3 && <Link href='/friends'>Ver todos</Link>}
+        {requests.length <= 3 ? null : quantity < requests.length ? (
+          <button
+            onClick={() => setQuantity(quantity + 2)}
+            className={styles.button}
+          >
+            Ver mais
+          </button>
+        ) : (
+          <button className={styles.button} onClick={() => setQuantity(3)}>
+            Ver menos
+          </button>
+        )}
       </div>
     );
   }
