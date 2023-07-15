@@ -23,4 +23,37 @@ export default class CommentsService {
 
     return comment;
   }
+
+  public async updateComment({
+    content,
+    authorization,
+    id,
+  }: {
+    content: string;
+    authorization: string;
+    id: number;
+  }) {
+    const { id: user_id } = JwtSecret.verify(authorization);
+
+    const comment = await this.model.update(
+      { content },
+      { where: { id, user_id } }
+    );
+
+    return comment;
+  }
+
+  public async deleteComment({
+    authorization,
+    id,
+  }: {
+    authorization: string;
+    id: number;
+  }) {
+    const { id: user_id } = JwtSecret.verify(authorization);
+
+    const comment = await this.model.destroy({ where: { id, user_id } });
+
+    return comment;
+  }
 }

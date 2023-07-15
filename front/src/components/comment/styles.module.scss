@@ -1,0 +1,220 @@
+@import '../../styles/colors.scss';
+
+.container {
+  .showComments {
+    display: flex;
+    justify-content: space-between;
+    .showMore {
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      text-decoration: none;
+      color: #000;
+
+      .icon {
+        margin-right: 5px;
+      }
+
+      &:hover {
+        color: $septenary;
+      }
+    }
+  }
+
+  hr {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    width: 100%;
+    box-shadow: 0 0 5px #ccc;
+    animation: roll 0.5s;
+
+    @keyframes roll {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notComments {
+  text-align: center;
+  p {
+    font-size: 16px;
+  }
+}
+
+.editButtons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  .cancelButton {
+    background-color: white;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: 0.2s;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+
+    &:hover {
+      color: $septenary;
+    }
+  }
+
+  .saveButton {
+    background-color: white;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: 0.2s;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+
+    &:hover {
+      color: $septenary;
+    }
+  }
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+
+  background-color: $primary;
+  border-radius: 5px;
+  padding: 5px;
+  animation: colorChange 0.5s;
+
+  @keyframes colorChange {
+    from {
+      background-color: transparent;
+    }
+    to {
+      background-color: $primary;
+    }
+  }
+
+  .commentContact {
+    display: flex;
+    img {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      margin-right: 10px;
+      object-fit: cover;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+  .commentContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 35px;
+    margin-bottom: 10px;
+    .commentText {
+      font-size: 16px;
+      word-wrap: break-word;
+    }
+  }
+}
+
+.newComment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: roll 0.5s;
+
+  input {
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  input:focus {
+    outline: none;
+    border: 1px solid $septenary;
+  }
+
+  button {
+    background-color: transparent;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: 0.2s;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+
+    &:hover {
+      color: $septenary;
+    }
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.svg {
+  border: none;
+  background-color: transparent;
+  text-decoration: none;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    color: $septenary;
+  }
+}
+
+.alignCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
