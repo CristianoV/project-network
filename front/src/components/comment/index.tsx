@@ -5,9 +5,7 @@ import { fetchFromApi } from '../../utils/axios';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import moment from 'moment';
-import { BiCommentDetail } from 'react-icons/bi';
-import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
-import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
+import { RiMore2Fill } from 'react-icons/ri';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
@@ -38,6 +36,7 @@ interface CommentProps {
 
 export default function Comment({ comment, key, token }: CommentProps) {
   const user = useSelector((state: any) => state.user.info);
+  const [plusEdit, setPlusEdit] = useState(false);
   const [text, setText] = useState('');
   const [editStates, setEditStates] = useState(false);
   const [deleted, setDeleted] = useState(false);
@@ -61,6 +60,11 @@ export default function Comment({ comment, key, token }: CommentProps) {
 
   const handleEditPost = async (postId: number) => {
     try {
+
+      if (text === comment.content) {
+        return;
+      }
+
       await fetchFromApi.put(
         `/comment/${postId}`,
         {
@@ -111,7 +115,7 @@ export default function Comment({ comment, key, token }: CommentProps) {
             {moment(comment.created_at).format('HH:mm')}
             {comment.created_at !== comment.updated_at && (
               <span>
-                {' '}
+                {'  '}
                 (editado em {moment(comment.updated_at).format(
                   'DD/MM/YYYY'
                 )} às {moment(comment.updated_at).format('HH:mm')})
@@ -119,18 +123,27 @@ export default function Comment({ comment, key, token }: CommentProps) {
             )}
             {user.id === comment.user.id && (
               <>
-                <FiEdit
+                {plusEdit && (
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <FiEdit
+                      className={styles.svg}
+                      style={{ marginLeft: 0.5 + 'rem' }}
+                      onClick={() => {
+                        setText(comment.content);
+                        setEditStates(!editStates);
+                      }}
+                    />
+                    <AiOutlineClose
+                      className={styles.svg}
+                      style={{ fontSize: 1.2 + 'rem' }}
+                      onClick={() => handleDeletePost(comment.id)}
+                    />
+                  </div>
+                )}
+                <RiMore2Fill
                   className={styles.svg}
-                  style={{ marginLeft: 0.5 + 'rem' }}
-                  onClick={() => {
-                    setText(comment.content);
-                    setEditStates(!editStates);
-                  }}
-                />
-                <AiOutlineClose
-                  className={styles.svg}
-                  style={{ fontSize: 1.2 + 'rem' }}
-                  onClick={() => handleDeletePost(comment.id)}
+                  style={{ fontSize: 1.3 + 'rem' }}
+                  onClick={() => setPlusEdit(!plusEdit)}
                 />
               </>
             )}
@@ -152,7 +165,10 @@ export default function Comment({ comment, key, token }: CommentProps) {
               <div className={styles.editButtons}>
                 <button
                   className={styles.cancelButton}
-                  onClick={() => setEditStates(!editStates)}
+                  onClick={() => {
+                    setEditStates(!editStates);
+                    setPlusEdit(!plusEdit);
+                  }}
                 >
                   Cancelar
                 </button>
@@ -161,6 +177,7 @@ export default function Comment({ comment, key, token }: CommentProps) {
                   onClick={() => {
                     handleEditPost(comment.id);
                     setEditStates(!editStates);
+                    setPlusEdit(!plusEdit);
                   }}
                 >
                   Salvar
