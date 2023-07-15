@@ -9,6 +9,7 @@ import Comment from '../comment';
 import { BiCommentDetail } from 'react-icons/bi';
 import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
+import { RiMore2Fill } from 'react-icons/ri';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
@@ -54,6 +55,7 @@ export default function Feed({ post, token }: FeedProps) {
   const [comment, setComment] = useState('');
   const [deleted, setDeleted] = useState(false);
   const [numberComments, setNumberComments] = useState(3);
+  const [plusEdit, setPlusEdit] = useState(false);
 
   const handleDeletePost = async (postId: number) => {
     try {
@@ -71,6 +73,9 @@ export default function Feed({ post, token }: FeedProps) {
 
   const handleEditPost = async (postId: number) => {
     try {
+      if (text === post.text) {
+        return;
+      }
       await fetchFromApi.put(
         `/post/${postId}`,
         {
@@ -199,18 +204,27 @@ export default function Feed({ post, token }: FeedProps) {
             )}
             {post.user.id === user.id && (
               <>
-                <FiEdit
-                  className={styles.svg}
-                  style={{ marginLeft: 0.5 + 'rem' }}
-                  onClick={() => {
-                    setText(post.text);
-                    setEditStates(!editStates);
-                  }}
-                />
-                <AiOutlineClose
+                {plusEdit && (
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <FiEdit
+                      className={styles.svg}
+                      style={{ marginLeft: 0.5 + 'rem' }}
+                      onClick={() => {
+                        setText(post.text);
+                        setEditStates(!editStates);
+                      }}
+                    />
+                    <AiOutlineClose
+                      className={styles.svg}
+                      style={{ fontSize: 1.3 + 'rem' }}
+                      onClick={() => handleDeletePost(post.id)}
+                    />
+                  </div>
+                )}
+                <RiMore2Fill
                   className={styles.svg}
                   style={{ fontSize: 1.3 + 'rem' }}
-                  onClick={() => handleDeletePost(post.id)}
+                  onClick={() => setPlusEdit(!plusEdit)}
                 />
               </>
             )}
@@ -302,29 +316,32 @@ export default function Feed({ post, token }: FeedProps) {
               )
               .map((comment: CometProps, index) => {
                 if (index < numberComments) {
-                  return <Comment key={comment.id} comment={comment} token={token} />;
+                  return (
+                    <Comment key={comment.id} comment={comment} token={token} />
+                  );
                 }
               })}
-                    <div className={styles.showComments}>
-        {post.comments.length > 3 && numberComments < post.comments.length && (
-          <button
-            onClick={() => setNumberComments(numberComments + 3)}
-            className={styles.showMore}
-          >
-            <AiOutlineArrowDown className={styles.icon} />
-            Carregar mais comentários
-          </button>
-        )}
-        {numberComments > 3 && (
-          <button
-            onClick={() => setNumberComments(3)}
-            className={styles.showMore}
-          >
-            <AiOutlineArrowUp className={styles.icon} />
-            Carregar menos comentários
-          </button>
-        )}
-      </div>
+            <div className={styles.showComments}>
+              {post.comments.length > 3 &&
+                numberComments < post.comments.length && (
+                  <button
+                    onClick={() => setNumberComments(numberComments + 3)}
+                    className={styles.showMore}
+                  >
+                    <AiOutlineArrowDown className={styles.icon} />
+                    Carregar mais comentários
+                  </button>
+                )}
+              {numberComments > 3 && (
+                <button
+                  onClick={() => setNumberComments(3)}
+                  className={styles.showMore}
+                >
+                  <AiOutlineArrowUp className={styles.icon} />
+                  Carregar menos comentários
+                </button>
+              )}
+            </div>
           </>
         ) : (
           commentStates && (
