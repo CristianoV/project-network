@@ -292,7 +292,40 @@ export default function Feed({ post, token }: FeedProps) {
           </div>
         )}
         {post.comments.length > 0 ? (
-          <Comment post={post} token={token} />
+          <>
+            {post.comments
+              .slice()
+              .sort(
+                (a: CometProps, b: CometProps) =>
+                  new Date(b.created_at).getTime() -
+                  new Date(a.created_at).getTime()
+              )
+              .map((comment: CometProps, index) => {
+                if (index < numberComments) {
+                  return <Comment key={comment.id} comment={comment} token={token} />;
+                }
+              })}
+                    <div className={styles.showComments}>
+        {post.comments.length > 3 && numberComments < post.comments.length && (
+          <button
+            onClick={() => setNumberComments(numberComments + 3)}
+            className={styles.showMore}
+          >
+            <AiOutlineArrowDown className={styles.icon} />
+            Carregar mais comentários
+          </button>
+        )}
+        {numberComments > 3 && (
+          <button
+            onClick={() => setNumberComments(3)}
+            className={styles.showMore}
+          >
+            <AiOutlineArrowUp className={styles.icon} />
+            Carregar menos comentários
+          </button>
+        )}
+      </div>
+          </>
         ) : (
           commentStates && (
             <div className={styles.notComments}>

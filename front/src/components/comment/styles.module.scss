@@ -52,6 +52,46 @@
   }
 }
 
+.editButtons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  .cancelButton {
+    background-color: white;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: 0.2s;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+
+    &:hover {
+      color: $septenary;
+    }
+  }
+
+  .saveButton {
+    background-color: white;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: 0.2s;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+
+    &:hover {
+      color: $septenary;
+    }
+  }
+}
+
 .comments {
   display: flex;
   flex-direction: column;
@@ -60,7 +100,6 @@
   border-radius: 5px;
   padding: 5px;
   animation: colorChange 0.5s;
-  margin: 5px 0;
 
   @keyframes colorChange {
     from {
