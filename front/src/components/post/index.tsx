@@ -245,7 +245,10 @@ export default function Feed({ post, token }: FeedProps) {
             <div className={styles.editButtons}>
               <button
                 className={styles.cancelButton}
-                onClick={() => setEditStates(!editStates)}
+                onClick={() => {
+                  setEditStates(!editStates);
+                  setPlusEdit(!plusEdit);
+                }}
               >
                 Cancelar
               </button>
@@ -254,6 +257,7 @@ export default function Feed({ post, token }: FeedProps) {
                 onClick={() => {
                   handleEditPost(post.id);
                   setEditStates(!editStates);
+                  setPlusEdit(!plusEdit);
                 }}
               >
                 Salvar

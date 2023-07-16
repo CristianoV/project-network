@@ -183,7 +183,7 @@ export default function Comment({ comment, key, token }: CommentProps) {
                   Salvar
                 </button>
               </div>
-              <span className={styles.commentText}>{comment.content}</span>
+              <span className={styles.postEditText}>{comment.content}</span>
             </>
           ) : (
             <p className={styles.commentText}>{comment.content}</p>
