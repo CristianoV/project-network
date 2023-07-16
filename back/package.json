@@ -13,7 +13,11 @@
     "db:drop": "npx sequelize-cli db:drop",
     "db:create": "npx sequelize-cli db:create",
     "db:migrate": "npx sequelize-cli db:migrate",
-    "db:seed": "npx sequelize-cli db:seed:all"
+    "db:seed": "npx sequelize-cli db:seed:all",
+
+
+    "startByDocker": "node build/server.js",
+    "prestartByDocker": "npm run build && npm run db:reset"
   },
   "keywords": [],
   "author": "",
