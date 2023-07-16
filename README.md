@@ -2,7 +2,6 @@
 Projeto Rede Social (Orkut)
 </h1>
 
-## 🖼️ Preview
 <p align="center">
    <img alt="Desktop" src="https://github.com/CristianoV/project-network/blob/development/preview_orkut.gif" width="500px" />
 </p>
@@ -15,6 +14,48 @@ Estou desenvolvendo um projeto que simula uma rede social antiga chamada Orkut. 
 
 Meu objetivo com esse projeto é proporcionar uma experiência única aos usuários, relembrando os recursos e a atmosfera que fizeram do Orkut um sucesso. Estou me esforçando para replicar as principais funcionalidades, como a criação de perfis, a adição de amigos, a participação em comunidades e a troca de depoimentos.
 </p>
+
+Link da aplicação: https://cv-network.vercel.app/
+
+-----
+
+## :man_technologist: Tecnologias, bibliotecas e arquiteturas usadas
+
+<details>
+  <summary><strong>Front-End</strong></summary> <br/>
+   <strong>
+      React <br/>
+      Next.JS <br/>
+      Hookform <br/>
+      Reduxjs <br/>
+      Axios <br/>
+      Moment <br/>
+      Sass <br/>
+      Zod <br/>
+      Typescript <br/>
+   </strong>
+</details>
+
+<details>
+<summary><strong>Back-End</strong></summary> <br/>
+   <strong>
+      Typescript <br/>
+      Multer <br/>
+      Jsonwebtoken <br/>
+      Zod <br/>
+      Sequelize <br/>
+      Express <br/>
+      Bcryptjs <br/>
+      AWS S3 <br/>
+   </strong>
+</details>
+
+<details>
+   <summary><strong>Banco de dados</strong></summary> <br/>
+   <strong>
+      Postgresql <br/>
+   </strong>
+</details>
 
 -----
 
