@@ -2,12 +2,14 @@
 Projeto Rede Social (Orkut)
 </h1>
 
+## 🖼️ Preview
 <p align="center">
    <img alt="Desktop" src="https://github.com/CristianoV/project-network/blob/development/preview_orkut.gif" width="500px" />
 </p>
 
 -----
 
+## :books: Contexto
 <p>
 Estou desenvolvendo um projeto que simula uma rede social antiga chamada Orkut. Inspirado na plataforma que foi muito popular no passado, estou trabalhando para recriar a essência e a nostalgia dessa era digital.
 
@@ -15,6 +17,8 @@ Meu objetivo com esse projeto é proporcionar uma experiência única aos usuár
 </p>
 
 -----
+
+## :rocket: Implementações
 
 <details>
   <summary><strong>Features</strong></summary><br />
@@ -40,4 +44,20 @@ Meu objetivo com esse projeto é proporcionar uma experiência única aos usuár
 - [ ] Chat
 - [ ] Mobile
 </details>
+
+-----
+
+## ⭐ Instruções da aplicação
+### Iniciar Projeto com docker
+```
+cd project-network
+npm run compose:up
+```
+
+Portas utilizadas
+```
+Front: 3000
+Back: 3333
+Banco: 5432
+```
 
