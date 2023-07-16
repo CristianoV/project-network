@@ -2,6 +2,12 @@
 Projeto Rede Social (Orkut)
 </h1>
 
+<p align="center">
+   <img alt="Desktop" src="https://github.com/CristianoV/project-network/blob/development/preview_orkut.gif" width="500px" />
+</p>
+
+-----
+
 <p>
 Estou desenvolvendo um projeto que simula uma rede social antiga chamada Orkut. Inspirado na plataforma que foi muito popular no passado, estou trabalhando para recriar a essência e a nostalgia dessa era digital.
 
