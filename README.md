@@ -18,7 +18,20 @@ Meu objetivo com esse projeto é proporcionar uma experiência única aos usuár
 - [x] Comunidades
 - [x] Pesquisas
 - [x] Amizades
+- [x] Publicações
+- [x] Jogos
+- [x] Possibilidade de remover Amigos
+- [x] Possibilidade de sair de comunidades
+- [x] Possibilidade de excluir comunidades
+- [x] Possibilidade de alterar fotos de comunidades
+- [X] Comentar publicações
+- [ ] Sistema de Like e Deslike
+- [ ] Sistema de opinar (confiável / legal / sexy)
+- [ ] Sistema de recados
+- [ ] Sistema de depoimentos
+- [ ] Adicionar fotos
+- [ ] Adicionar Vídeos
+- [ ] Chat
 - [ ] Mobile
-- [ ] Publicações
-- [ ] Jogos
 </details>
+
