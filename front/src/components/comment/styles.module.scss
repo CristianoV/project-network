@@ -52,6 +52,14 @@
   }
 }
 
+.postEditText {
+  background-color: $warning;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 97%;
+}
+
 .editButtons {
   display: flex;
   justify-content: space-between;
@@ -95,7 +103,6 @@
 .comments {
   display: flex;
   flex-direction: column;
-
   background-color: $primary;
   border-radius: 5px;
   padding: 5px;
@@ -112,6 +119,7 @@
 
   .commentContact {
     display: flex;
+    align-items: center;
     img {
       width: 25px;
       height: 25px;
