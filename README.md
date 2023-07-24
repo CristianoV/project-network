@@ -78,7 +78,7 @@ Link da aplicação: https://cv-network.vercel.app/
 - [X] Comentar publicações
 - [ ] Sistema de Like e Deslike
 - [ ] Sistema de opinar (confiável / legal / sexy)
-- [ ] Sistema de recados
+- [X] Sistema de recados
 - [ ] Sistema de depoimentos
 - [ ] Adicionar fotos
 - [ ] Adicionar Vídeos
