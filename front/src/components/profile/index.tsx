@@ -24,6 +24,7 @@ export default function Profile({ token }: WelcomeProps) {
   const [edit, setEdit] = useState(false);
   const [phrase, setPhrase] = useState('');
   const redux = useSelector((state: any) => state.user);
+  const [messages, setMessages] = useState(0);
 
   useEffect(() => {
     setPhrase(redux.info?.phrase);
@@ -41,6 +42,25 @@ export default function Profile({ token }: WelcomeProps) {
     );
     setEdit(!edit);
   };
+
+  useEffect(() => {
+    try {
+      const getPosts = async () => {
+        const response = await fetchFromApi.get('/countmessages', {
+          headers: {
+            Authorization: token,
+          },
+        });
+        if (response.data.length === 0) {
+          return;
+        }
+        setMessages(response.data);
+      };
+      getPosts();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [token]);
 
   const { info } = redux;
 
@@ -95,7 +115,7 @@ export default function Profile({ token }: WelcomeProps) {
 
       <hr />
       <div className={styles.inputs}>
-        <Inputs text='recados' icon={<BiMessageSquareEdit />} number={0} />
+        <Inputs text='recados' icon={<BiMessageSquareEdit />} number={messages} />
         <Inputs text='fotos' icon={<AiOutlineCamera />} number={0} />
         <Inputs text='vídeos' icon={<AiOutlineVideoCamera />} number={0} />
         <Inputs text='fãs' icon={<AiFillStar />} number={0} />

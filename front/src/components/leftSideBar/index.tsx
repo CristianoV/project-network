@@ -133,7 +133,7 @@ export default function LeftSideBar({ token }: LeftSideBarProps) {
         <Link href='/profile'>
           <CgProfile /> perfil
         </Link>
-        <Link href='/'>
+        <Link href='/messages'>
           <BiMessageSquareEdit /> recados
         </Link>
         <Link href='/'>

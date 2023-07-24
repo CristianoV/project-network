@@ -23,14 +23,35 @@ interface WelcomeProps {
 
 export default function Profile({ token }: WelcomeProps) {
   const redux = useSelector((state: any) => state.profile);
+  const [messages, setMessages] = useState(0);
   const { info, loading } = redux;
   const router = useRouter();
+  const { id } = router.query;
 
   useEffect(() => {
     if (loading === 'failed') {
       router.push('/');
     }
   }, [loading, router]);
+
+  useEffect(() => {
+    try {
+      const getPosts = async () => {
+        const response = await fetchFromApi.get(`/countmessages?to=${id}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        if (response.data.length === 0) {
+          return;
+        }
+        setMessages(response.data);
+      };
+      getPosts();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [id, token]);
 
   return (
     <div className={styles.container}>
@@ -44,7 +65,11 @@ export default function Profile({ token }: WelcomeProps) {
       )}
       <hr />
       <div className={styles.inputs}>
-        <Inputs text='recados' icon={<BiMessageSquareEdit />} number={0} />
+        <Inputs
+          text='recados'
+          icon={<BiMessageSquareEdit />}
+          number={messages}
+        />
         <Inputs text='fotos' icon={<AiOutlineCamera />} number={0} />
         <Inputs text='vídeos' icon={<AiOutlineVideoCamera />} number={0} />
         <Inputs text='fãs' icon={<AiFillStar />} number={0} />

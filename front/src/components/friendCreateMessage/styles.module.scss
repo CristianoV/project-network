@@ -1,0 +1,178 @@
+@import '../../styles/colors.scss';
+
+.container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  p {
+    font-weight: bold;
+    span {
+      font-weight: normal;
+    }
+  }
+
+  a {
+    text-align: center;
+    text-decoration: underline;
+  }
+
+  textarea {
+    height: 90px;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 18px;
+    transition: 0.3s;
+  }
+
+  textarea:empty {
+    height: 30px;
+  }
+
+  textarea:focus {
+    outline: 1px solid $primary;
+    height: 90px;
+  }
+
+  .imageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    position: relative;
+
+    .exclude {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      font-size: 20px;
+      cursor: pointer;
+
+      animation: roll 0.5s;
+    }
+
+    .exclude:hover {
+      opacity: 0.8;
+
+      animation: rollHover 0.5s;
+    }
+
+    img {
+      max-width: 500px;
+      max-height: 500px;
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+
+    .addPhoto {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+
+  .submitContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  button {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+  }
+
+  .submit {
+    background-color: $senary;
+  }
+
+  .submit:hover {
+    background-color: $senary;
+    opacity: 0.8;
+  }
+
+  .cancel {
+    background-color: $danger;
+  }
+
+  .cancel:hover {
+    background-color: $danger;
+    opacity: 0.8;
+  }
+
+  .submit:disabled {
+    background-color: $senary;
+    opacity: 0.5;
+    //     cursor: not-allowed;
+  }
+
+  .cancel:disabled {
+    background-color: $danger;
+    opacity: 0.5;
+    //     cursor: not-allowed;
+  }
+
+  .addPhoto {
+    background-color: $senary;
+  }
+
+  .addPhoto:hover {
+    background-color: $senary;
+    opacity: 0.8;
+  }
+
+  .addPhoto:disabled {
+    background-color: $senary;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@keyframes roll {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rollHover {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
