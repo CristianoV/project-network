@@ -7,6 +7,7 @@ import SearchRoutes from './search.router';
 import GroupRoutes from './group.router';
 import PostRoutes from './post.router';
 import CommentRoutes from './comment.router';
+import MessageRoutes from './message.router';
 
 export default [
   RegisterRoutes,
@@ -18,4 +19,5 @@ export default [
   GroupRoutes,
   PostRoutes,
   CommentRoutes,
+  MessageRoutes
 ];

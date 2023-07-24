@@ -1,22 +1,20 @@
-import styles from '../../styles/Home.module.scss';
+import styles from './styles.module.scss';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Header from '../../components/header';
-import FriendLeftSideBar from '../../components/friendLeftSideBar';
-import FriendProfile from '../../components/friendProfile';
-import FriendFriends from '../../components/friendFriends';
-import FriendCommunity from '../../components/friendCommunity';
-import store from '../../redux/store';
+import Header from '../../../../components/header';
+import FriendLeftSideBar from '../../../../components/friendLeftSideBar';
+import Footer from '../../../../components/footer';
+import store from '../../../../redux/store';
+import { fetchUserData } from '../../../../redux/slices/user';
 import {
   fetchProfileUserData,
   cleanUserData,
-} from '../../redux/slices/profile';
-import { fetchUserData } from '../../redux/slices/user';
+} from '../../../../redux/slices/profile';
 import { useEffect } from 'react';
+import FriendMessages from '../../../../components/friendMessages';
+import FriendCreateMessage from '../../../../components/friendCreateMessage';
 import { useRouter } from 'next/router';
-import Footer from '../../components/footer';
 import { useSelector } from 'react-redux';
-import FeedProfile from '../../components/feedProfile';
 
 interface HomeProps {
   token: string;
@@ -43,7 +41,7 @@ export default function Home({ token }: HomeProps) {
       <Head>
         <title>
           {loading === 'succeeded'
-            ? `${info?.firstName} ${info?.lastName} - Rede Social`
+            ? `${info?.firstName} ${info?.lastName} - Mensagem | Rede Social`
             : 'Rede Social'}
         </title>
         <link rel='icon' href='/favicon.ico' />
@@ -51,13 +49,9 @@ export default function Home({ token }: HomeProps) {
       <Header />
       <main className={styles.container}>
         <FriendLeftSideBar token={token} />
-        <div>
-          <FriendProfile token={token} />
-          <FeedProfile token={token} />
-        </div>
-        <div>
-          <FriendFriends />
-          <FriendCommunity />
+        <div className={styles.content}>
+          <FriendCreateMessage token={token} />
+          <FriendMessages token={token} />
         </div>
       </main>
       <Footer />

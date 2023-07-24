@@ -1,18 +1,14 @@
-import styles from '../styles/Home.module.scss';
+import styles from './styles.module.scss';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Header from '../components/header';
-import LeftSideBar from '../components/leftSideBar';
-import Welcome from '../components/welcome';
-import Friends from '../components/friends';
-import Community from '../components/community';
-import NewFriends from '../components/newFriends';
-import Footer from '../components/footer';
-import store from '../redux/store';
-import { fetchUserData } from '../redux/slices/user';
+import Header from '../../components/header';
+import LeftSideBar from '../../components/leftSideBar';
+import Footer from '../../components/footer';
+import store from '../../redux/store';
+import { fetchUserData } from '../../redux/slices/user';
 import { useEffect } from 'react';
-import CreatePost from '../components/createPost';
-import FeedPosts from '../components/feedHome';
+import Messages from '../../components/messages';
+import CreateMessage from '../../components/createMessage';
 
 interface HomeProps {
   token: string;
@@ -34,15 +30,9 @@ export default function Home({ token }: HomeProps) {
       <Header />
       <main className={styles.container}>
         <LeftSideBar />
-        <div>
-          <Welcome token={token} />
-          <NewFriends token={token} />
-          <CreatePost token={token} />
-          <FeedPosts token={token} />
-        </div>
-        <div>
-          <Friends />
-          <Community />
+        <div className={styles.content}>
+          <CreateMessage token={token} />
+          <Messages token={token} />
         </div>
       </main>
       <Footer />

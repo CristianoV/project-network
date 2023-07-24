@@ -17,6 +17,7 @@ export default function LeftSideBar({ token }: { token?: string }) {
   const [isRequest, setIsRequest] = useState(false);
   const [showDeleteFriendModal, setShowDeleteFriendModal] = useState(false);
   const router = useRouter();
+  const { id } = router.query;
   const { info } = redux;
 
   const handleAddFriend = async () => {
@@ -133,10 +134,10 @@ export default function LeftSideBar({ token }: { token?: string }) {
       )}
       <hr />
       <div>
-        <Link href='/profile'>
+        <Link href={`/profile/${id}`}>
           <CgProfile /> perfil
         </Link>
-        <Link href='/'>
+        <Link href={`/profile/${id}/messages`}>
           <BiMessageSquareEdit /> recados
         </Link>
         <Link href='/'>

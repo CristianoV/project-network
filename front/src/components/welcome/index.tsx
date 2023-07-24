@@ -7,18 +7,40 @@ import {
 } from 'react-icons/ai';
 import Inputs from './inputs';
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { fetchFromApi } from '../../utils/axios';
 
-export default function Welcome() {
+export default function Welcome({ token }: { token: string }) {
+  const [messages, setMessages] = useState(0);
   const redux = useSelector((state: any) => state.user);
 
   const { info } = redux;
+
+  useEffect(() => {
+    try {
+      const getPosts = async () => {
+        const response = await fetchFromApi.get('/countmessages', {
+          headers: {
+            Authorization: token,
+          },
+        });
+        if (response.data.length === 0) {
+          return;
+        }
+        setMessages(response.data);
+      };
+      getPosts();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [token]);
 
   return (
     <div className={styles.container}>
       <h1>Bem-vindo(a), {info?.firstName}</h1>
       <hr />
       <div className={styles.inputs}>
-        <Inputs text='recados' icon={<BiMessageSquareEdit />} number={0} />
+        <Inputs text='recados' icon={<BiMessageSquareEdit />} number={messages} link='/messages' />
         <Inputs text='fotos' icon={<AiOutlineCamera />} number={0} />
         <Inputs text='vídeos' icon={<AiOutlineVideoCamera />} number={0} />
         <Inputs text='fãs' icon={<AiFillStar />} number={0} />
