@@ -5,7 +5,7 @@ import {
   AiOutlineVideoCamera,
   AiFillStar,
 } from 'react-icons/ai';
-import Inputs from './inputs';
+import InputProfile from '../inputProfile';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchFromApi } from '../../utils/axios';
@@ -40,10 +40,10 @@ export default function Welcome({ token }: { token: string }) {
       <h1>Bem-vindo(a), {info?.firstName}</h1>
       <hr />
       <div className={styles.inputs}>
-        <Inputs text='recados' icon={<BiMessageSquareEdit />} number={messages} link='/messages' />
-        <Inputs text='fotos' icon={<AiOutlineCamera />} number={0} />
-        <Inputs text='vídeos' icon={<AiOutlineVideoCamera />} number={0} />
-        <Inputs text='fãs' icon={<AiFillStar />} number={0} />
+        <InputProfile text='recados' icon={<BiMessageSquareEdit />} number={messages} link='/messages' />
+        <InputProfile text='fotos' icon={<AiOutlineCamera />} number={0} />
+        <InputProfile text='vídeos' icon={<AiOutlineVideoCamera />} number={0} />
+        <InputProfile text='fãs' icon={<AiFillStar />} number={0} />
       </div>
       <hr />
       <p>
