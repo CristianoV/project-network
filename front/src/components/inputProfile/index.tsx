@@ -8,7 +8,7 @@ interface InputsProps {
   link?: string;
 }
 
-export default function Inputs({ text, icon, number, link }: InputsProps) {
+export default function InputProfile({ text, icon, number, link }: InputsProps) {
   return (
     <div className={styles.container}>
       <p>{text}</p>
