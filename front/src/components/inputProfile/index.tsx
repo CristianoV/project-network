@@ -8,23 +8,28 @@ interface InputsProps {
   link?: string;
 }
 
-export default function InputProfile({ text, icon, number, link }: InputsProps) {
+export default function InputProfile({
+  text,
+  icon,
+  number,
+  link,
+}: InputsProps) {
   return (
     <div className={styles.container}>
       <p>{text}</p>
-      <p>
-        {link ? (
-          <Link href={link}>
+      {link ? (
+        <Link href={link}>
+          <div className={styles.icons_input}>
             <span>{icon}</span>
             <span>{number <= 99 ? number : '99+'}</span>
-          </Link>
-        ) : (
-          <>
-            <span>{icon}</span>
-            <span>{number <= 99 ? number : '99+'}</span>
-          </>
-        )}
-      </p>
+          </div>
+        </Link>
+      ) : (
+        <div className={styles.icons_input}>
+          <span>{icon}</span>
+          <span>{number <= 99 ? number : '99+'}</span>
+        </div>
+      )}
     </div>
   );
 }
