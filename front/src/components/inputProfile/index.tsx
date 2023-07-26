@@ -16,7 +16,7 @@ export default function InputProfile({
 }: InputsProps) {
   return (
     <div className={styles.container}>
-      <p>{text}</p>
+      <p className={styles.title}>{text}</p>
       {link ? (
         <Link href={link}>
           <div className={styles.icons_input}>
