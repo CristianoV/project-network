@@ -1,9 +1,14 @@
 .textGreen {
   color: #047857;
+  @media screen and (max-width: 768px) {
+  }
 }
 
 .textBlack {
   color: #000;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 }
 
 .container {
