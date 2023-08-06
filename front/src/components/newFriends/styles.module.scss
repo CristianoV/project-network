@@ -1,6 +1,11 @@
 @import '../../styles/colors.scss';
 
 .container {
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+    margin: 0;
+    margin-bottom: 10px;
+  }
   background-color: white;
   border-radius: 10px;
   margin: 10px;

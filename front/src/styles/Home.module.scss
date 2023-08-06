@@ -4,5 +4,11 @@
   justify-content: space-between;
   height: 100%;
   width: 100%;
-  min-width: 1200px;
+  @media screen and (max-width: 768px) {
+    .content {
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+    }
+  }
 }

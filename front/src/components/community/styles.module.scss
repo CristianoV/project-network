@@ -33,4 +33,8 @@
     margin-left: 10px;
     text-decoration: underline;
   }
+
+  @media screen and (max-width: 991px) {
+    display: none;
+  }
 }
