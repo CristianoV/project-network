@@ -15,6 +15,9 @@
   z-index: 100;
 
   div {
+    @media screen and (max-width: 768px) {
+      justify-content: center;
+    }
     display: flex;
     max-width: 1400px;
     min-width: 1100px;
@@ -22,6 +25,13 @@
     align-items: center;
     justify-content: space-between;
     img {
+      @media screen and (max-width: 768px) {
+        object-fit: contain;
+        background: none;
+        background: none;
+        width: 80px;
+        height: 50%;
+      }
       width: 100px;
       height: 50%;
       background: rgb(252, 252, 252);
@@ -35,6 +45,15 @@
     }
 
     nav ul {
+      @media screen and (max-width: 768px) {
+        max-width: 250px;
+        flex-wrap: wrap;
+        gap: 5px;
+
+        li {
+          font-size: 1rem;
+        }
+      }
       display: flex;
       gap: 15px;
 
@@ -48,6 +67,9 @@
     }
 
     form {
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
       display: flex;
       align-items: center;
       background-color: $septenary;
@@ -70,6 +92,9 @@
   gap: 15px;
 
   p {
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
     font-size: 16px;
     margin-bottom: 5px;
     font-weight: bold;
@@ -85,5 +110,11 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+.removedInMobile {
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 }
