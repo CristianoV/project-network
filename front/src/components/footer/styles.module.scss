@@ -1,4 +1,7 @@
 .container {
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
   background-color: white;
   border-radius: 10px;
   margin: 0 10px;
