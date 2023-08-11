@@ -17,6 +17,7 @@
   div {
     @media screen and (max-width: 768px) {
       justify-content: center;
+      gap: calc(100vw / 6 - 20px);
     }
     display: flex;
     max-width: 1400px;
@@ -86,7 +87,7 @@
 
   @media screen and (max-width: 768px) {
     flex-direction: row-reverse;
-    gap: 5px;
+    gap: calc(100vw / 15 - 20px);
   }
 
   p {
