@@ -29,8 +29,7 @@
         object-fit: contain;
         background: none;
         background: none;
-        width: 80px;
-        height: 50%;
+        width: 100px;
       }
       width: 100px;
       height: 50%;
@@ -46,13 +45,7 @@
 
     nav ul {
       @media screen and (max-width: 768px) {
-        max-width: 250px;
-        flex-wrap: wrap;
-        gap: 5px;
-
-        li {
-          font-size: 1rem;
-        }
+        display: none;
       }
       display: flex;
       gap: 15px;
@@ -67,9 +60,6 @@
     }
 
     form {
-      @media screen and (max-width: 768px) {
-        display: none;
-      }
       display: flex;
       align-items: center;
       background-color: $septenary;
@@ -81,6 +71,9 @@
         outline: none;
         font-size: 16px;
         padding: 5px;
+        @media screen and (max-width: 768px) {
+          width: 150px;
+        }
       }
     }
   }
@@ -90,6 +83,11 @@
   display: flex;
   align-items: center;
   gap: 15px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: row-reverse;
+    gap: 5px;
+  }
 
   p {
     @media screen and (max-width: 768px) {
@@ -101,6 +99,9 @@
   }
 
   button {
+    @media screen and (max-width: 768px) {
+      font-size: 20px;
+    }
     background-color: transparent;
     border: none;
     outline: none;
@@ -116,5 +117,42 @@
 .removedInMobile {
   @media screen and (max-width: 768px) {
     display: none;
+  }
+}
+
+.header_mobile {
+  display: none;
+  padding: 0 20px;
+  height: 60px;
+  background-color: $senary;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    justify-content: center;
+    .profile {
+      ul {
+        display: flex;
+        gap: 15px;
+        justify-content: space-between;
+
+        li {
+          a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+
+            svg {
+              color: white;
+            }
+          }
+        }
+      }
+    }
   }
 }
