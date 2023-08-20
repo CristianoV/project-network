@@ -8,6 +8,7 @@ import GroupRoutes from './group.router';
 import PostRoutes from './post.router';
 import CommentRoutes from './comment.router';
 import MessageRoutes from './message.router';
+import Avaliation_statusRoutes from './avaliation_status.router';
 
 export default [
   RegisterRoutes,
@@ -19,5 +20,6 @@ export default [
   GroupRoutes,
   PostRoutes,
   CommentRoutes,
-  MessageRoutes
+  MessageRoutes,
+  Avaliation_statusRoutes
 ];
