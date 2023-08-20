@@ -15,6 +15,7 @@ import Link from 'next/link';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import { fetchFromApi } from '../../utils/axios';
+import InputStatus from '../inputStatus';
 
 interface WelcomeProps {
   token: string;
@@ -119,9 +120,9 @@ export default function Profile({ token }: WelcomeProps) {
         <InputProfile text='fotos' icon={<AiOutlineCamera />} number={0} />
         <InputProfile text='vídeos' icon={<AiOutlineVideoCamera />} number={0} />
         <InputProfile text='fãs' icon={<AiFillStar />} number={0} />
-        <InputProfile text='confiável' icon={<BiHappyAlt />} number={0} />
-        <InputProfile text='legal' icon={<RxCube />} number={0} />
-        <InputProfile text='sexy' icon={<AiFillHeart />} number={0} />
+        <InputStatus text='confiável' icon={<BiHappyAlt />} number={25} color='yellow'/>
+        <InputStatus text='legal' icon={<RxCube />} number={25} color='blue'/>
+        <InputStatus text='sexy' icon={<AiFillHeart />} number={25} color='red'/>
       </div>
       <hr />
       <div className={styles.social}>

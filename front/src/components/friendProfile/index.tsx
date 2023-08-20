@@ -16,6 +16,7 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 import { fetchFromApi } from '../../utils/axios';
 import { useRouter } from 'next/router';
+import InputStatus from '../inputStatus';
 
 interface WelcomeProps {
   token: string;
@@ -78,9 +79,9 @@ export default function Profile({ token }: WelcomeProps) {
           number={0}
         />
         <InputProfile text='fãs' icon={<AiFillStar />} number={0} />
-        <InputProfile text='confiável' icon={<BiHappyAlt />} number={0} />
-        <InputProfile text='legal' icon={<RxCube />} number={0} />
-        <InputProfile text='sexy' icon={<AiFillHeart />} number={0} />
+        <InputStatus text='confiável' icon={<BiHappyAlt />} number={75} color='yellow'/>
+        <InputStatus text='legal' icon={<RxCube />} number={75} color='blue'/>
+        <InputStatus text='sexy' icon={<AiFillHeart />} number={75} color='red'/>
       </div>
       <hr />
       <div className={styles.social}>

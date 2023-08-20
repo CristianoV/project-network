@@ -1,0 +1,59 @@
+@import '../../styles/colors.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  .title {
+    font-weight: normal;
+    gap: 5px;
+    display: flex;
+    font-weight: bold;
+    color: #000;
+    display: flex;
+  }
+
+  .icons_input {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1px;
+    font-weight: bold;
+
+    span {
+      font-weight: normal;
+      gap: 5px;
+      display: flex;
+      font-weight: bold;
+      color: #000;
+      display: flex;
+      transition: 0.2s;
+
+      svg {
+        font-size: 18px;
+        &:hover {
+          color: $septenary;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.yellow {
+  svg {
+    color: #e8e839;
+  }
+}
+
+.blue {
+  svg {
+    color: #399ce8;
+  }
+}
+
+.red {
+  svg {
+    color: red;
+  }
+}
