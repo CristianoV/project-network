@@ -25,6 +25,11 @@ interface WelcomeProps {
 export default function Profile({ token }: WelcomeProps) {
   const redux = useSelector((state: any) => state.profile);
   const [messages, setMessages] = useState(0);
+  const [status, setStatus] = useState({
+    sexy: 0,
+    cool: 0,
+    reliable: 0,
+  });
   const { info, loading } = redux;
   const router = useRouter();
   const { id } = router.query;
@@ -43,16 +48,51 @@ export default function Profile({ token }: WelcomeProps) {
             Authorization: token,
           },
         });
+        const response2 = await fetchFromApi.get(`/avaliation_status/${id}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
         if (response.data.length === 0) {
           return;
         }
         setMessages(response.data);
+        setStatus(response2.data);
       };
       getPosts();
     } catch (error) {
       console.error(error);
     }
   }, [id, token]);
+
+  const avaliationProfile = async ({
+    avaliation,
+    type_avaliation,
+  }: {
+    avaliation: string;
+    type_avaliation: string;
+  }) => {
+    try {
+      await fetchFromApi.post(
+        `/avaliation_status`,
+        {
+          avaliation: avaliation,
+          user_id: id,
+          type_avaliation: type_avaliation,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+        }
+      );
+
+      router.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -79,9 +119,27 @@ export default function Profile({ token }: WelcomeProps) {
           number={0}
         />
         <InputProfile text='fãs' icon={<AiFillStar />} number={0} />
-        <InputStatus text='confiável' icon={<BiHappyAlt />} number={75} color='yellow'/>
-        <InputStatus text='legal' icon={<RxCube />} number={75} color='blue'/>
-        <InputStatus text='sexy' icon={<AiFillHeart />} number={75} color='red'/>
+        <InputStatus
+          text='confiável'
+          icon={<BiHappyAlt />}
+          number={status.reliable}
+          color='yellow'
+          avaliationProfile={avaliationProfile}
+        />
+        <InputStatus
+          text='legal'
+          icon={<RxCube />}
+          number={status.cool}
+          color='blue'
+          avaliationProfile={avaliationProfile}
+        />
+        <InputStatus
+          text='sexy'
+          icon={<AiFillHeart />}
+          number={status.sexy}
+          color='red'
+          avaliationProfile={avaliationProfile}
+        />
       </div>
       <hr />
       <div className={styles.social}>

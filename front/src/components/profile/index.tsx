@@ -26,6 +26,13 @@ export default function Profile({ token }: WelcomeProps) {
   const [phrase, setPhrase] = useState('');
   const redux = useSelector((state: any) => state.user);
   const [messages, setMessages] = useState(0);
+  const [status, setStatus] = useState({
+    sexy: 0,
+    cool: 0,
+    reliable: 0,
+  });
+
+  const { info } = redux;
 
   useEffect(() => {
     setPhrase(redux.info?.phrase);
@@ -56,14 +63,36 @@ export default function Profile({ token }: WelcomeProps) {
           return;
         }
         setMessages(response.data);
+
+        if (!!info?.id) {
+          const response2 = await fetchFromApi.get(
+            `/avaliation_status/${info.id}`,
+            {
+              headers: {
+                Authorization: token,
+              },
+            }
+          );
+
+          setStatus(response2.data);
+        }
       };
+
       getPosts();
     } catch (error) {
       console.error(error);
     }
-  }, [token]);
+  }, [info.id, token]);
 
-  const { info } = redux;
+  const avaliationProfile = async ({
+    avaliation,
+    type_avaliation,
+  }: {
+    avaliation: string;
+    type_avaliation: string;
+  }) => {
+    return
+  };
 
   return (
     <div className={styles.container}>
@@ -116,13 +145,40 @@ export default function Profile({ token }: WelcomeProps) {
 
       <hr />
       <div className={styles.inputs}>
-        <InputProfile text='recados' icon={<BiMessageSquareEdit />} number={messages} link='/messages' />
+        <InputProfile
+          text='recados'
+          icon={<BiMessageSquareEdit />}
+          number={messages}
+          link='/messages'
+        />
         <InputProfile text='fotos' icon={<AiOutlineCamera />} number={0} />
-        <InputProfile text='vídeos' icon={<AiOutlineVideoCamera />} number={0} />
+        <InputProfile
+          text='vídeos'
+          icon={<AiOutlineVideoCamera />}
+          number={0}
+        />
         <InputProfile text='fãs' icon={<AiFillStar />} number={0} />
-        <InputStatus text='confiável' icon={<BiHappyAlt />} number={25} color='yellow'/>
-        <InputStatus text='legal' icon={<RxCube />} number={25} color='blue'/>
-        <InputStatus text='sexy' icon={<AiFillHeart />} number={25} color='red'/>
+        <InputStatus
+          text='confiável'
+          icon={<BiHappyAlt />}
+          number={status.reliable}
+          color='yellow'
+          avaliationProfile={avaliationProfile}
+        />
+        <InputStatus
+          text='legal'
+          icon={<RxCube />}
+          number={status.cool}
+          color='blue'
+          avaliationProfile={avaliationProfile}
+        />
+        <InputStatus
+          text='sexy'
+          icon={<AiFillHeart />}
+          number={status.sexy}
+          color='red'
+          avaliationProfile={avaliationProfile}
+        />
       </div>
       <hr />
       <div className={styles.social}>

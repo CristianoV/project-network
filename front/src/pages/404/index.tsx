@@ -7,8 +7,6 @@ import Head from 'next/head';
 export default function Custom404() {
   useEffect(() => {
     setTimeout(() => {
-      console.log('redirecionando');
-      
       window.location.href = '/';
     }, 5000);
   }, []);

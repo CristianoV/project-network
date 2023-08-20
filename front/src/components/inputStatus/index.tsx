@@ -7,6 +7,19 @@ interface InputsProps {
   number: number;
   color: string;
   link?: string;
+  avaliationProfile: ({
+    avaliation,
+    type_avaliation,
+  }: {
+    avaliation: string;
+    type_avaliation: any;
+  }) => void;
+}
+
+enum TypeAvaliation {
+  confiável = 'reliable',
+  legal = 'Cool',
+  sexy = 'sexy',
 }
 
 export default function InputStatus({
@@ -15,11 +28,8 @@ export default function InputStatus({
   link,
   number,
   color,
+  avaliationProfile,
 }: InputsProps) {
-  const sendAvaliationStatus = (status: number) => {
-    console.log(status);
-  };
-
   return (
     <div className={styles.container}>
       <p className={styles.title}>{text}</p>
@@ -33,19 +43,34 @@ export default function InputStatus({
         <div className={styles.icons_input}>
           <span
             className={number >= 25 ? styles[color] : ''}
-            onClick={() => sendAvaliationStatus(1)}
+            onClick={() =>
+              avaliationProfile({
+                avaliation: '33',
+                type_avaliation: TypeAvaliation[text as keyof typeof TypeAvaliation],
+              })
+            }
           >
             {icon}
           </span>
           <span
             className={number >= 50 ? styles[color] : ''}
-            onClick={() => sendAvaliationStatus(2)}
+            onClick={() =>
+              avaliationProfile({
+                avaliation: '66',
+                type_avaliation: TypeAvaliation[text as keyof typeof TypeAvaliation],
+              })
+            }
           >
             {icon}
           </span>
           <span
             className={number >= 75 ? styles[color] : ''}
-            onClick={() => sendAvaliationStatus(3)}
+            onClick={() =>
+              avaliationProfile({
+                avaliation: '99',
+                type_avaliation: TypeAvaliation[text as keyof typeof TypeAvaliation],
+              })
+            }
           >
             {icon}
           </span>
