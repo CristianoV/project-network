@@ -77,9 +77,9 @@ Link da aplicação: https://cv-network.vercel.app/
 - [x] Possibilidade de alterar fotos de comunidades
 - [X] Comentar publicações
 - [ ] Sistema de Like e Deslike
-- [ ] Sistema de opinar (confiável / legal / sexy)
+- [x] Sistema de opinar (confiável / legal / sexy)
 - [X] Sistema de recados
-- [ ] Sistema de depoimentos
+- [x] Sistema de depoimentos
 - [ ] Adicionar fotos
 - [ ] Adicionar Vídeos
 - [ ] Chat
