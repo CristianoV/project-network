@@ -60,7 +60,6 @@ export default function Comment({ comment, key, token }: CommentProps) {
 
   const handleEditPost = async (postId: number) => {
     try {
-
       if (text === comment.content) {
         return;
       }
@@ -160,6 +159,12 @@ export default function Comment({ comment, key, token }: CommentProps) {
                   rows={10}
                   value={text}
                   onChange={(e) => setText(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.keyCode === 13) {
+                      e.preventDefault();
+                      setText(text + '\n');
+                    }
+                  }}
                 ></textarea>
               </p>
               <div className={styles.editButtons}>
@@ -183,10 +188,20 @@ export default function Comment({ comment, key, token }: CommentProps) {
                   Salvar
                 </button>
               </div>
-              <span className={styles.postEditText}>{comment.content}</span>
+              <span
+                className={styles.postEditText}
+                style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+              >
+                {comment.content}
+              </span>
             </>
           ) : (
-            <p className={styles.commentText}>{comment.content}</p>
+            <p
+              className={styles.commentText}
+              style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+            >
+              {comment.content}
+            </p>
           )}
         </div>
       </div>

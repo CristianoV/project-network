@@ -91,7 +91,7 @@ export default function Profile({ token }: WelcomeProps) {
     avaliation: string;
     type_avaliation: string;
   }) => {
-    return
+    return;
   };
 
   return (
@@ -198,7 +198,14 @@ export default function Profile({ token }: WelcomeProps) {
           </div>
           <div className={styles.text}>
             <p>quem sou eu:</p>
-            <span>{info?.bio}</span>
+            <span
+              style={{
+                whiteSpace: 'pre-wrap',
+                wordBreak: 'break-word',
+              }}
+            >
+              {info?.bio}
+            </span>
           </div>
           <div className={styles.text}>
             <p>país:</p>

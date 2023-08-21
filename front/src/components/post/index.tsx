@@ -240,6 +240,12 @@ export default function Feed({ post, token }: FeedProps) {
                 rows={10}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.keyCode === 13) {
+                    e.preventDefault();
+                    setText(text + '\n');
+                  }
+                }}
               ></textarea>
             </p>
             <div className={styles.editButtons}>
@@ -263,11 +269,21 @@ export default function Feed({ post, token }: FeedProps) {
                 Salvar
               </button>
             </div>
-            <span className={styles.postEditText}>{post.text}</span>
+            <span
+              className={styles.postEditText}
+              style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+            >
+              {post.text}
+            </span>
           </>
         ) : (
           <p>
-            <span className={styles.postText}>{post.text}</span>
+            <span
+              className={styles.postText}
+              style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+            >
+              {post.text}
+            </span>
           </p>
         )}
         {post.image && (
@@ -294,8 +310,7 @@ export default function Feed({ post, token }: FeedProps) {
         </div>
         {commentStates && (
           <div className={styles.newComment}>
-            <input
-              type='text'
+            <textarea
               onChange={(e) => setComment(e.target.value)}
               value={comment}
               placeholder='Escreva um comentário...'

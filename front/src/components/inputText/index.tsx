@@ -34,6 +34,12 @@ export default function InputText({ placeholder, handleSubmit }: Props) {
         placeholder={placeholder}
         value={text}
         onChange={(e) => setText(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.keyCode === 13) {
+            e.preventDefault();
+            setText(text + '\n');
+          }
+        }}
       ></textarea>
       <div className={styles.buttons}>
         <input

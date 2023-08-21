@@ -419,6 +419,12 @@ export default function CreateCommunity({ token }: CreateCommunityProps) {
                 id=''
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.keyCode === 13) {
+                    e.preventDefault();
+                    setDescription(description + '\n');
+                  }
+                }}
                 required
               ></textarea>
             </label>

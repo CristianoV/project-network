@@ -515,6 +515,12 @@ export default function Edit({ token }: EditProps) {
               id=''
               value={bio}
               onChange={(e) => setBio(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.keyCode === 13) {
+                  e.preventDefault();
+                  setBio(bio + '\n');
+                }
+              }}
             ></textarea>
           </label>
         </div>
