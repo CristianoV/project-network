@@ -43,6 +43,7 @@ type LoginUserData = z.infer<typeof loginUserSchema>;
 
 export default function Login() {
   const [errorLogin, setErrorLogin] = useState(false);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -54,6 +55,7 @@ export default function Login() {
   const router = useRouter();
 
   async function createUser({ email, password }: LoginUserData) {
+    setLoading(true);
     try {
       setErrorLogin(false);
       const { data } = await fetchFromApi.post('/login', {
@@ -76,6 +78,8 @@ export default function Login() {
       console.error(error);
       reset();
       setErrorLogin(true);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -143,7 +147,38 @@ export default function Login() {
                   Salvar as minhas informações neste computador
                 </label>
                 <p id={styles.check}>Não use em computadores públicos [?]</p>
-                <button type='submit'>Entrar</button>
+                <button
+                  type='submit'
+                  disabled={loading}
+                  className={`${styles.loadingButton} ${
+                    loading ? 'animate-spin' : ''
+                  }`}
+                >
+                  {loading ? (
+                    <svg
+                      className={`h-5 w-5 mr-3 ${
+                        loading ? 'opacity-25' : 'opacity-75'
+                      }`}
+                      viewBox='0 0 24 24'
+                    >
+                      <circle
+                        className='opacity-25'
+                        cx='12'
+                        cy='12'
+                        r='10'
+                        stroke='currentColor'
+                        strokeWidth='4'
+                      />
+                      <path
+                        className='opacity-75'
+                        fill='currentColor'
+                        d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                      />
+                    </svg>
+                  ) : (
+                    'Entrar'
+                  )}
+                </button>
               </form>
               <p>
                 <a href='#'>Não consegue acessar a sua conta?</a>
