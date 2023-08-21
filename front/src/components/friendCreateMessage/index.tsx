@@ -53,6 +53,12 @@ export default function CreateMessage({ token }: { token: string }) {
         placeholder='Escreva uma mensagem...'
         value={text}
         onChange={(e) => setText(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.keyCode === 13) {
+            e.preventDefault();
+            setText(text + '\n');
+          }
+        }}
       ></textarea>
       <div className={styles.buttons}>
         <input

@@ -66,6 +66,12 @@ export default function CreatePost({ token }: { token: string }) {
         placeholder='O que você está pensando?'
         value={text}
         onChange={(e) => setText(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.keyCode === 13) {
+            e.preventDefault();
+            setText(text + '\n');
+          }
+        }}
       ></textarea>
 
       {image && (

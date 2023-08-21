@@ -78,7 +78,6 @@ export default function Login() {
       console.error(error);
       reset();
       setErrorLogin(true);
-    } finally {
       setLoading(false);
     }
   }

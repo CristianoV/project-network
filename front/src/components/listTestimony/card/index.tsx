@@ -83,7 +83,9 @@ export default function Card({
         <p>
           {obj.fromUser.firstName} {obj.fromUser.lastName}
         </p>
-        <span>{obj.message}</span>
+        <span style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+          {obj.message}
+        </span>
       </div>
     </div>
   );

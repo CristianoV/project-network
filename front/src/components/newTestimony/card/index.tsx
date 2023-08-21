@@ -84,8 +84,11 @@ export default function Card({
           <p>
             {obj.fromUser.firstName} {obj.fromUser.lastName}
           </p>
-          <span>
-            <strong>Depoimento:</strong> <br /> {obj.message}
+          <span  style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+            <strong>
+              Depoimento:
+            </strong>
+            <br /> {obj.message}
           </span>
           <span>
             Deseja publicar o depoimento de {obj.fromUser.firstName} em seu

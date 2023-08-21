@@ -141,7 +141,12 @@ export default function Messages({ token }: IMessage) {
                       )}
                     </span>
                   </div>
-                  <p>{message.message}</p>
+                  <p
+                    style={{
+                      whiteSpace: 'pre-wrap',
+                      wordBreak: 'break-word',
+                    }}
+                  >{message.message}</p>
                 </div>
               </div>
             ))

@@ -21,7 +21,12 @@ export default function Profile() {
         <main>
           <div className={styles.text}>
             <p>descrição:</p>
-            <span>{info?.description}</span>
+            <span
+            style={{
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+            }}
+            >{info?.description}</span>
           </div>
           <div className={styles.text}>
             <p>idioma:</p>
