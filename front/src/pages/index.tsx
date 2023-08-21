@@ -13,6 +13,7 @@ import { fetchUserData } from '../redux/slices/user';
 import { useEffect } from 'react';
 import CreatePost from '../components/createPost';
 import FeedPosts from '../components/feedHome';
+import NewTestimony from '../components/newTestimony';
 
 interface HomeProps {
   token: string;
@@ -37,6 +38,7 @@ export default function Home({ token }: HomeProps) {
         <div>
           <Welcome token={token} />
           <NewFriends token={token} />
+          <NewTestimony token={token} />
           <CreatePost token={token} />
           <FeedPosts token={token} />
         </div>

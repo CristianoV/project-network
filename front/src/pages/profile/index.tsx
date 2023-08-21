@@ -8,6 +8,9 @@ import Friends from '../../components/friends';
 import Community from '../../components/community';
 import Footer from '../../components/footer';
 import store from '../../redux/store';
+import NewTestimony from '../../components/newTestimony';
+import NewFriends from '../../components/newFriends';
+import ListTestimony from '../../components/listTestimony';
 import { fetchUserData } from '../../redux/slices/user';
 import { useEffect } from 'react';
 
@@ -33,6 +36,9 @@ export default function Home({ token }: HomeProps) {
         <LeftSideBar />
         <div>
           <Profile token={token} />
+          <NewFriends token={token} />
+          <NewTestimony token={token} />
+          <ListTestimony token={token} />
         </div>
         <div>
           <Friends />

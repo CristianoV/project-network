@@ -1,7 +1,7 @@
 import * as jtw from 'jsonwebtoken';
 
 export default class JwtSecret {
-  private static algorithm = { algorithm: 'HS256', expiresIn: '24h' } as Record<string, string>;
+  private static algorithm = { algorithm: 'HS256', expiresIn: '7d' } as Record<string, string>;
   private static segredo = process.env.JWT_SECRET || 'ssw0rdEncryptSaltJWT';
 
   public static sign(payload: Record<string, string | number>): string {
