@@ -9,6 +9,7 @@ import PostRoutes from './post.router';
 import CommentRoutes from './comment.router';
 import MessageRoutes from './message.router';
 import Avaliation_statusRoutes from './avaliation_status.router';
+import TestimonyRoutes from './Testimony.router';
 
 export default [
   RegisterRoutes,
@@ -21,5 +22,6 @@ export default [
   PostRoutes,
   CommentRoutes,
   MessageRoutes,
-  Avaliation_statusRoutes
+  Avaliation_statusRoutes,
+  TestimonyRoutes,
 ];
