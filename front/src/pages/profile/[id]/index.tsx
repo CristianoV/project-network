@@ -17,6 +17,7 @@ import { useRouter } from 'next/router';
 import Footer from '../../../components/footer';
 import { useSelector } from 'react-redux';
 import FeedProfile from '../../../components/feedProfile';
+import ListTestimony from '../../../components/listTestimony';
 
 interface HomeProps {
   token: string;
@@ -53,6 +54,7 @@ export default function Home({ token }: HomeProps) {
         <FriendLeftSideBar token={token} />
         <div>
           <FriendProfile token={token} />
+          <ListTestimony token={token} to={id as string} />
           <FeedProfile token={token} />
         </div>
         <div>
