@@ -10,6 +10,7 @@ import CommentRoutes from './comment.router';
 import MessageRoutes from './message.router';
 import Avaliation_statusRoutes from './avaliation_status.router';
 import TestimonyRoutes from './Testimony.router';
+import LikeRoutes from './like.router';
 
 export default [
   RegisterRoutes,
@@ -24,4 +25,5 @@ export default [
   MessageRoutes,
   Avaliation_statusRoutes,
   TestimonyRoutes,
+  LikeRoutes,
 ];

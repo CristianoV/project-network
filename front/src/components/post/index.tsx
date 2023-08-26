@@ -31,6 +31,14 @@ interface UserProps {
   profile_picture: string;
 }
 
+interface LikeProps {
+  id: number;
+  user_id: number;
+  post_id: number;
+  status: string;
+  user: UserProps;
+}
+
 interface PostProps {
   id: number;
   text: string;
@@ -39,6 +47,9 @@ interface PostProps {
   updated_at: string;
   user: UserProps;
   comments: CometProps[];
+  likes: LikeProps[];
+  countLike: number;
+  youLiked: string | null;
 }
 
 interface FeedProps {
@@ -50,12 +61,15 @@ export default function Feed({ post, token }: FeedProps) {
   const user = useSelector((state: any) => state.user.info);
   const [commentStates, setCommentStates] = useState(false);
   const [editStates, setEditStates] = useState(false);
-  const [page, setPage] = useState(0);
   const [text, setText] = useState('');
   const [comment, setComment] = useState('');
   const [deleted, setDeleted] = useState(false);
   const [numberComments, setNumberComments] = useState(3);
   const [plusEdit, setPlusEdit] = useState(false);
+
+  const [postLikes, setPostLikes] = useState(post.likes);
+
+  const formatter = Intl.NumberFormat('en', { notation: 'compact' });
 
   const handleDeletePost = async (postId: number) => {
     try {
@@ -133,23 +147,45 @@ export default function Feed({ post, token }: FeedProps) {
     }
   };
 
-  useEffect(() => {
-    const intersectionObserver = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        setPage((prevState) => prevState + 1);
-      }
-    });
+  const handleLike = async (postId: number, type: string | null) => {
+    if (post.youLiked !== type) {
+      post.youLiked = type;
+    }
 
-    const sentinelScroll = document.getElementById(
-      'sentinelScroll'
-    ) as HTMLLIElement;
+    if (post.youLiked === 'dislike' && type === 'dislike') {
+      post.countLike++;
+    } else if (post.youLiked === 'dislike') {
+      post.countLike--;
+    }
 
-    intersectionObserver.observe(sentinelScroll);
+    try {
+      await fetchFromApi.post(
+        '/like',
+        {
+          post_id: postId,
+          status: type,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      const response = await fetchFromApi.get(`/like/${postId}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
 
-    return () => {
-      intersectionObserver.disconnect();
-    };
-  }, []);
+      post.countLike = response.data;
+      setPostLikes(
+        postLikes.filter((like: LikeProps) => like.user_id !== user.id)
+      );
+    }
+  };
 
   if (deleted) {
     return null;
@@ -300,8 +336,41 @@ export default function Feed({ post, token }: FeedProps) {
         )}
         <div className={styles.icons}>
           <div className={styles.likeDislike}>
-            <AiOutlineLike className={styles.icon} /> 0
-            <AiOutlineDislike className={styles.icon} />
+            <AiOutlineLike
+              className={styles.icon}
+              style={
+                post.youLiked !== null
+                  ? post.youLiked === 'like'
+                    ? { color: 'blue' }
+                    : { color: 'gray' }
+                  : {}
+              }
+              onClick={() => {
+                if (post.youLiked === 'dislike' || post.youLiked === null) {
+                  handleLike(post.id, 'like');
+                } else if (post.youLiked === 'like') {
+                  handleLike(post.id, null);
+                }
+              }}
+            />
+            {formatter.format(post.countLike)}
+            <AiOutlineDislike
+              className={styles.icon}
+              style={
+                post.youLiked !== null
+                  ? post.youLiked === 'dislike'
+                    ? { color: 'red' }
+                    : { color: 'gray' }
+                  : {}
+              }
+              onClick={() => {
+                if (post.youLiked === 'like' || post.youLiked === null) {
+                  handleLike(post.id, 'dislike');
+                } else if (post.youLiked === 'dislike') {
+                  handleLike(post.id, null);
+                }
+              }}
+            />
           </div>
           <BiCommentDetail
             className={styles.icon}
