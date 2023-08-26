@@ -4,6 +4,45 @@ import Friends from '../database/models/friends';
 import Comment from '../database/models/comment';
 import { Op } from 'sequelize';
 
+export interface RootObject {
+  toJSON(): any;
+  id: number;
+  text: string;
+  image?: any;
+  user_id: number;
+  created_at: string;
+  updated_at: string;
+  user: User;
+  comments: any[];
+  likes: Like[];
+}
+
+export interface Like {
+  id: number;
+  user_id: number;
+  post_id: number;
+  status: string;
+  user: User;
+}
+
+export interface User {
+  id: number;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  bio: string;
+  profile_picture?: any;
+  birthday: string;
+  relationship: string;
+  country: string;
+  phrase?: any;
+  sex: string;
+  cep: string;
+  state: string;
+  language: string;
+}
+
 export default class PostsService {
   constructor(private model: typeof Post) {}
 
@@ -68,26 +107,37 @@ export default class PostsService {
     page: number;
     pageSize: number;
   }) {
-    const { id } = JwtSecret.verify(authorization);
-
+    const { id } = JwtSecret.verify(authorization) as { id: number };
+  
     const friends = await Friends.findAll({
       where: {
         [Op.or]: [{ user_id_1: id }, { user_id_2: id }],
         status: 'accepted',
       },
     });
-
-    const friendIds = friends.flatMap((item) => {
-      if (item.user_id_1 === id) {
-        return item.user_id_2;
-      } else {
-        return item.user_id_1;
-      }
-    }) as number[];
-
+  
+    const friendIds = friends.flatMap((item) =>
+      item.user_id_1 === id ? item.user_id_2 : item.user_id_1
+    );
+  
     friendIds.push(Number(id));
-
-    const posts = await this.model.findAll({
+  
+    const posts = await this.getPostsWithDetails(friendIds);
+  
+    const countLikeForPost = await this.getCountsForLikes(posts);
+    const youLiked = await this.getUserLikes(posts, id);
+  
+    const postsWithCount = this.combinePostDetails(posts, countLikeForPost, youLiked);
+  
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = page * pageSize;
+    const result = postsWithCount.slice(startIndex, endIndex);
+  
+    return result;
+  }
+  
+  private async getPostsWithDetails(friendIds: number[]) {
+    return this.model.findAll({
       order: [['created_at', 'DESC']],
       where: {
         user_id: friendIds,
@@ -96,16 +146,49 @@ export default class PostsService {
         {
           all: true,
           nested: true,
-        }
+        },
       ],
-    });
-
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = page * pageSize;
-    const result = posts.slice(startIndex, endIndex);
-
-    return result;
+    }) as unknown as RootObject[];
   }
+  
+  private async getCountsForLikes(posts: RootObject[]) {
+    return Promise.all(
+      posts.map(async (post) => {
+        const likes = await post.likes;
+        return likes.reduce((total, like) => {
+            if (like.status === 'like') {
+              return total + 1;
+            } else if (like.status === 'dislike') {
+              return total - 1;
+            }
+          return total;
+        }, 0);
+      })
+    );
+  }
+  
+  private async getUserLikes(posts: RootObject[], userId: number) {
+    return Promise.all(
+      posts.map(async (post) => {
+        const likes = await post.likes;
+        const userLike = likes.find((like) => like.user_id === userId);
+        return userLike?.status;
+      })
+    );
+  }
+  
+  private combinePostDetails(
+    posts: RootObject[],
+    likeCounts: number[],
+    userLikes: (string | undefined)[]
+  ) {
+    return posts.map((post, index) => ({
+      ...post.toJSON(),
+      countLike: likeCounts[index],
+      youLiked: userLikes[index] || null,
+    }));
+  }
+  
 
   public async getPostsProfile({
     authorization,
@@ -118,7 +201,7 @@ export default class PostsService {
     pageSize: number;
     id: number;
   }) {
-    const { id: userId } = JwtSecret.verify(authorization);
+    const { id: userId } = JwtSecret.verify(authorization) as { id: number };
 
     const posts = await this.model.findAll({
       order: [['created_at', 'DESC']],
@@ -131,12 +214,17 @@ export default class PostsService {
           nested: true,
         },
       ],
-    });
+    }) as unknown as RootObject[];
 
+    const countLikeForPost = await this.getCountsForLikes(posts);
+    const youLiked = await this.getUserLikes(posts, userId);
+  
+    const postsWithCount = this.combinePostDetails(posts, countLikeForPost, youLiked);
+  
     const startIndex = (page - 1) * pageSize;
     const endIndex = page * pageSize;
-    const result = posts.slice(startIndex, endIndex);
-
+    const result = postsWithCount.slice(startIndex, endIndex);
+  
     return result;
   }
 

@@ -1,6 +1,7 @@
 import { INTEGER, STRING, TEXT, Model, DATE } from 'sequelize';
 import user from './user';
 import Comment from './comment';
+import Like from './likes';
 import db from '.';
 
 class Post extends Model {
@@ -51,5 +52,6 @@ Post.init(
 
 Post.belongsTo(user, { foreignKey: 'user_id', as: 'user' });
 Post.hasMany(Comment, { foreignKey: 'post_id', as: 'comments' });
+Post.hasMany(Like, { foreignKey: 'post_id', as: 'likes' });
 
 export default Post;
