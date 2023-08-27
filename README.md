@@ -76,7 +76,7 @@ Link da aplicação: https://cv-network.vercel.app/
 - [x] Possibilidade de excluir comunidades
 - [x] Possibilidade de alterar fotos de comunidades
 - [X] Comentar publicações
-- [ ] Sistema de Like e Deslike
+- [x] Sistema de Like e Deslike
 - [x] Sistema de opinar (confiável / legal / sexy)
 - [X] Sistema de recados
 - [x] Sistema de depoimentos
